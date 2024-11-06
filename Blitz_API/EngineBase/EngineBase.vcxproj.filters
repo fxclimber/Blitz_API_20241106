@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="EngineDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompiledFile.h">
+      <Filter>PreCompiledFile</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDelegate.h">
+      <Filter>Function</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineTimer.h">
+      <Filter>Time</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineDirectory.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePath.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="Object.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineString.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineRandom.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSerializer.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EngineDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompiledFile.cpp">
+      <Filter>PreCompiledFile</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDelegate.cpp">
+      <Filter>Function</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineTimer.cpp">
+      <Filter>Time</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineDirectory.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePath.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="Object.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineString.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineRandom.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSerializer.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{78b6108e-3fc1-4750-8641-f8bd572d937d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{61834f60-1002-4071-9e28-34087dfb4d09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{ea7ef493-e79b-4081-9ac6-502c8d1eb677}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompiledFile">
+      <UniqueIdentifier>{4dcb7dc8-d672-4a09-a9cb-ba31052f6ad8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function">
+      <UniqueIdentifier>{615fafb6-0a99-4a09-ba16-9fff2a24b65d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Time">
+      <UniqueIdentifier>{49a20d56-db73-4976-a65b-6ce1fc4372bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{9a5d438d-8031-48a3-abc8-3c4cc25a65e5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{999a0166-2cd0-48b4-b201-488055cc3831}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

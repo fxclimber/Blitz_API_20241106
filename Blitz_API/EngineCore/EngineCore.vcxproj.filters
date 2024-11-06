@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="Actor.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineAPICore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompiledFile.h">
+      <Filter>PreCompiledFile</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Object\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="GameMode.h">
+      <Filter>Object\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSprite.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteRenderer.h">
+      <Filter>Object\Actor\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="2DCollision.h">
+      <Filter>Object\Actor\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ActorComponent.h">
+      <Filter>Object\Actor\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneComponent.h">
+      <Filter>Object\Actor\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineCoreDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineAPICore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompiledFile.cpp">
+      <Filter>PreCompiledFile</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Object\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="GameMode.cpp">
+      <Filter>Object\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSprite.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageManager.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="SpriteRenderer.cpp">
+      <Filter>Object\Actor\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="2DCollision.cpp">
+      <Filter>Object\Actor\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="ActorComponent.cpp">
+      <Filter>Object\Actor\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneComponent.cpp">
+      <Filter>Object\Actor\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineCoreDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Core">
+      <UniqueIdentifier>{a3cc9477-3cc4-4249-a423-51db8b59f372}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{f1756490-5322-498b-95d6-e115a808a59e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompiledFile">
+      <UniqueIdentifier>{fbbea3e6-c8be-40e2-b9e4-02d759baf13e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor">
+      <UniqueIdentifier>{cf408943-7625-4a46-8477-71a312b7a622}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Level">
+      <UniqueIdentifier>{4113baec-e00c-4a77-aaec-ff344133de18}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{94df7288-4080-42b3-94b0-54c2f086338b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Component">
+      <UniqueIdentifier>{de38b002-00cc-4a10-bb7c-f28fbc4288c0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Component\Collision">
+      <UniqueIdentifier>{64c90ed4-8bba-42f0-9b64-96a3e74db890}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Actor\Component\Rendering">
+      <UniqueIdentifier>{797acec0-6ded-488a-8db1-b619d0d78179}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{66466f31-9822-4f37-a912-94f630b155d3}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

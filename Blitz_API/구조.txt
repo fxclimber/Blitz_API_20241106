@@ -1,0 +1,44 @@
+
+<구조>
+
+엔진구조를 언리얼과 유사하게 할것임. 이걸 dx에서 그대로 사용.
+언리얼 구조는 네트웍때문인 경우가 많음
+
+1. base :		수학,디버깅,os,이름,메모리 할당, new재할당
+				한번 완성되면 다시 빌드하지않게 된다
+
+2. platform :	os관련
+				입력
+
+3. EngineCore
+	Object
+	Rendering
+	Collision
+
+	- 많은 .h .cpp가 만들어지고 안정되면, 대부분 재빌드되지않는다. 미리 컴파일된 헤더
+	- .Message 처리 부분 ->펑셔널 
+
+
+4. 레벨 클래스
+
+	레벨 : 장면 - 내 게임에서 "화면전환"을 체크할것-> 전환될때마다 레벨추가
+		`엔진코어 -> CreateLevel();` //타이틀->플레이->엔딩
+			CreateLevel<TitleGameMode>();
+			CreateLevel<PlayGameMode>();
+			CreateLevel<EndGameMode>();
+
+	액터 : 레벨에 등장하는 요소 전체
+		class TitleGameMode : public AGameMode
+		{
+			BeginPlay()
+			{
+				GetWorld()->SpawnActor<Player>();
+				GetWorld()->SpawnActor<UI>();
+			}
+			Tick()
+			{
+				
+			}
+		}
+
+

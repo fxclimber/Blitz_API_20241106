@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="PreCompiledFile.cpp">
+      <Filter>PreCompiledFile</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="PreCompiledFile">
+      <UniqueIdentifier>{047e2636-5200-4dfb-988f-b255bd4efce4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="PreCompiledFile.h">
+      <Filter>PreCompiledFile</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

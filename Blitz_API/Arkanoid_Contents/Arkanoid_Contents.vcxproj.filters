@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClInclude Include="PreCompiledFile.h">
+      <Filter>PreCompiledFile</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ArkanoidContentsCore.h">
+      <Filter>Core</Filter>
+    </ClInclude>
+    <ClInclude Include="Ball.h">
+      <Filter>ContentsObject\Play_old</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>ContentsObject\Play_old</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayMap.h">
+      <Filter>ContentsObject\Play_old</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="ContentsEnum.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>ContentsObject\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Title.h">
+      <Filter>ContentsObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Play.h">
+      <Filter>ContentsObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Ending.h">
+      <Filter>ContentsObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="Paddle.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Puck.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="Brick.h">
+      <Filter>Play</Filter>
+    </ClInclude>
+    <ClInclude Include="EndGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapGameMode.h">
+      <Filter>TileMapRef</Filter>
+    </ClInclude>
+    <ClInclude Include="ATileMap.h">
+      <Filter>TileMapRef</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickEditor.h">
+      <Filter>Tools</Filter>
+    </ClInclude>
+    <ClInclude Include="BrickEditorGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="PreCompiledFile.cpp">
+      <Filter>PreCompiledFile</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ArkanoidContentsCore.cpp">
+      <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="Ball.cpp">
+      <Filter>ContentsObject\Play_old</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>ContentsObject\Play_old</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayMap.cpp">
+      <Filter>ContentsObject\Play_old</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="ContentsEnum.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>ContentsObject\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Title.cpp">
+      <Filter>ContentsObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Play.cpp">
+      <Filter>ContentsObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Ending.cpp">
+      <Filter>ContentsObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Paddle.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Puck.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="Brick.cpp">
+      <Filter>Play</Filter>
+    </ClCompile>
+    <ClCompile Include="EndGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapGameMode.cpp">
+      <Filter>TileMapRef</Filter>
+    </ClCompile>
+    <ClCompile Include="ATileMap.cpp">
+      <Filter>TileMapRef</Filter>
+    </ClCompile>
+    <ClCompile Include="BrickEditor.cpp">
+      <Filter>Tools</Filter>
+    </ClCompile>
+    <ClCompile Include="BrickEditorGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="ContentsObject">
+      <UniqueIdentifier>{a11097a5-1646-4d86-a81c-712272e26edd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompiledFile">
+      <UniqueIdentifier>{fe314114-107b-427a-b36c-54b8ef05a38d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\GameMode">
+      <UniqueIdentifier>{f0f40633-3907-4f70-b1d3-e7c2eb6bf4e8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Core">
+      <UniqueIdentifier>{77b186b4-a3fb-43c1-84d6-bade0a6ef5ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Global">
+      <UniqueIdentifier>{f7445582-885d-4d6e-946a-2593ed4a2541}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Global">
+      <UniqueIdentifier>{f6f5c8ca-b812-4d85-a818-47ad5e4a5239}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Title">
+      <UniqueIdentifier>{167cab3e-d0a5-4ac0-bf56-3404c6639209}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Map">
+      <UniqueIdentifier>{19111cb6-8dab-470b-8893-2d62e68f837a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ContentsObject\Play_old">
+      <UniqueIdentifier>{51df0539-91f8-4c9c-8caa-27dcaec1cd05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Play">
+      <UniqueIdentifier>{f6654f5f-ae54-4cb8-a6a6-034ca1f526fb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="TileMapRef">
+      <UniqueIdentifier>{3c7a4cd1-42f3-4579-8b1a-ee2905f5378c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Tools">
+      <UniqueIdentifier>{bcd63494-c349-462d-ae3f-b153972cbf3c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
