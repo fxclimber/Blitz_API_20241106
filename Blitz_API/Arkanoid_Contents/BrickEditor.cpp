@@ -6,6 +6,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
+#include "Ball.h"
 
 
 
@@ -29,7 +30,8 @@ void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _
 	//float WinSize = Globals::WinSize.X;//터지냐....왜........
 	float AllSpriteWidth = (_BrickSize.X * static_cast<float>(_Count.X)) / 2;
 	float gap = WinSize - AllSpriteWidth;
-	SetActorLocation({ gap ,100.f });
+	PlusPos = { gap, 100.f };
+	SetActorLocation(PlusPos);
 }
 
 FVector2D BrickEditor::IndexToBrickLocation(FIntPoint _Index)
@@ -174,6 +176,12 @@ void BrickEditor::DeSerialize(UEngineSerializer& _Ser)
 
 }
 
+FVector2D BrickEditor::CheckCollision(ABall* Ball, FIntPoint brickIndex)
+{
+	FVector2D Normal = CheckCollision(Ball->GetActorLocation(), Ball->GetRender()->GetComponentScale(), brickIndex);
+	Ball->Reflect(Normal);
+	return Normal;
+}
 
 FVector2D BrickEditor::CheckCollision(const FVector2D& playerPos, const FVector2D& playerSize, FIntPoint brickIndex)
 {
@@ -187,8 +195,26 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& playerPos, const FVector2
 	FVector2D brickPos = IndexToBrickLocation(brickIndex);// -thisPos;
 	FVector2D brickSize = brick.Scale; // 개별 벽돌의 크기
 
+	// 0          0 
+	// AllBricks[y][x] => index 0, 0 => fvector 0, 0
+	// AllBricks[y][x] => index 1, 0 => fvector 64, 0
+
+	// 충돌체크고 뭐고 다 할수 있다.
 	for (int y = 0; y < AllBricks.size(); ++y) {
 		for (int x = 0; x < AllBricks[y].size(); ++x) {
+
+			if (nullptr == AllBricks[y][x].SpriteRenderer)
+			{
+				continue;
+			}
+
+			// if (충돌했을대ㅑ)
+			// {
+				AllBricks[y][x].SpriteRenderer->SetSprite("paddle_materialize_002.png", 0);
+			// }
+
+			AllBricks[y][x].SpriteRenderer->GetComponentLocation();
+
 			FVector2D brickPos = IndexToBrickLocation({ y, x });
 			FVector2D brickSize = AllBricks[y][x].Scale;
 
@@ -246,4 +272,23 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& playerPos, const FVector2
 	}
 
 	return FVector2D(0.0f, 0.0f); // 충돌 없음
+}
+
+
+// 
+void BrickEditor::RemoveBlock(FIntPoint brickIndex)
+{
+	if (true == IsIndexOver(brickIndex))
+	{
+		MSGASSERT("인덱스가 오버되었습니다.");
+	}
+
+	if (nullptr == AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer)
+	{
+		return;
+	}
+
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy();
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+
 }

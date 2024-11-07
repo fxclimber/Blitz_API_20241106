@@ -4,6 +4,12 @@
 #include <EngineBase/EngineSerializer.h>
 #include "Brick.h"
 
+enum BlockType
+{
+	HPBlock,
+	NotBreak,
+};
+
 // Brick의 개별 위치와 크기는 BrickSize, Scale, IndexToBrickLocation,
 // SetComponentLocation 함수에서 확인
 class ABrick : public ISerializObject
@@ -17,11 +23,10 @@ public:
 
 	bool IsMove = true;
 	int BrickType = -1;
-	// 타일하나하나가 개별적인 크기를 가지고 있다면
-	// 이걸로 직접 입력해주셔야 합니다.
 	FVector2D Scale;
 	FVector2D Pivot;
 	int SpriteIndex;
+	unsigned int HP = -1;
 
 	// 데이터를 직렬화(압축)
 	void Serialize(UEngineSerializer& _Ser)
@@ -87,6 +92,8 @@ public:
 	// 데이터를 복구(할때)
 	void DeSerialize(UEngineSerializer& _Ser);
 
+	FVector2D CheckCollision(class ABall* Ball, FIntPoint brickIndex);
+
 	FVector2D CheckCollision(const FVector2D& playerPos, const FVector2D& playerSize, FIntPoint brickIndex);
 
 	FVector2D GetBrickSize()
@@ -97,6 +104,9 @@ public:
 	{
 		return BrickCount;
 	}
+
+	void RemoveBlock(FIntPoint brickIndex);
+
 protected:
 
 private:
@@ -104,6 +114,7 @@ private:
 	FIntPoint BrickCount;
 	std::string SpriteName;
 	FVector2D BrickSize;//벽돌 개별크기
+	FVector2D PlusPos;
 	std::vector<std::vector<ABrick>> AllBricks;
 };
 

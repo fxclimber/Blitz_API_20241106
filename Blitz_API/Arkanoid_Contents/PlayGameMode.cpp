@@ -85,7 +85,7 @@ void APlayGameMode::BeginPlay()
 
 	Player = GetWorld()->SpawnActor<APlayer>();
 	paddle = GetWorld()->SpawnActor<Paddle>();
-	//brick = GetWorld()->SpawnActor<Brick>();
+	brick = GetWorld()->SpawnActor<Brick>();
 
 	ball = GetWorld()->SpawnActor<ABall>();
 	ball->SetActorLocation((paddle->GetActorLocation()) + ball->GetRender()->GetComponentScale()/2);

@@ -17,7 +17,16 @@ public:
 		return SpriteRenderer;
 	}
 
-	FVector2D vel = {0.f,0.f};
+	void SetSpeed(float _Speed)
+	{
+		Speed = _Speed;
+	}
+
+	void SetDir(FVector2D _Value)
+	{
+		Value = _Value;
+		Value.Normalize();
+	}
 
 	void MoveFunction(const FVector2D& velocity);
 	void Reflect(const FVector2D& normal);
@@ -25,6 +34,8 @@ public:
 private:
 	float Speed = 1.0f;
 	int MySpriteIndex = 0;
+
+	FVector2D Value;
 
 	class USpriteRenderer* SpriteRenderer;
 
