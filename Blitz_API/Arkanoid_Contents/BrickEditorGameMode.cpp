@@ -24,7 +24,7 @@ void BrickEditorGameMode::BeginPlay()
 	{
 		//FVector2D Size = Globals::BrickSize; //{ 65,30 };
 		FVector2D Size = { 57,26 };
-		FIntPoint Num = { 10,8 };
+		FIntPoint Num = { 10,3 };
 
 		WallTileMap = GetWorld()->SpawnActor<BrickEditor>();
 		WallTileMap->Create("Brick", Num, Size);

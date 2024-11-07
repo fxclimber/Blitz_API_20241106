@@ -19,14 +19,14 @@ public:
 	WhereIsBall ballEnum = WhereIsBall::NONE;
 	//FVector2D GetVectorForBallPos(WhereIsBall position);
 
-protected:
-
-private:
 	// 사용할 액터들
 	class APlayer* Player = nullptr;
 	class Paddle* paddle = nullptr;
 	class Brick* brick = nullptr;
 	class ABall* ball = nullptr;
+protected:
+
+private:
 	// 타일맵 포인터들
 	class BrickEditor* WallTileMap = nullptr;
 

@@ -182,17 +182,46 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& playerPos, const FVector2
 	{
 		return FVector2D(0.0f, 0.0f); // 충돌 없음
 	}
-
+	//FVector2D thisPos = GetTransform().Location;
 	auto& brick = AllBricks[brickIndex.Y][brickIndex.X];
-	FVector2D brickPos = IndexToBrickLocation(brickIndex);
+	FVector2D brickPos = IndexToBrickLocation(brickIndex);// -thisPos;
 	FVector2D brickSize = brick.Scale; // 개별 벽돌의 크기
 
-	UEngineDebug::CoreOutPutString("brickPos" + brickPos.ToString(), { 100, 600 });
-	UEngineDebug::CoreOutPutString("brickSize" + brickSize.ToString(), { 100, 650 });
+	for (int y = 0; y < AllBricks.size(); ++y) {
+		for (int x = 0; x < AllBricks[y].size(); ++x) {
+			FVector2D brickPos = IndexToBrickLocation({ y, x });
+			FVector2D brickSize = AllBricks[y][x].Scale;
 
+			// 로그 출력
+			UEngineDebug::CoreOutPutString("brickPos[" + std::to_string(y) + "][" + std::to_string(x) + "] : " + brickPos.ToString(), { 30, 300 + y * 100 + x * 20 });
+		}
+	}
 
 	// 충돌 감지 로직
 	FVector2D HitResult = (playerPos - brickPos) / brickSize;
+
+	for (int y = 0; y < AllBricks.size(); ++y) {
+		for (int x = 0; x < AllBricks[y].size(); ++x) {
+			auto& brick = AllBricks[y][x];
+			FVector2D brickPos = IndexToBrickLocation({ y, x });
+			FVector2D brickSize = brick.Scale;
+
+			// 충돌 검사
+			if (playerPos.X < brickPos.X + brickSize.X &&
+				playerPos.X + playerSize.X > brickPos.X &&
+				playerPos.Y < brickPos.Y + brickSize.Y &&
+				playerPos.Y + playerSize.Y > brickPos.Y) {
+				// 충돌한 벽돌 발견
+				UEngineDebug::CoreOutPutString("Collision with brick at index [" + std::to_string(y) + "][" + std::to_string(x) + "]", { 800, 800 });
+
+				// 필요한 로직을 여기에 추가 (예: 충돌 처리, 벽돌 파괴 등)
+				//brick.HandleCollision(); // 예시로 벽돌에 충돌 처리 메서드를 호출
+			}
+		}
+	}
+
+
+
 	if (HitResult.X > 0 && HitResult.Y > 0 && HitResult.X < 1 && HitResult.Y < 1) {
 		if (HitResult.X < HitResult.Y) {
 			if (HitResult.X > 1 - HitResult.Y) {

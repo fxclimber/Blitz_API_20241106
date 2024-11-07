@@ -85,12 +85,10 @@ void APlayGameMode::BeginPlay()
 
 	Player = GetWorld()->SpawnActor<APlayer>();
 	paddle = GetWorld()->SpawnActor<Paddle>();
-	brick = GetWorld()->SpawnActor<Brick>();
+	//brick = GetWorld()->SpawnActor<Brick>();
 
 	ball = GetWorld()->SpawnActor<ABall>();
 	ball->SetActorLocation((paddle->GetActorLocation()) + ball->GetRender()->GetComponentScale()/2);
-	//FVector2D ballInitVel = { 0.7f,-1.f };
-	//ball->vel = ballInitVel;
 }
 
 void APlayGameMode::Tick(float _DeltaTime)
@@ -100,14 +98,23 @@ void APlayGameMode::Tick(float _DeltaTime)
 	ball->Tick(_DeltaTime); // 공의 이동 및 반사 로직
 
 	// 충돌 검사 및 반사 처리
-	FVector2D normal = brick->CheckCollision(Player->GetTransform().Location, ball->GetRender()->GetComponentScale());
-	if (normal != FVector2D(0.0f, 0.0f)) {
-		ball->Reflect(normal);
-	}
+	//FVector2D normal = brick->CheckCollision(Player->GetTransform().Location, ball->GetRender()->GetComponentScale());
+	//if (normal != FVector2D(0.0f, 0.0f)) {
+	//	ball->Reflect(normal);
+	//}
 
 	// 디버그 출력 등 나머지 로직 유지
 
 
+	// 벽돌 충돌함수 강제로딩
+	FVector2D PlayerPos = Player->GetTransform().Location;
+	FVector2D PlayerSize = Player->GetRender()->GetComponentScale();
+	FIntPoint index = {0,0};//진짜 인덱스 받아와야함.
+
+	WallTileMap->CheckCollision(PlayerPos, PlayerSize, index);
+
+
+	UEngineDebug::CoreOutPutString("PlayerPos :  " + PlayerPos.ToString());
 
 
 

@@ -30,7 +30,7 @@ Brick::~Brick()
 
 FVector2D Brick::CheckCollision(const FVector2D& playerPos, const FVector2D& playerSize)
 {
-    FVector2D brickPos = GetTransform().Location;
+    FVector2D brickPos = GetActorLocation();
     FVector2D brickSize = GetRender()->GetComponentScale();
     FVector2D HitResult = (playerPos - brickPos) / brickSize;
 
