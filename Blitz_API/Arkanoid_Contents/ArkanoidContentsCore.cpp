@@ -84,7 +84,15 @@ void ArkanoidContentsCore::BeginPlay()
 
 	}
 
+	{
+		// brickFX
+		UEngineDirectory exp;
+		exp.MoveParentToDirectory(ImageRes);
+		exp.Append("exp");
 
+		UImageManager::GetInst().LoadFolder(exp.GetPathToString());
+
+	}
 
 	// À©µµ¿ì 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Blitz_Window");

@@ -74,7 +74,7 @@ void ABall::Tick(float _DeltaTime)
     //}
 
     MoveFunction(Value);
-    UEngineDebug::CoreOutPutString("ballVel : " + Value.ToString(), { 100, 200 });
+    //UEngineDebug::CoreOutPutString("ballVel : " + Value.ToString(), { 100, 200 });
 
 }
 

@@ -18,9 +18,10 @@ void ATestGameMode::BeginPlay()
 	GetWorld()->SetCameraToMainPawn(false);
 
 	Editor = GetWorld()->SpawnActor<BrickEditor>();
+	Editor->SetBricksHeight(160);
 
 	FVector2D Size = { 57,26 };
-	FIntPoint Num = { 10,3 };
+	FIntPoint Num = { 6,10 };
 	Editor->Create("Brick", Num, Size);
 	for (int y = 0; y < Num.X; y++)
 	{
@@ -39,7 +40,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 	Editor->CheckCollision(Ball, {0, 0});
-	// Editor->RemoveBlock({1, 0});
+	//Editor->RemoveBlock({1, 0});
 
 }
 

@@ -6,6 +6,7 @@
 
 enum BlockType
 {
+	Default,
 	HPBlock,
 	NotBreak,
 };
@@ -55,6 +56,7 @@ public:
 		_Ser >> SpriteIndex;
 	}
 
+	bool IsCollide = false;
 };
 
 // 사람들이 가장 먼저 원하는 기능.
@@ -67,7 +69,6 @@ public:
 	~BrickEditor(){}
 
 
-	//             100, 100                  64 64 
 	// 타일 이미지는 sprite 1개에서 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize);
 
@@ -107,6 +108,13 @@ public:
 
 	void RemoveBlock(FIntPoint brickIndex);
 
+	void SetBricksHeight(float _height)
+	{
+		Height = _height;
+	}
+
+	void SpawnFX();
+
 protected:
 
 private:
@@ -114,8 +122,11 @@ private:
 	FIntPoint BrickCount;
 	std::string SpriteName;
 	FVector2D BrickSize;//벽돌 개별크기
+	float Height = 0;
 	FVector2D PlusPos;
 	std::vector<std::vector<ABrick>> AllBricks;
+	std::vector<std::vector<FVector2D>> BrickPositions;
+	class ABrick* BrickFX;
 };
 
 
