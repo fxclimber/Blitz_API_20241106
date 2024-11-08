@@ -74,8 +74,6 @@ void ABall::Tick(float _DeltaTime)
     //}
 
     MoveFunction(Value);
-    //UEngineDebug::CoreOutPutString("ballVel : " + Value.ToString(), { 100, 200 });
-
 }
 
 void ABall::MoveFunction(const FVector2D& velocity)
@@ -90,11 +88,3 @@ void ABall::Reflect(const FVector2D& normal)
     float dotProduct = Value.Dot(normal);
     Value = Value - normal * (2 * dotProduct);
 }
-
-
-//void ABall::MoveFunction(FVector2D _Dir)
-//{
-//	float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
-//	AddActorLocation(_Dir * DeltaTime * Speed);
-//}
-//

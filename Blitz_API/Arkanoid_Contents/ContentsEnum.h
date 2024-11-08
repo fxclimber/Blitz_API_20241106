@@ -12,6 +12,7 @@ enum class ERenderOrder
 	PLAYER = 0,
 	NEW = 1000,
 	UI = 2000,
+	FX = 2001,
 };
 enum class WhereIsBall
 {
@@ -21,6 +22,19 @@ enum class WhereIsBall
 	LEFT,
 	RIGHT,
 };
+
+enum class BonusType
+{
+	LIFE=0,
+	COPY=1,
+	SLOW=2,
+	LASER=3,
+	EXPAND=4,
+	CATCH=5,
+	WARP=6,
+};
+
+
 
 class Globals 
 {

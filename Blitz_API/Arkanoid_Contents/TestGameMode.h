@@ -24,5 +24,6 @@ protected:
 private:
 	class BrickEditor* Editor;
 	class ABall* Ball;
+	class APaddle* Paddle;
 };
 

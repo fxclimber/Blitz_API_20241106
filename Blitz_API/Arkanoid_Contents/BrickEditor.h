@@ -113,7 +113,7 @@ public:
 		Height = _height;
 	}
 
-	void SpawnFX();
+	void SpawnFX(FVector2D _brickPos);
 
 protected:
 
@@ -126,7 +126,7 @@ private:
 	FVector2D PlusPos;
 	std::vector<std::vector<ABrick>> AllBricks;
 	std::vector<std::vector<FVector2D>> BrickPositions;
-	class ABrick* BrickFX;
+	class Brick* BonusA;
 };
 
 

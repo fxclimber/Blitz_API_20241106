@@ -21,7 +21,7 @@ public:
 
 	// 사용할 액터들
 	class APlayer* Player = nullptr;
-	class Paddle* paddle = nullptr;
+	class APaddle* paddle = nullptr;
 	class Brick* brick = nullptr;
 	class ABall* ball = nullptr;
 protected:

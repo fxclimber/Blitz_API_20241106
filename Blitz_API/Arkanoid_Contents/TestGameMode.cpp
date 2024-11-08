@@ -2,6 +2,8 @@
 #include "TestGameMode.h"
 #include "BrickEditor.h"
 #include "Ball.h"
+#include "Brick.h"
+#include "Paddle.h"
 
 ATestGameMode::ATestGameMode()
 {
@@ -33,7 +35,16 @@ void ATestGameMode::BeginPlay()
 
 	Ball = GetWorld()->SpawnActor<ABall>();
 	Ball->SetDir({1, 1});
-	Ball->SetSpeed(400.0f);
+	Ball->SetSpeed(700.0f);
+
+	Paddle = GetWorld()->SpawnActor<APaddle>();
+	Paddle->SetActorLocation({385,950});
+	FVector2D ballPos = Ball->GetActorLocation();
+	FVector2D ballsize = Ball->GetRender()->GetComponentScale();
+	FVector2D HitNormal =Paddle->CheckCollision(ballPos, ballsize);
+	UEngineDebug::CoreOutPutString("HitNormal :  " + HitNormal.ToString());
+
+	//Ball->SetDir(HitNormal);
 }
 
 void ATestGameMode::Tick(float _DeltaTime)

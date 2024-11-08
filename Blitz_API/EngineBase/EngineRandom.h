@@ -1,19 +1,12 @@
 #pragma once
 #include <random>
 
-// 설명 :
 class UEngineRandom
 {
 public:
 	// constrcuter destructer
 	UEngineRandom();
 	~UEngineRandom();
-
-	// delete Function
-	UEngineRandom(const UEngineRandom& _Other) = delete;
-	UEngineRandom(UEngineRandom&& _Other) noexcept = delete;
-	UEngineRandom& operator=(const UEngineRandom& _Other) = delete;
-	UEngineRandom& operator=(UEngineRandom&& _Other) noexcept = delete;
 
 	void SetSeed(__int64 _Seed)
 	{
@@ -23,7 +16,7 @@ public:
 	int RandomInt(int _Min, int _Max)
 	{
 		// _Min ~ _Max 랜덤값 뽑아줘
-		std::uniform_int_distribution<int> RandomCreate(_Min, _Max + 1);
+		std::uniform_int_distribution<int> RandomCreate(_Min, _Max);
 
 		// MtGen 제네레이터 써서
 		// std::mt19937_64 메르헨 트위스터 알고리즘 써서 만들어줘.
@@ -48,5 +41,4 @@ private:
 	// 만들면서 new 시드 넣어줍니다.
 	std::mt19937_64 MtGen = std::mt19937_64(time(nullptr));
 
-	//std::well512
 };

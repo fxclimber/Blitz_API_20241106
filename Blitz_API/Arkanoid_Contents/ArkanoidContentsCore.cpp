@@ -74,6 +74,60 @@ void ArkanoidContentsCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(paddle_materialize.GetPathToString());
 	}
 
+	// 폴더- 보너스 아이템 
+	{
+		{
+			//powerup_laser
+			UEngineDirectory powerup_laser;
+			powerup_laser.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_laser.Append("powerup_laser");
+			UImageManager::GetInst().LoadFolder(powerup_laser.GetPathToString());
+		}
+		{
+			//powerup_catch
+			UEngineDirectory powerup_catch;
+			powerup_catch.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_catch.Append("powerup_catch");
+			UImageManager::GetInst().LoadFolder(powerup_catch.GetPathToString());
+		}
+		{
+			//powerup_duplicate
+			UEngineDirectory powerup_duplicate;
+			powerup_duplicate.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_duplicate.Append("powerup_duplicate");
+			UImageManager::GetInst().LoadFolder(powerup_duplicate.GetPathToString());
+		}
+		{
+			//powerup_expand
+			UEngineDirectory powerup_expand;
+			powerup_expand.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_expand.Append("powerup_expand");
+			UImageManager::GetInst().LoadFolder(powerup_expand.GetPathToString());
+		}
+		{
+			//powerup_life
+			UEngineDirectory powerup_life;
+			powerup_life.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_life.Append("powerup_life");
+			UImageManager::GetInst().LoadFolder(powerup_life.GetPathToString());
+		}
+		{
+			//powerup_slow
+			UEngineDirectory powerup_slow;
+			powerup_slow.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_slow.Append("powerup_slow");
+			UImageManager::GetInst().LoadFolder(powerup_slow.GetPathToString());
+		}
+		{
+			//powerup_warp
+			UEngineDirectory powerup_warp;
+			powerup_warp.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_warp.Append("powerup_warp");
+			UImageManager::GetInst().LoadFolder(powerup_warp.GetPathToString());
+		}
+
+	}
+
 	{
 		// 타일셋 로드
 		UEngineDirectory Dir;

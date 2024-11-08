@@ -8,9 +8,9 @@
 #include "ContentsEnum.h"
 
 
-Paddle::Paddle()
+APaddle::APaddle()
 {
-	SetActorLocation({ 400,950 });
+	//SetActorLocation({ 370,920 });
 
 	{
 		//SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();		
@@ -19,31 +19,27 @@ Paddle::Paddle()
 		//SpriteRenderer->CreateAnimation("paddle_materialize", "paddle_materialize", 0, 14, 0.12f);
 		//SpriteRenderer->ChangeAnimation("paddle_materialize");
 		//SpriteRenderer->SetComponentScale({ 125, 34 });
-		////FVector2D PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
 	}
 
 	this;
 	{
-
 	// static sprite
 	USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetOrder(ERenderOrder::Bricks);
 	SpriteRenderer->SetSprite("paddle_small.png");
 	FVector2D PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
-
 	}
-
 }
 
-Paddle::~Paddle()
+APaddle::~APaddle()
 {
 }
 
-void Paddle::BeginPlay()
+void APaddle::BeginPlay()
 {
 }
 
-void Paddle::Tick(float _DeltaTime)
+void APaddle::Tick(float _DeltaTime)
 {
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
@@ -55,18 +51,45 @@ void Paddle::Tick(float _DeltaTime)
 	}
 }
 
-void Paddle::MoveFunction(FVector2D _Dir)
+void APaddle::MoveFunction(FVector2D _Dir)
 {
 }
 
-void Paddle::RunSoundPlay()
+void APaddle::RunSoundPlay()
 {
 }
 
-void Paddle::LevelChangeStart()
+FVector2D APaddle::CheckCollision(const FVector2D& ballPos, const FVector2D& ballSize)
 {
+    FVector2D paddlePos = GetActorLocation();
+    FVector2D paddlesize = SpriteRenderer->GetComponentScale();
+    FVector2D HitResult = (ballPos - paddlePos) / paddlesize;
+
+    if (HitResult.X > 0 && HitResult.Y > 0 && HitResult.X < 1 && HitResult.Y < 1) {
+        if (HitResult.X < HitResult.Y) {
+            if (HitResult.X > 1 - HitResult.Y) {
+                return Reflect({ 0, -1 });
+            }
+            else {
+                return Reflect({ -1, 0 });
+            }
+        }
+        else if(HitResult.X > HitResult.Y)
+        {
+            if (HitResult.Y > 1 - HitResult.X) {
+                return Reflect({ 1, 0 });
+            }
+            else {
+                return Reflect({ 0, 1 });
+            }
+        }
+    }
 }
 
-void Paddle::LevelChangeEnd()
+
+FVector2D APaddle::Reflect(const FVector2D& normal)
 {
+    float dotProduct = Value.Dot(normal);
+    Value = Value - normal * (2 * dotProduct);
+    return Value;
 }

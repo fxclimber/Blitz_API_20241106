@@ -445,10 +445,10 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 
 			if (true == brick.IsCollide)
 			{
-				brick.SpriteRenderer->SetSprite("exp");
-				brick.SpriteRenderer->SetSpriteScale(0.5f);
-				brick.SpriteRenderer->CreateAnimation("exp1", "exp", 0, 7, 0.1f,false);
-				brick.SpriteRenderer->ChangeAnimation("exp1");
+				//brick.SpriteRenderer->SetSprite("exp");
+				//brick.SpriteRenderer->SetSpriteScale(0.5f);
+				//brick.SpriteRenderer->CreateAnimation("exp1", "exp", 0, 7, 0.1f,false);
+				//brick.SpriteRenderer->ChangeAnimation("exp1");
 
 			}
 
@@ -458,28 +458,32 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 				if (HitResult.X < HitResult.Y) {
 					if (HitResult.X > 1 - HitResult.Y) {
 						UEngineDebug::CoreOutPutString("HitResult : BOTTOM" + HitResult.ToString());
-						brick.IsCollide = true;
+						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
+						SpawnFX(brickPos);
 						return FVector2D(0.0f, -1.0f); // 아래쪽 반사 벡터
 					}
 					else {
 						UEngineDebug::CoreOutPutString("HitResult : LEFT" + HitResult.ToString());
-						brick.IsCollide = true;
+						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
+						SpawnFX(brickPos);
 						return FVector2D(-1.0f, 0.0f); // 왼쪽 반사 벡터
 					}
 				}
 				else if (HitResult.X > HitResult.Y) {
 					if (HitResult.Y > 1 - HitResult.X) {
 						UEngineDebug::CoreOutPutString("HitResult : RIGHT" + HitResult.ToString());
-						brick.IsCollide = true;
+						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
+						SpawnFX(brickPos);
 						return FVector2D(1.0f, 0.0f); // 오른쪽 반사 벡터
 					}
 					else {
 						UEngineDebug::CoreOutPutString("HitResult : TOP" + HitResult.ToString());
-						brick.IsCollide = true;
+						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
+						SpawnFX(brickPos);
 						return FVector2D(0.0f, 1.0f); // 위쪽 반사 벡터
 					}
 				}
@@ -510,16 +514,27 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		return;
 	}
 
-	//AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(1.0f);
-	//AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f,false);
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp1");
+
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.25f);
+	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
 
 }
 
-void BrickEditor::SpawnFX()
+void BrickEditor::SpawnFX(FVector2D _brickPos)
 {
-	//BrickFX = GetWorld()->SpawnActor<ABrick>();
-	//BrickFX->SpriteRenderer->SetSprite("exp");
-	//BrickFX->SpriteRenderer->SetComponentLocation(BrickPositions);
+	//if (BonusA != nullptr)
+	//{
+	//	return;
+	//}
+	//else if (BonusA->GetActorLocation().Y> 950.f)
+	//{
+	//	BonusA->Destroy();
+	//}
+		BonusA = GetWorld()->SpawnActor<Brick>();
+		BonusA->SetActorLocation(_brickPos);
 }
-
-

@@ -1,11 +1,11 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-class Paddle : public AActor
+class APaddle : public AActor
 {
 public:
-	Paddle();
-	~Paddle();
+	APaddle();
+	~APaddle();
 
 	void BeginPlay()override;
 	void Tick(float _DeltaTime) override;
@@ -13,16 +13,18 @@ public:
 	void MoveFunction(FVector2D _Dir);
 
 	void RunSoundPlay();
+	FVector2D CheckCollision(const FVector2D& ballPos, const FVector2D& ballSize);
 
-	void LevelChangeStart();
-	void LevelChangeEnd();
+	FVector2D Reflect(const FVector2D& normal);
 
 protected:
 
 private:
-	float Speed = 100.0f;
+	float Speed = 500.f;
 	int MySpriteIndex = 0;
+	FVector2D Value;
 
+	class ABall* ball;
 	class USpriteRenderer* SpriteRenderer;
 
 };
