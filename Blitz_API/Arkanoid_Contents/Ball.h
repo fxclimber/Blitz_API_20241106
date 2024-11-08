@@ -31,6 +31,9 @@ public:
 	void MoveFunction(const FVector2D& velocity);
 	void Reflect(const FVector2D& normal);
 
+
+	void UpdatePosition(float deltaTime);
+
 private:
 	float Speed = 1.0f;
 	int MySpriteIndex = 0;

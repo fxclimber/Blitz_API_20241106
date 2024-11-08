@@ -12,7 +12,7 @@
 
 ABall::ABall()
 {
-    SetActorLocation({ 400,800 });
+    SetActorLocation({ 385,850 });
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("ball_red.png");
@@ -38,41 +38,8 @@ void ABall::Tick(float _DeltaTime)
     FVector2D ballPos = GetActorLocation();
     FVector2D ballScale = GetRender()->GetComponentScale();
     float tolerance = 0.02f + ballScale.X / 2;
-    
-    // 왼쪽벽에 닿았다
-    if (MaxLeft > ballPos.X)
-    {
-        Reflect({1, 0});
-    }
 
-    // 오른쪽 벽에 닿았다.
-    if (MaxRight < ballPos.X)
-    {
-        Reflect({ -1, 0 });
-    }
-
-    // 아랫벽에 닿았다.
-    if (MaxBottom < ballPos.Y)
-    {
-        Reflect({ 0, 1 });
-    }
-
-    // 위쪽벽에 닿았다.
-    if (MaxTop > ballPos.Y)
-    {
-        Reflect({ 0, -1 });
-    }
-
-
-    //if (MaxLeft < ballPos.X && ballPos.X < MaxRight && MaxTop < ballPos.Y && ballPos.Y < MaxBottom) {
-    //    if (ballPos.X <= MaxLeft + tolerance || ballPos.X >= MaxRight - tolerance) {
-    //        Value.X *= -1.0f;
-    //    }
-    //    if (ballPos.Y <= MaxTop + tolerance || ballPos.Y >= MaxBottom - tolerance) {
-    //        Value.Y *= -1.0f;
-    //    }
-    //}
-
+    UpdatePosition(_DeltaTime);
     MoveFunction(Value);
 }
 
@@ -86,5 +53,55 @@ void ABall::MoveFunction(const FVector2D& velocity)
 void ABall::Reflect(const FVector2D& normal)
 {
     float dotProduct = Value.Dot(normal);
-    Value = Value - normal * (2 * dotProduct);
+    Value = Value - (normal * (2.0f * dotProduct));
+    //SetDir(Value);
 }
+
+
+void ABall::UpdatePosition(float deltaTime)
+{
+
+    // 벽 충돌 체크 및 속도 반사
+    int MaxTop = 101, MaxBottom = 999, MaxLeft = 46, MaxRight = 725;
+    FVector2D ballPos = GetActorLocation();
+    FVector2D ballScale = GetRender()->GetComponentScale();
+    float tolerance = 0.02f + ballScale.X / 2;
+
+    bool hasCollided = false; // 충돌 여부 플래그 초기화
+
+    // 왼쪽 벽에 닿았다
+    if (MaxLeft > ballPos.X && !hasCollided)
+    {
+        Reflect({ 1, 0 });
+        ballPos.X = MaxLeft + 0.1f; // 벽에서 약간 떨어지게 위치 조정
+        hasCollided = true;
+    }
+
+    // 오른쪽 벽에 닿았다
+    if (MaxRight < ballPos.X && !hasCollided)
+    {
+        Reflect({ -1, 0 });
+        ballPos.X = MaxRight - 0.1f;
+        hasCollided = true;
+    }
+
+    // 아랫벽에 닿았다
+    if (MaxBottom < ballPos.Y && !hasCollided)
+    {
+        Reflect({ 0, 1 });
+        ballPos.Y = MaxBottom - 0.1f;
+        hasCollided = true;
+    }
+
+    // 위쪽 벽에 닿았다
+    if (MaxTop > ballPos.Y && !hasCollided)
+    {
+        Reflect({ 0, -1 });
+        ballPos.Y = MaxTop + 0.1f;
+        hasCollided = true;
+    }
+
+    // 위치 업데이트
+    ballPos += Value * deltaTime;
+}
+

@@ -12,9 +12,18 @@ namespace UEngineDebug
 		FVector2D Pos;
 	};
 
+	class DebugNumberInfo
+	{
+	public:
+		std::string Text;
+		float Num;
+		FVector2D Pos;
+	};
+
 
 	// 선언
 	std::vector<DebugTextInfo> DebugTexts;
+	std::vector<DebugNumberInfo> Num;
 
 
 	// #ifdef _DEBUG
@@ -39,17 +48,20 @@ namespace UEngineDebug
 
 	void CoreOutPutString(std::string_view _Text)
 	{
-		// #ifdef _DEBUG
-				// 바로 출력하지 않는다.
 		DebugTexts.push_back({ _Text.data(), EngineTextPos });
 		EngineTextPos.Y += 20;
-		// endif 
 	}
 
 	void CoreOutPutString(std::string_view _Text, FVector2D _Pos)
 	{
 		// #ifdef _DEBUG
 		DebugTexts.push_back({ _Text.data(), _Pos });
+		// #endif
+	}
+	void CoreOutPutNum(std::string_view _Text, float _Num , FVector2D _Pos)
+	{
+		// #ifdef _DEBUG
+		Num.push_back({ _Text.data(), _Num, _Pos });
 		// #endif
 	}
 

@@ -127,6 +127,8 @@ private:
 	std::vector<std::vector<ABrick>> AllBricks;
 	std::vector<std::vector<FVector2D>> BrickPositions;
 	class Brick* BonusA;
+
+	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
 };
 
 

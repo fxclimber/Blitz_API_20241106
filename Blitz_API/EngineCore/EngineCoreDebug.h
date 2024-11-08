@@ -15,4 +15,7 @@ namespace UEngineDebug
 	// 분리해야 하겠네요
 
 	void PrintEngineDebugText();
+
+	void CoreOutPutNum(std::string_view _Text, float _Num, FVector2D _Pos);
+
 }

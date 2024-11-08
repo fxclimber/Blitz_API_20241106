@@ -457,33 +457,37 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 			if (HitResult.X > 0 && HitResult.Y > 0 && HitResult.X < 1 && HitResult.Y < 1) {
 				if (HitResult.X < HitResult.Y) {
 					if (HitResult.X > 1 - HitResult.Y) {
-						UEngineDebug::CoreOutPutString("HitResult : BOTTOM" + HitResult.ToString());
+						UEngineDebug::CoreOutPutString("HitResult : BOTTOM" + HitResult.ToString(),{400,800});
 						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
+						ballPosition = WhereIsBall::BOTTOM;
 						return FVector2D(0.0f, -1.0f); // 아래쪽 반사 벡터
 					}
 					else {
-						UEngineDebug::CoreOutPutString("HitResult : LEFT" + HitResult.ToString());
+						UEngineDebug::CoreOutPutString("HitResult : LEFT" + HitResult.ToString(), { 400,800 });
 						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
+						ballPosition = WhereIsBall::LEFT;
 						return FVector2D(-1.0f, 0.0f); // 왼쪽 반사 벡터
 					}
 				}
 				else if (HitResult.X > HitResult.Y) {
 					if (HitResult.Y > 1 - HitResult.X) {
-						UEngineDebug::CoreOutPutString("HitResult : RIGHT" + HitResult.ToString());
+						UEngineDebug::CoreOutPutString("HitResult : RIGHT" + HitResult.ToString(), { 400,800 });
 						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
+						ballPosition = WhereIsBall::RIGHT;
 						return FVector2D(1.0f, 0.0f); // 오른쪽 반사 벡터
 					}
 					else {
-						UEngineDebug::CoreOutPutString("HitResult : TOP" + HitResult.ToString());
+						UEngineDebug::CoreOutPutString("HitResult : TOP" + HitResult.ToString(), { 400,800 });
 						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
+						ballPosition = WhereIsBall::TOP;
 						return FVector2D(0.0f, 1.0f); // 위쪽 반사 벡터
 					}
 				}

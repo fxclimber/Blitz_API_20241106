@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include "Ball.h"
 
 class APaddle : public AActor
 {
@@ -13,14 +14,16 @@ public:
 	void MoveFunction(FVector2D _Dir);
 
 	void RunSoundPlay();
-	FVector2D CheckCollision(const FVector2D& ballPos, const FVector2D& ballSize);
 
-	FVector2D Reflect(const FVector2D& normal);
+
+	FVector2D CheckCollision(const FVector2D& ballPos);
+
+
 
 protected:
 
 private:
-	float Speed = 500.f;
+	float Speed = 700.f;
 	int MySpriteIndex = 0;
 	FVector2D Value;
 
