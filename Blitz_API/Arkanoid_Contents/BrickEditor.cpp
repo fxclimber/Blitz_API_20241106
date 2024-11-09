@@ -457,16 +457,12 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 			if (HitResult.X > 0 && HitResult.Y > 0 && HitResult.X < 1 && HitResult.Y < 1) {
 				if (HitResult.X < HitResult.Y) {
 					if (HitResult.X > 1 - HitResult.Y) {
-						UEngineDebug::CoreOutPutString("HitResult : BOTTOM" + HitResult.ToString(),{400,800});
-						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
 						ballPosition = WhereIsBall::BOTTOM;
 						return FVector2D(0.0f, -1.0f); // 아래쪽 반사 벡터
 					}
 					else {
-						UEngineDebug::CoreOutPutString("HitResult : LEFT" + HitResult.ToString(), { 400,800 });
-						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
 						ballPosition = WhereIsBall::LEFT;
@@ -475,16 +471,12 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 				}
 				else if (HitResult.X > HitResult.Y) {
 					if (HitResult.Y > 1 - HitResult.X) {
-						UEngineDebug::CoreOutPutString("HitResult : RIGHT" + HitResult.ToString(), { 400,800 });
-						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
 						ballPosition = WhereIsBall::RIGHT;
 						return FVector2D(1.0f, 0.0f); // 오른쪽 반사 벡터
 					}
 					else {
-						UEngineDebug::CoreOutPutString("HitResult : TOP" + HitResult.ToString(), { 400,800 });
-						//brick.IsCollide = true;
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
 						SpawnFX(brickPos);
 						ballPosition = WhereIsBall::TOP;
@@ -531,14 +523,6 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 
 void BrickEditor::SpawnFX(FVector2D _brickPos)
 {
-	//if (BonusA != nullptr)
-	//{
-	//	return;
-	//}
-	//else if (BonusA->GetActorLocation().Y> 950.f)
-	//{
-	//	BonusA->Destroy();
-	//}
-		BonusA = GetWorld()->SpawnActor<Brick>();
-		BonusA->SetActorLocation(_brickPos);
+	BonusA = GetWorld()->SpawnActor<Brick>();
+	BonusA->SetActorLocation(_brickPos);
 }

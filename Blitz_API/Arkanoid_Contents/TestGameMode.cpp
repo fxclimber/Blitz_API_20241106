@@ -5,6 +5,23 @@
 #include "Brick.h"
 #include "Paddle.h"
 
+
+
+
+#include <EngineCore/Level.h>
+#include <EnginePlatform/EngineInput.h>
+#include <EngineCore/EngineAPICore.h>
+#include <EngineBase/EngineFile.h>
+#include <EngineBase/EngineDirectory.h>
+#include <EngineBase/EngineRandom.h>
+
+#include "ContentsEnum.h"
+
+
+
+
+
+
 ATestGameMode::ATestGameMode()
 {
 }
@@ -29,9 +46,32 @@ void ATestGameMode::BeginPlay()
 	{
 		for (int x = 0; x < Num.Y; x++)
 		{
-			Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 2);
+			//Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 2);
 		}
 	}
+
+
+	//저장 벽돌 로드
+		UEngineDirectory Dir;
+
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+
+		Dir.Append("Data");
+
+		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+		UEngineFile NewFile = SaveFilePath;
+		NewFile.FileOpen("rb");
+
+		UEngineSerializer Ser;
+		NewFile.Read(Ser);
+
+
+		Editor->DeSerialize(Ser);
+
 
 	Ball = GetWorld()->SpawnActor<ABall>();
 	Ball->SetDir({0.1f, 1.f});

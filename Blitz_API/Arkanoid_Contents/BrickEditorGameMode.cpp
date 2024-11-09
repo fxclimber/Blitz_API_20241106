@@ -29,36 +29,23 @@ void BrickEditorGameMode::BeginPlay()
 		WallTileMap = GetWorld()->SpawnActor<BrickEditor>();
 		WallTileMap->Create("Brick", Num, Size);
 
+		//std::random
+		std::srand(static_cast<unsigned int>(std::time(nullptr)));
+
+
 		for (int y = 0; y < Num.X; y++)
 		{
 			for (int x = 0; x < Num.Y; x++)
 			{
-				WallTileMap->SetBrickIndex({ y,x }, { 0, 0 }, Size, 2);
+				//WallTileMap->SetBrickIndex({ y,x }, { 0, 0 }, Size, 6);
+				int randomIndex = std::rand() % 5;//일반벽돌색 5개
+				WallTileMap->SetBrickIndex({ y,x }, { 0, 0 }, Size, randomIndex);
 			}
 		}
 	}
 
-	//{
-	//	UEngineDirectory Dir;
-
-	//	if (false == Dir.MoveParentToDirectory("Resources"))
-	//	{
-	//		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-	//		return;
-	//	}
-
-	//	Dir.Append("Data");
-
-	//	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-	//	UEngineFile NewFile = SaveFilePath;
-	//	NewFile.FileOpen("rb");
-
-	//	UEngineSerializer Ser;
-	//	NewFile.Read(Ser);
 
 
-	//	WallTileMap->DeSerialize(Ser);
-	//}
 
 }
 
@@ -73,20 +60,25 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		WallTileMap->SetBrickLocation(MousePos, 1);
+		WallTileMap->SetBrickLocation(MousePos, 5);
 	}
-
 	if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		ABrick* BaseTile = WallTileMap->GetBrickRef(MousePos);
-
-		if (BaseTile != nullptr && BaseTile->SpriteRenderer != nullptr)
-		{
-			BaseTile->SpriteRenderer->Destroy(0.0f);
-			BaseTile->SpriteRenderer = nullptr;
-		}
+		WallTileMap->SetBrickLocation(MousePos, 6);
 	}
+
+	//if (true == UEngineInput::GetInst().IsPress(VK_RBUTTON))
+	//{
+	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+	//	ABrick* BaseTile = WallTileMap->GetBrickRef(MousePos);
+
+	//	if (BaseTile != nullptr && BaseTile->SpriteRenderer != nullptr)
+	//	{
+	//		BaseTile->SpriteRenderer->Destroy(0.0f);
+	//		BaseTile->SpriteRenderer = nullptr;
+	//	}
+	//}
 
 
 	// 이동할 필요가 없다. 예로 보여주는것

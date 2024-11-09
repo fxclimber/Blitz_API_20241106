@@ -162,9 +162,9 @@ void ArkanoidContentsCore::BeginPlay()
 
 	//타일맵 테스트용 
 	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
-	// UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, AActor>("Tile");
+	 UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Test");
+	UEngineAPICore::GetCore()->OpenLevel("Tile");
 
 
 	// UEngineAPICore::GetCore()->OpenLevel("");
