@@ -495,8 +495,42 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 
 
 
-
-
+//void BrickEditor::RemoveBlock(FIntPoint brickIndex)
+//{
+//	if (true == IsIndexOver(brickIndex))
+//	{
+//		MSGASSERT("인덱스가 오버되었습니다.");
+//	}
+//
+//	if (nullptr == AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer)
+//	{
+//		return;
+//	}
+//
+//	AllBricks[brickIndex.Y][brickIndex.X].HP -= 1;
+//
+//		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("brick_silver_shine");
+//		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
+//		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(1.28f);
+//		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("brick_silver_shine", "brick_silver_shine", 0, 9, 0.12f,true);
+//		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("brick_silver_shine");
+//
+//		if (AllBricks[brickIndex.Y][brickIndex.X].HP == 0)
+//		{
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f,false);
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp1");
+//
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.11f);
+//			AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+//
+//			SpawnFX(brickPos);
+//		}
+//
+//
+//}
 
 void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 {
@@ -511,18 +545,23 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 	}
 
 	AllBricks[brickIndex.Y][brickIndex.X].HP -= 1;
+
+	// HPBrick일 경우에만 "brick_silver_shine" 효과 적용
+	if (AllBricks[brickIndex.Y][brickIndex.X].HP>1 && AllBricks[brickIndex.Y][brickIndex.X].HP<3)
+	{
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("brick_silver_shine");
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(1.28f);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("brick_silver_shine", "brick_silver_shine", 0, 9, 0.12f,true);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(1.3f);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("brick_silver_shine", "brick_silver_shine", 0, 9, 0.12f, true);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("brick_silver_shine");
+	}
 
 	if (AllBricks[brickIndex.Y][brickIndex.X].HP == 0)
 	{
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f,false);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f, false);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp1");
 
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.11f);
@@ -530,8 +569,10 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 
 		SpawnFX(brickPos);
 	}
-
 }
+
+
+
 
 void BrickEditor::SpawnFX(FVector2D _brickPos)
 {
@@ -556,20 +597,29 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 	AllBricks[_Index.Y][_Index.X].SpriteRenderer->SetSprite(_Sprite, _SpriteIndex);
 }
 
+
+BrickEditor::BrickEditor()
+{
+	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+}
 void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 {
+	//std::random
+	int randomIndex = (std::rand() % 5) + 1; // 인덱스가 1~5까지
+
 	switch (_Type)
 	{
 	case Default:
-		SetBrickSprite(_Index, "Brick", 1);
+
+		SetBrickSprite(_Index, "Brick", randomIndex);
 		SetBrickHp(_Index, 1);
 		break;
 	case HPBrick:
-		SetBrickSprite(_Index, "Brick", 1);
-		SetBrickHp(_Index, 2);
+		SetBrickSprite(_Index, "Brick", 6);
+		SetBrickHp(_Index, 3);
 		break;
 	case NotBreak:
-		SetBrickSprite(_Index, "Brick", 1);
+		SetBrickSprite(_Index, "Brick", 5);
 		SetBrickHp(_Index, 400001);
 		break;
 	default:

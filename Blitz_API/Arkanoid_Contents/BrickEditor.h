@@ -65,7 +65,7 @@ class BrickEditor : public AActor, public ISerializObject
 {
 public:
 	// constrcuter destructer
-	BrickEditor(){}
+	BrickEditor();
 	~BrickEditor(){}
 
 	void SetBrickHp(FIntPoint _Index, int _Hp);
