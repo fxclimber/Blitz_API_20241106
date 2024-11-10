@@ -126,6 +126,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore));
 	}
+	UEngineDebug::CoreOutPutString("uiPos : " + GetActorLocation().ToString());
 
 }
 
