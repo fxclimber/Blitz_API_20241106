@@ -100,7 +100,6 @@ void UImageManager::Load(std::string_view _KeyName, std::string_view Path)
 	// 만들었다고 끝이 아닙니다.
 	UEngineWinImage* NewImage = new UEngineWinImage();
 	NewImage->Load(WindowImage, Path);
-
 	NewImage->SetName(UpperName);
 	Images.insert({ UpperName , NewImage });
 
@@ -167,7 +166,7 @@ void UImageManager::LoadFolder(std::string_view _KeyName, std::string_view _Path
 	}
 }
 
-void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingSize)
+void UImageManager::CuttingSprite(std::string_view _KeyName, int _X, int _Y)
 {
 	std::string UpperName = UEngineString::ToUpper(_KeyName);
 
@@ -188,6 +187,37 @@ void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingS
 
 	Sprite->ClearSpriteData();
 
+	FVector2D Scale = Image->GetImageScale();
+
+	Scale.X /= _X;
+	Scale.Y /= _Y;
+
+	CuttingSprite(_KeyName, Scale);
+}
+
+void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingSize)
+{
+	std::string UpperName = UEngineString::ToUpper(_KeyName);
+
+	if (false == Sprites.contains(UpperName))
+	{
+		MSGASSERT("존재하지 않은 스프라이트를 자르려고 했습니다" + std::string(_KeyName));
+		return;
+	}
+
+	if (false == Images.contains(UpperName))
+	{
+		MSGASSERT("존재하지 않은 이미지를 기반으로 스프라이트를 자르려고 했습니다" + std::string(_KeyName));
+		return;
+	}
+
+	UEngineSprite* Sprite = Sprites[UpperName];
+	UEngineWinImage* Image = Images[UpperName];
+
+	Sprite->ClearSpriteData();
+	Sprite->SetName(UpperName);
+	Image->SetName(UpperName);
+
 	if (0 != (Image->GetImageScale().iX() % _CuttingSize.iX()))
 	{
 		MSGASSERT("스프라이트 컷팅에 x가 딱 떨어지지 않습니다." + std::string(_KeyName));
@@ -199,6 +229,55 @@ void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingS
 		MSGASSERT("스프라이트 컷팅에 y가 딱 떨어지지 않습니다." + std::string(_KeyName));
 		return;
 	}
+
+	int SpriteX = Image->GetImageScale().iX() / _CuttingSize.iX();
+	int SpriteY = Image->GetImageScale().iY() / _CuttingSize.iY();
+
+	FTransform CuttingTrans;
+
+	CuttingTrans.Location = FVector2D::ZERO;
+	CuttingTrans.Scale = _CuttingSize;
+
+	for (size_t y = 0; y < SpriteY; ++y)
+	{
+		for (size_t x = 0; x < SpriteX; ++x)
+		{
+			Sprite->PushData(Image, CuttingTrans);
+			CuttingTrans.Location.X += _CuttingSize.X;
+		}
+
+		CuttingTrans.Location.X = 0.0f;
+		CuttingTrans.Location.Y += _CuttingSize.Y;
+	}
+}
+
+void UImageManager::CuttingSprite(std::string_view _NewSpriteName, std::string_view _Image, FVector2D _CuttingSize)
+{
+	std::string SpriteUpperName = UEngineString::ToUpper(_NewSpriteName);
+	std::string ImageUpperName = UEngineString::ToUpper(_Image);
+
+	if (false == Images.contains(ImageUpperName))
+	{
+		MSGASSERT("존재하지 않은 이미지를 기반으로 스프라이트를 자르려고 했습니다" + std::string(_Image));
+		return;
+	}
+
+	UEngineSprite* Sprite = new UEngineSprite();
+
+	if (false == Sprites.contains(SpriteUpperName))
+	{
+		Sprite = new UEngineSprite();;
+		Sprites.insert({ SpriteUpperName, Sprite });
+	}
+	else {
+		Sprite = Sprites[SpriteUpperName];
+	}
+
+	UEngineWinImage* Image = Images[ImageUpperName];
+
+	Sprite->ClearSpriteData();
+	Sprite->SetName(SpriteUpperName);
+	Image->SetName(ImageUpperName);
 
 	int SpriteX = Image->GetImageScale().iX() / _CuttingSize.iX();
 	int SpriteY = Image->GetImageScale().iY() / _CuttingSize.iY();
@@ -250,7 +329,7 @@ UEngineWinImage* UImageManager::FindImage(std::string_view _KeyName)
 
 	if (false == Images.contains(UpperName))
 	{
-		MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_KeyName));
+		// MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_KeyName));
 		return nullptr;
 	}
 
@@ -304,6 +383,8 @@ void UImageManager::CreateCutSprite(std::string_view _SearchKeyName, std::string
 
 	UEngineSprite* Sprite = Sprites[SearchName];
 	UEngineWinImage* Image = Images[SearchName];
+	Sprite->SetName(SearchName);
+	Image->SetName(SearchName);
 
 	Sprite->ClearSpriteData();
 

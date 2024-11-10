@@ -54,9 +54,7 @@ namespace UEngineDebug
 
 	void CoreOutPutString(std::string_view _Text, FVector2D _Pos)
 	{
-		// #ifdef _DEBUG
 		DebugTexts.push_back({ _Text.data(), _Pos });
-		// #endif
 	}
 	void CoreOutPutNum(std::string_view _Text, float _Num , FVector2D _Pos)
 	{

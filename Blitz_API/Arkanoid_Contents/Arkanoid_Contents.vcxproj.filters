@@ -64,6 +64,9 @@
     <ClInclude Include="TestGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -128,6 +131,9 @@
     </ClCompile>
     <ClCompile Include="TestGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>ContentsObject\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

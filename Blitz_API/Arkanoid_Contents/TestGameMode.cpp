@@ -6,6 +6,7 @@
 #include "Paddle.h"
 
 
+#include <format>
 
 
 #include <EngineCore/Level.h>
@@ -17,6 +18,7 @@
 
 #include "ContentsEnum.h"
 
+#include "Score.h"
 
 
 
@@ -24,6 +26,17 @@
 void ATestGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+
+	//UI
+	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
+	//NewActor->SetActorLocation({300, 300}); // 위치조정을 원할경우,로직변경필요 
+	NewActor->SetTextSpriteName("Text.bmp");
+	NewActor->SetOrder(ERenderOrder::UI);
+	NewActor->SetTextScale({ 100, 100 });
+	NewActor->SetValue(45362784);//여기에 점수넣기
+
+	FVector2D uiPos = NewActor->GetActorLocation();
+	UEngineDebug::CoreOutPutString("uiPos : " + uiPos.ToString());
 
 	GetWorld()->SetCameraToMainPawn(false);
 
@@ -101,18 +114,20 @@ void ATestGameMode::Tick(float _DeltaTime)
 		Ball->SetDir(normal);
 		//Ball->Reflect(normal);
 	}
-	float fps = 1/_DeltaTime;
-	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
-	float EleapsedTime = Editor->GetElapsedTime();
-	UEngineDebug::CoreOutPutString("EleapsedTime : " + std::to_string(EleapsedTime));
+	// 확인용 로그들 
+	{
+		float fps = 1/_DeltaTime;
+		UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
-	int TotalScore = Editor->GetScore();
-	UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore));
+		float EleapsedTime = Editor->GetElapsedTime();
+		UEngineDebug::CoreOutPutString("EleapsedTime : " + std::to_string(EleapsedTime));
+
+		int TotalScore = Editor->GetScore();
+		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore));
+	}
 
 }
-
-
 
 
 

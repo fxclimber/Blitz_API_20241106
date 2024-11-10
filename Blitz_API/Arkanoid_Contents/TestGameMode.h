@@ -15,8 +15,6 @@ protected:
 
 	void Tick(float _DeltaTime) override;
 
-	void StartStage();
-	float GetElapsedTime() const;
 
 private:
 	class BrickEditor* Editor;

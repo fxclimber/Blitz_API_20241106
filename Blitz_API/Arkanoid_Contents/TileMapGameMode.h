@@ -21,6 +21,6 @@ private:
 	ATileMap* GroundTileMap = nullptr;
 
 	std::string LoadFileName;
-
+	FVector2D  ScorePos = {0,0};
 };
 

@@ -169,6 +169,7 @@
     <ClInclude Include="PlayMap.h" />
     <ClInclude Include="PreCompiledFile.h" />
     <ClInclude Include="BrickEditor.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="TestGameMode.h">
       <SubType>
       </SubType>
@@ -198,6 +199,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="BrickEditor.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="TestGameMode.cpp">
       <SubType>
       </SubType>

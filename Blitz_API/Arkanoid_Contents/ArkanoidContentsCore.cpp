@@ -31,6 +31,7 @@ ArkanoidContentsCore::~ArkanoidContentsCore()
 
 void ArkanoidContentsCore::BeginPlay()
 {
+
 	UEngineDirectory Dir;
 
 	std::string ImageRes = "Resources//Images";
@@ -53,6 +54,9 @@ void ArkanoidContentsCore::BeginPlay()
 
 	// 자르는 작업 <- 텍스쳐 모두 로딩되야함
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", { 128, 128 });
+
+	//UI
+	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
 
 	// 폴더 낱장 애니
 	{
