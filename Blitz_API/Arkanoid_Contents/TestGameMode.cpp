@@ -20,6 +20,7 @@
 
 
 
+
 void ATestGameMode::BeginPlay()
 {
 	Super::BeginPlay();
@@ -103,8 +104,9 @@ void ATestGameMode::Tick(float _DeltaTime)
 	float fps = 1/_DeltaTime;
 	UEngineDebug::CoreOutPutString("FPS : " + std::to_string(1.0f / _DeltaTime));
 
+	float EleapsedTime = Editor->GetElapsedTime();
+	UEngineDebug::CoreOutPutString("EleapsedTime : " + std::to_string(EleapsedTime));
 }
-
 
 
 

@@ -601,6 +601,8 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 BrickEditor::BrickEditor()
 {
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
+	stageStartTime = std::chrono::steady_clock::now();
+
 }
 void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 {
@@ -627,3 +629,14 @@ void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 	}
 }
 
+void BrickEditor::StartStage()
+{
+	stageStartTime = std::chrono::steady_clock::now();
+}
+
+float BrickEditor::GetElapsedTime() const
+{
+	auto Now = std::chrono::steady_clock::now();
+	auto Duration = std::chrono::duration<float>(Now - stageStartTime);  // 초 단위로 변환
+	return Duration.count();  // float 타입으로 반환
+}

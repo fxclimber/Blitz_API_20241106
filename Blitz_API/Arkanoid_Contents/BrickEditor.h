@@ -3,6 +3,7 @@
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineBase/EngineSerializer.h>
 #include "Brick.h"
+#include <chrono>
 
 enum BrickType
 {
@@ -120,6 +121,10 @@ public:
 
 	void SpawnFX(FVector2D _brickPos);
 
+	void StartStage();
+	float GetElapsedTime() const;
+
+
 protected:
 
 private:
@@ -135,6 +140,9 @@ private:
 	FVector2D brickPos;
 
 	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
+	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
+	float Duration;
+
 };
 
 
