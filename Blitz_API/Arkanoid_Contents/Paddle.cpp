@@ -27,7 +27,7 @@ APaddle::APaddle()
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetOrder(ERenderOrder::Bricks);
 	SpriteRenderer->SetSprite("paddle_small.png");
-	FVector2D PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
+	PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
 	}
 }
 

@@ -17,7 +17,7 @@ public:
 
 
 	FVector2D CheckCollision(const FVector2D& ballPos);
-
+	FVector2D PaddleScale = { 0,0 };
 
 
 protected:

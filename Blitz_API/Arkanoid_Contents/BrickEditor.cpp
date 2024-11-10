@@ -213,6 +213,7 @@ void BrickEditor::Serialize(UEngineSerializer& _Ser)
 	_Ser << BrickSize;
 	_Ser << SpriteName;
 	_Ser << AllBricks;
+	_Ser << Score;
 
 }
 
@@ -611,7 +612,7 @@ BrickEditor::BrickEditor()
 void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 {
 	//std::random
-	int randomIndex = (std::rand() % 5) ; // 인덱스가 0~4까지
+	int randomIndex = (std::rand() % RandomBrick) ; // 인덱스가 0~4까지
 
 	switch (_Type)
 	{

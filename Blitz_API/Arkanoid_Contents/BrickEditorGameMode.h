@@ -17,6 +17,5 @@ protected:
 private:
 	BrickEditor* WallTileMap = nullptr;
 	std::string LoadFileName;
-
 };
 

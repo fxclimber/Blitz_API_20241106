@@ -18,8 +18,6 @@ ABall::ABall()
 	SpriteRenderer->SetSprite("ball_red.png");
 	SpriteRenderer->SetComponentScale({ 22, 22 });
 	SpriteRenderer->SetOrder(ERenderOrder::UI);
-
-    // 상수 세팅은 좋지 않다.
 }
 
 ABall::~ABall()
@@ -38,15 +36,20 @@ void ABall::Tick(float _DeltaTime)
     FVector2D ballPos = GetActorLocation();
     FVector2D ballScale = GetRender()->GetComponentScale();
     float tolerance = 0.02f + ballScale.X / 2;
-
-    UpdatePosition(_DeltaTime);
-    MoveFunction(Value);
+    if (true == GetIsMove())
+    {
+        UpdatePosition(_DeltaTime);
+        MoveFunction(Value);
+    }
+    else
+    {
+        MoveFunction({0,0});
+    }
 }
 
 void ABall::MoveFunction(const FVector2D& velocity)
 {
     float DeltaTime = UEngineAPICore::GetCore()->GetDeltaTime();
-    //SetActorLocation(GetActorLocation() + velocity * DeltaTime);
     AddActorLocation(velocity * DeltaTime * Speed);
 }
 
@@ -54,7 +57,6 @@ void ABall::Reflect(const FVector2D& normal)
 {
     float dotProduct = Value.Dot(normal);
     Value = Value - (normal * (2.0f * dotProduct));
-    //SetDir(Value);
 }
 
 
@@ -67,7 +69,7 @@ void ABall::UpdatePosition(float deltaTime)
     FVector2D ballScale = GetRender()->GetComponentScale();
     float tolerance = 0.02f + ballScale.X / 2;
 
-    bool hasCollided = false; // 충돌 여부 플래그 초기화
+    bool hasCollided = false; // 충돌 여부
 
     // 왼쪽 벽에 닿았다
     if (MaxLeft > ballPos.X && !hasCollided)

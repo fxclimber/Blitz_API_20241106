@@ -28,7 +28,7 @@ public:
 	FVector2D Scale;
 	FVector2D Pivot;
 	int SpriteIndex;
-	unsigned int HP = 400001;
+	int HP = 400001;
 
 	// 데이터를 직렬화(압축)
 	void Serialize(UEngineSerializer& _Ser)
@@ -44,6 +44,7 @@ public:
 		_Ser << Scale;
 		_Ser << Pivot;
 		_Ser << SpriteIndex;
+		_Ser << HP;
 	}
 
 	void DeSerialize(UEngineSerializer& _Ser)
@@ -128,6 +129,7 @@ public:
 	{
 		return Score;
 	}
+	int RandomBrick = 5;
 
 protected:
 
@@ -147,6 +149,8 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
 	float Duration;
 	int Score = 0;
+
+
 };
 
 

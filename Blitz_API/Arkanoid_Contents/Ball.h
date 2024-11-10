@@ -27,16 +27,29 @@ public:
 		Value = _Value;
 		Value.Normalize();
 	}
+	void SetIsMove(bool _value)
+	{
+		IsMove = _value; // 값을 할당하도록 수정
+	}
 
+	bool GetIsMove()
+	{
+		return IsMove;
+	}
+
+	FVector2D GetVel()
+	{
+		return Value;
+	}
 	void MoveFunction(const FVector2D& velocity);
 	void Reflect(const FVector2D& normal);
-
-
 	void UpdatePosition(float deltaTime);
+
 
 private:
 	float Speed = 1.0f;
 	int MySpriteIndex = 0;
+	bool IsMove=false;
 
 	FVector2D Value;
 

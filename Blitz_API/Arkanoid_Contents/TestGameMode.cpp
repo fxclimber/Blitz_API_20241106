@@ -91,28 +91,40 @@ void ATestGameMode::BeginPlay()
 		//Editor->DeSerialize(Ser);
 	}
 
+	Paddle = GetWorld()->SpawnActor<APaddle>();
+	Paddle->SetActorLocation({385,950});
 
 	Ball = GetWorld()->SpawnActor<ABall>();
 	Ball->SetDir({0.15f, 1.f});
 	Ball->SetSpeed(650.0f);
-
-	Paddle = GetWorld()->SpawnActor<APaddle>();
-	Paddle->SetActorLocation({385,950});
+	Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 }
 
 void ATestGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	if (!Ball->GetIsMove()) // 공이 정지 상태일 때 (IsMove가 false일 때)
+	{
+		// 공을 패들의 위치에 고정
+		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
+
+		// 버튼이 눌리면 공을 이동 상태로 전환
+		if (UEngineInput::GetInst().IsDown(VK_SPACE))
+		{
+			Ball->SetIsMove(true);  // 공의 움직임 시작
+			Ball->SetSpeed(650.0f); // 초기 속도 설정 (필요할 경우)
+		}
+	}
+
+
 	Editor->CheckCollision(Ball, {0, 0});
-	//Editor->RemoveBlock({1, 0});
-	//Paddle->CheckCollision(Ball);
 
 	FVector2D ballPos = Ball->GetActorLocation();
 	FVector2D normal = Paddle->CheckCollision(ballPos);
-	if (normal != FVector2D{ 0, 0 }) {
-		//Ball->Reflect(normal);  // 공이 반사되도록 처리
+	if (normal != FVector2D{ 0, 0 }) 
+	{
 		Ball->SetDir(normal);
-		//Ball->Reflect(normal);
 	}
 
 	AScore::ScoreUI = Editor->GetScore()*32;
@@ -128,8 +140,8 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore*32));
+		UEngineDebug::CoreOutPutString("move : " + std::to_string(Ball->GetIsMove()));
 
-		//UEngineDebug::CoreOutPutString("uiPos : " + UIPos.ToString());
 	}
 
 }
