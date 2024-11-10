@@ -21,5 +21,7 @@ private:
 	class ABall* Ball;
 	class APaddle* Paddle;
 
+	class AScore* score;
+	FVector2D UIPos = {0,0};
 };
 

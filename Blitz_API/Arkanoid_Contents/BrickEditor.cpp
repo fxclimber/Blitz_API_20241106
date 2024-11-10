@@ -8,6 +8,7 @@
 #include "ContentsEnum.h"
 #include "Ball.h"
 
+#include "Score.h"
 
 
 void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize)
@@ -32,6 +33,8 @@ void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _
 	float gap = WinSize - AllSpriteWidth;
 	PlusPos = { gap, Height };
 	SetActorLocation(PlusPos);
+
+
 }
 
 FVector2D BrickEditor::IndexToBrickLocation(FIntPoint _Index)

@@ -28,15 +28,15 @@ void ATestGameMode::BeginPlay()
 	Super::BeginPlay();
 
 	//UI
-	AScore* NewActor = GetWorld()->SpawnActor<AScore>();
-	//NewActor->SetActorLocation({300, 300}); // 위치조정을 원할경우,로직변경필요 
-	NewActor->SetTextSpriteName("Text.bmp");
-	NewActor->SetOrder(ERenderOrder::UI);
-	NewActor->SetTextScale({ 100, 100 });
-	NewActor->SetValue(45362784);//여기에 점수넣기
+	score = GetWorld()->SpawnActor<AScore>();
+	score->SetActorLocation({ 500,500 });
+	score->SetTextSpriteName("Text.bmp");
+	score->SetOrder(ERenderOrder::UI);
+	score->SetTextScale({ 100, 100 });
 
-	FVector2D uiPos = NewActor->GetActorLocation();
-	UEngineDebug::CoreOutPutString("uiPos : " + uiPos.ToString());
+	//UIPos = UIScore->GetActorLocation();
+
+
 
 	GetWorld()->SetCameraToMainPawn(false);
 
@@ -115,6 +115,9 @@ void ATestGameMode::Tick(float _DeltaTime)
 		//Ball->Reflect(normal);
 	}
 
+	AScore::ScoreUI = Editor->GetScore();
+	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
+
 	// 확인용 로그들 
 	{
 		float fps = 1/_DeltaTime;
@@ -125,8 +128,9 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore));
+
+		UEngineDebug::CoreOutPutString("uiPos : " + UIPos.ToString());
 	}
-	UEngineDebug::CoreOutPutString("uiPos : " + GetActorLocation().ToString());
 
 }
 

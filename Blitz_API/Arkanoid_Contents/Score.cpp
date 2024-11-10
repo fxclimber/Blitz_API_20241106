@@ -1,6 +1,8 @@
 #include "PreCompiledFile.h"
 #include "Score.h"
 
+int AScore::ScoreUI = 0; // 정적 변수 정의
+
 AScore::AScore()
 {
 	for (size_t i = 0; i < 10; i++)
@@ -49,7 +51,7 @@ void AScore::SetValue(int _Score)
 		return;
 	}
 
-	Pos = FVector2D::ZERO;
+	FVector2D Pos = FVector2D::ZERO;
 
 	for (size_t i = 0; i < Number.size(); i++)
 	{

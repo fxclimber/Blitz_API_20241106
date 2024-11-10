@@ -33,10 +33,8 @@ public:
 	{
 		return &Renders;
 	}
-	FVector2D SetPos(FVector2D _Pos)
-	{
-		Pos = _Pos;
-	}
+
+	static int ScoreUI;
 
 protected:
 	void BeginPlay() override{}
@@ -46,6 +44,7 @@ private:
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;
-	FVector2D Pos = { 0,0 };
+
+
 };
 
