@@ -4,10 +4,10 @@
 #include <EngineBase/EngineSerializer.h>
 #include "Brick.h"
 
-enum BlockType
+enum BrickType
 {
 	Default,
-	HPBlock,
+	HPBrick,
 	NotBreak,
 };
 
@@ -27,7 +27,7 @@ public:
 	FVector2D Scale;
 	FVector2D Pivot;
 	int SpriteIndex;
-	unsigned int HP = -1;
+	unsigned int HP = 400001;
 
 	// 데이터를 직렬화(압축)
 	void Serialize(UEngineSerializer& _Ser)
@@ -68,6 +68,11 @@ public:
 	BrickEditor(){}
 	~BrickEditor(){}
 
+	void SetBrickHp(FIntPoint _Index, int _Hp);
+
+	void SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int _SpriteIndex);
+
+	void setBrickType(FIntPoint _Index, BrickType _Type);
 
 	// 타일 이미지는 sprite 1개에서 
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize);
@@ -127,6 +132,7 @@ private:
 	std::vector<std::vector<ABrick>> AllBricks;
 	std::vector<std::vector<FVector2D>> BrickPositions;
 	class Brick* BonusA;
+	FVector2D brickPos;
 
 	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
 };

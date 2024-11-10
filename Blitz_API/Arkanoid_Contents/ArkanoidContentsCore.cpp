@@ -74,6 +74,19 @@ void ArkanoidContentsCore::BeginPlay()
 		UImageManager::GetInst().LoadFolder(paddle_materialize.GetPathToString());
 	}
 
+	
+
+	// 폴더- 보너스 아이템 
+	{
+		{
+			//powerup_laser
+			UEngineDirectory powerup_laser;
+			powerup_laser.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Ani");
+			powerup_laser.Append("brick_silver_shine");
+			UImageManager::GetInst().LoadFolder(powerup_laser.GetPathToString());
+		}
+	}
+
 	// 폴더- 보너스 아이템 
 	{
 		{
@@ -164,7 +177,7 @@ void ArkanoidContentsCore::BeginPlay()
 	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
 	 UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, AActor>("Tile");
 
-	UEngineAPICore::GetCore()->OpenLevel("Tile");
+	UEngineAPICore::GetCore()->OpenLevel("Test");
 
 
 	// UEngineAPICore::GetCore()->OpenLevel("");

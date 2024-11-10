@@ -46,36 +46,40 @@ void ATestGameMode::BeginPlay()
 	{
 		for (int x = 0; x < Num.Y; x++)
 		{
-			//Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 2);
+			Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 1);
+			//Editor->setBrickType({ y,x }, BrickType::Default);
+			Editor->setBrickType({ y,x }, BrickType::HPBrick);
+			//Editor->setBrickType({ y,x }, BrickType::NotBreak);
 		}
 	}
 
-
 	//저장 벽돌 로드
-		UEngineDirectory Dir;
+	{
+		//UEngineDirectory Dir;
 
-		if (false == Dir.MoveParentToDirectory("Resources"))
-		{
-			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-			return;
-		}
+		//if (false == Dir.MoveParentToDirectory("Resources"))
+		//{
+		//	MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+		//	return;
+		//}
 
-		Dir.Append("Data");
+		//Dir.Append("Data");
 
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("rb");
+		//std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+		//UEngineFile NewFile = SaveFilePath;
+		//NewFile.FileOpen("rb");
 
-		UEngineSerializer Ser;
-		NewFile.Read(Ser);
+		//UEngineSerializer Ser;
+		//NewFile.Read(Ser);
 
 
-		Editor->DeSerialize(Ser);
+		//Editor->DeSerialize(Ser);
+	}
 
 
 	Ball = GetWorld()->SpawnActor<ABall>();
 	Ball->SetDir({0.1f, 1.f});
-	Ball->SetSpeed(350.0f);
+	Ball->SetSpeed(550.0f);
 
 	Paddle = GetWorld()->SpawnActor<APaddle>();
 	Paddle->SetActorLocation({385,950});

@@ -437,7 +437,7 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 			}
 
 			// 벽돌 위치와 크기 가져오기
-			FVector2D brickPos = BrickPositions[y][x];
+			brickPos = BrickPositions[y][x];
 			FVector2D brickSize = BrickSize;
 
 			// 충돌 감지 로직
@@ -458,13 +458,13 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 				if (HitResult.X < HitResult.Y) {
 					if (HitResult.X > 1 - HitResult.Y) {
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
-						SpawnFX(brickPos);
+						//SpawnFX(brickPos);
 						ballPosition = WhereIsBall::BOTTOM;
 						return FVector2D(0.0f, -1.0f); // 아래쪽 반사 벡터
 					}
 					else {
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
-						SpawnFX(brickPos);
+						//SpawnFX(brickPos);
 						ballPosition = WhereIsBall::LEFT;
 						return FVector2D(-1.0f, 0.0f); // 왼쪽 반사 벡터
 					}
@@ -472,13 +472,13 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 				else if (HitResult.X > HitResult.Y) {
 					if (HitResult.Y > 1 - HitResult.X) {
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
-						SpawnFX(brickPos);
+						//SpawnFX(brickPos);
 						ballPosition = WhereIsBall::RIGHT;
 						return FVector2D(1.0f, 0.0f); // 오른쪽 반사 벡터
 					}
 					else {
 						RemoveBlock(FIntPoint(x, y)); // 실제 충돌한 벽돌의 인덱스를 전달
-						SpawnFX(brickPos);
+						//SpawnFX(brickPos);
 						ballPosition = WhereIsBall::TOP;
 						return FVector2D(0.0f, 1.0f); // 위쪽 반사 벡터
 					}
@@ -510,14 +510,26 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		return;
 	}
 
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f,false);
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp1");
+	AllBricks[brickIndex.Y][brickIndex.X].HP -= 1;
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("brick_silver_shine");
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(1.28f);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("brick_silver_shine", "brick_silver_shine", 0, 9, 0.12f,true);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("brick_silver_shine");
 
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.25f);
-	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+	if (AllBricks[brickIndex.Y][brickIndex.X].HP == 0)
+	{
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f,false);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp1");
+
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.11f);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+
+		SpawnFX(brickPos);
+	}
 
 }
 
@@ -526,3 +538,42 @@ void BrickEditor::SpawnFX(FVector2D _brickPos)
 	BonusA = GetWorld()->SpawnActor<Brick>();
 	BonusA->SetActorLocation(_brickPos);
 }
+
+void BrickEditor::SetBrickHp(FIntPoint _Index, int _Hp)
+{
+	AllBricks[_Index.Y][_Index.X].HP = _Hp;
+}
+
+void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int _SpriteIndex)
+{
+	// 인덱스가 범위를 벗어나면 리턴
+	if (IsIndexOver(_Index))
+	{
+		return;
+	}
+
+	AllBricks[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
+	AllBricks[_Index.Y][_Index.X].SpriteRenderer->SetSprite(_Sprite, _SpriteIndex);
+}
+
+void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
+{
+	switch (_Type)
+	{
+	case Default:
+		SetBrickSprite(_Index, "Brick", 1);
+		SetBrickHp(_Index, 1);
+		break;
+	case HPBrick:
+		SetBrickSprite(_Index, "Brick", 1);
+		SetBrickHp(_Index, 2);
+		break;
+	case NotBreak:
+		SetBrickSprite(_Index, "Brick", 1);
+		SetBrickHp(_Index, 400001);
+		break;
+	default:
+		break;
+	}
+}
+
