@@ -106,6 +106,10 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 	float EleapsedTime = Editor->GetElapsedTime();
 	UEngineDebug::CoreOutPutString("EleapsedTime : " + std::to_string(EleapsedTime));
+
+	int TotalScore = Editor->GetScore();
+	UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore));
+
 }
 
 

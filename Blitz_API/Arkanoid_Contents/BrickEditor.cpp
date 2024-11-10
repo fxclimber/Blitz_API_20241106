@@ -545,6 +545,7 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 	}
 
 	AllBricks[brickIndex.Y][brickIndex.X].HP -= 1;
+	Score += 1;
 
 	// HPBrick일 경우에만 "brick_silver_shine" 효과 적용
 	if (AllBricks[brickIndex.Y][brickIndex.X].HP>1 && AllBricks[brickIndex.Y][brickIndex.X].HP<3)

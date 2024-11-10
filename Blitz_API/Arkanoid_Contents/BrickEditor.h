@@ -124,6 +124,10 @@ public:
 	void StartStage();
 	float GetElapsedTime() const;
 
+	int GetScore()const
+	{
+		return Score;
+	}
 
 protected:
 
@@ -142,7 +146,7 @@ private:
 	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
 	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
 	float Duration;
-
+	int Score = 0;
 };
 
 
