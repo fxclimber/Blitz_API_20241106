@@ -30,7 +30,7 @@ void ATestGameMode::BeginPlay()
 	Editor->SetBricksHeight(210);
 
 	FVector2D Size = { 57,26 };
-	FIntPoint Num = { 6,4 };
+	FIntPoint Num = { 10,8 };
 	Editor->Create("Brick", Num, Size);
 
 
@@ -79,8 +79,8 @@ void ATestGameMode::BeginPlay()
 
 
 	Ball = GetWorld()->SpawnActor<ABall>();
-	Ball->SetDir({0.1f, 1.f});
-	Ball->SetSpeed(550.0f);
+	Ball->SetDir({0.15f, 1.f});
+	Ball->SetSpeed(650.0f);
 
 	Paddle = GetWorld()->SpawnActor<APaddle>();
 	Paddle->SetActorLocation({385,950});
