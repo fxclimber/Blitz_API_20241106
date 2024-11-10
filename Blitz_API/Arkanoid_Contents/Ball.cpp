@@ -18,6 +18,7 @@ ABall::ABall()
 	SpriteRenderer->SetSprite("ball_red.png");
 	SpriteRenderer->SetComponentScale({ 22, 22 });
 	SpriteRenderer->SetOrder(ERenderOrder::UI);
+    IsMove = false;
 }
 
 ABall::~ABall()

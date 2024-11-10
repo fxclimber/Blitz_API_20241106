@@ -1,5 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
+#include <vector>
+
 
 // Ό³Έν :
 class ATestGameMode : public AGameMode
@@ -18,10 +20,12 @@ protected:
 
 private:
 	class BrickEditor* Editor;
-	class ABall* Ball;
+	//class ABall* Ball;
 	class APaddle* Paddle;
 
 	class AScore* score;
 	FVector2D UIPos = {0,0};
+
+	std::vector<class ABall*> Balls;
 };
 

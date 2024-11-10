@@ -49,7 +49,7 @@ public:
 private:
 	float Speed = 1.0f;
 	int MySpriteIndex = 0;
-	bool IsMove=false;
+	bool IsMove;
 
 	FVector2D Value;
 

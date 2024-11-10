@@ -59,41 +59,6 @@ void APaddle::RunSoundPlay()
 {
 }
 
-//
-//FVector2D APaddle::CheckCollision(ABall* Ball)
-//{
-//	FVector2D Normal = CheckCollision(Ball->GetActorLocation(), Ball->GetRender()->GetComponentScale());
-//	Ball->Reflect(Normal);
-//	return Normal;
-//}
-//
-//
-//FVector2D APaddle::CheckCollision(const FVector2D& ballPos, const FVector2D& ballSize)
-//{
-//    FVector2D paddlePos = GetActorLocation();
-//    FVector2D paddlesize = SpriteRenderer->GetComponentScale();
-//    FVector2D HitResult = (ballPos - paddlePos) / paddlesize;
-//
-//    if (HitResult.X > 0 && HitResult.Y > 0 && HitResult.X < 1 && HitResult.Y < 1) {
-//        if (HitResult.X < HitResult.Y) {
-//            if (HitResult.X > 1 - HitResult.Y) {
-//                return Reflect({ 0, -1 });
-//            }
-//            else {
-//                return Reflect({ -1, 0 });
-//            }
-//        }
-//        else if(HitResult.X > HitResult.Y)
-//        {
-//            if (HitResult.Y > 1 - HitResult.X) {
-//                return Reflect({ 1, 0 });
-//            }
-//            else {
-//                return Reflect({ 0, 1 });
-//            }
-//        }
-//    }
-//}
 
 FVector2D APaddle::CheckCollision(const FVector2D& ballPos)
 {
