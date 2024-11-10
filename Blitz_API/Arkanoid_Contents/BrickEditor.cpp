@@ -566,10 +566,10 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp1", "exp", 1, 8, 0.09f, false);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp1");
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp", "exp", 1, 8, 0.09f, true);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp");
 
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.11f);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.5f);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
 
 		SpawnFX(brickPos);

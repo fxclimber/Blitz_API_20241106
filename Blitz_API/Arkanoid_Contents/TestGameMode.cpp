@@ -120,6 +120,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 
 	{
+		// 볼1개일때 
 		//if (!Ball->GetIsMove()) // 공이 정지 상태일 때 (IsMove가 false일 때)
 		//{
 		//	// 공을 패들의 위치에 고정
