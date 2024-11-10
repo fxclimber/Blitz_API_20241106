@@ -56,7 +56,7 @@ void ArkanoidContentsCore::BeginPlay()
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", { 128, 128 });
 
 	//UI
-	UImageManager::GetInst().CuttingSprite("Text.bmp", { 16, 32 });
+	UImageManager::GetInst().CuttingSprite("Text_Num.png", { 64, 64 });
 
 	// 폴더 낱장 애니
 	{

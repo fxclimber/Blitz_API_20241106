@@ -218,17 +218,17 @@ void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingS
 	Sprite->SetName(UpperName);
 	Image->SetName(UpperName);
 
-	if (0 != (Image->GetImageScale().iX() % _CuttingSize.iX()))
-	{
-		MSGASSERT("스프라이트 컷팅에 x가 딱 떨어지지 않습니다." + std::string(_KeyName));
-		return;
-	}
+	//if (0 != (Image->GetImageScale().iX() % _CuttingSize.iX()))
+	//{
+	//	MSGASSERT("스프라이트 컷팅에 x가 딱 떨어지지 않습니다." + std::string(_KeyName));
+	//	return;
+	//}
 
-	if (0 != (Image->GetImageScale().iY() % _CuttingSize.iY()))
-	{
-		MSGASSERT("스프라이트 컷팅에 y가 딱 떨어지지 않습니다." + std::string(_KeyName));
-		return;
-	}
+	//if (0 != (Image->GetImageScale().iY() % _CuttingSize.iY()))
+	//{
+	//	MSGASSERT("스프라이트 컷팅에 y가 딱 떨어지지 않습니다." + std::string(_KeyName));
+	//	return;
+	//}
 
 	int SpriteX = Image->GetImageScale().iX() / _CuttingSize.iX();
 	int SpriteY = Image->GetImageScale().iY() / _CuttingSize.iY();

@@ -10,7 +10,7 @@ Map_Play::Map_Play()
 	{
 		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		SpriteRenderer->SetSprite("Map_Play004_1000.png");
+		SpriteRenderer->SetSprite("Map_Play007_1000.png");
 
 		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 		SpriteRenderer->SetComponentScale(WinSize);

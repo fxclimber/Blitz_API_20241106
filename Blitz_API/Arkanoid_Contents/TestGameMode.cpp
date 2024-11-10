@@ -29,10 +29,10 @@ void ATestGameMode::BeginPlay()
 
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
-	score->SetActorLocation({ 500,500 });
-	score->SetTextSpriteName("Text.bmp");
+	score->SetActorLocation({ 755,50 });
+	score->SetTextSpriteName("Text_Num.png");
 	score->SetOrder(ERenderOrder::UI);
-	score->SetTextScale({ 100, 100 });
+	score->SetTextScale({ 32, 32 });
 
 	//UIPos = UIScore->GetActorLocation();
 
@@ -115,7 +115,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 		//Ball->Reflect(normal);
 	}
 
-	AScore::ScoreUI = Editor->GetScore();
+	AScore::ScoreUI = Editor->GetScore()*32;
 	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
 
 	// 확인용 로그들 
@@ -127,9 +127,9 @@ void ATestGameMode::Tick(float _DeltaTime)
 		UEngineDebug::CoreOutPutString("EleapsedTime : " + std::to_string(EleapsedTime));
 
 		int TotalScore = Editor->GetScore();
-		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore));
+		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore*32));
 
-		UEngineDebug::CoreOutPutString("uiPos : " + UIPos.ToString());
+		//UEngineDebug::CoreOutPutString("uiPos : " + UIPos.ToString());
 	}
 
 }
