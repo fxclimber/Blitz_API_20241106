@@ -95,10 +95,8 @@ void ATestGameMode::BeginPlay()
 	//Ball->SetSpeed(650.0f);
 	//Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 
+	// 시작 볼 1개 
 	Balls.push_back(GetWorld()->SpawnActor<ABall>());
-	Balls.push_back(GetWorld()->SpawnActor<ABall>());
-	Balls.push_back(GetWorld()->SpawnActor<ABall>());
-
 	for (ABall* Ball : Balls)
 	{
 		Ball->SetDir({ 0.15f, 1.f });
@@ -139,9 +137,22 @@ void ATestGameMode::Tick(float _DeltaTime)
 		//{
 		//	Ball->SetDir(normal);
 		//}
-
 	}
 
+	if (UEngineInput::GetInst().IsDown('B'))
+	{ // B 를 누르면 보너스상태
+		bIsBonusActive = true;  
+	}
+
+
+	if (true == bIsBonusActive)  
+	{	//보너스상태에선 3개 추가스폰
+		SpawnBall();
+		bIsBonusActive = false;  // 보너스 상태 초기화
+	}
+
+
+	// 볼이 여러개일때
 	for (ABall* Ball : Balls)
 	{
 		if (Ball == nullptr) continue; // null 체크
@@ -187,5 +198,23 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 }
 
+void ATestGameMode::SpawnBall()
+{
+		Balls.push_back(GetWorld()->SpawnActor<ABall>());
+		Balls.push_back(GetWorld()->SpawnActor<ABall>());
+		Balls.push_back(GetWorld()->SpawnActor<ABall>());
+
+		for (ABall* Ball : Balls)
+		{
+			Ball->SetDir({ 0.15f, 1.f });
+			Ball->SetSpeed(650.0f);
+			Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
+		}
+}
+
+void ATestGameMode::KillBall()
+{
+
+}
 
 

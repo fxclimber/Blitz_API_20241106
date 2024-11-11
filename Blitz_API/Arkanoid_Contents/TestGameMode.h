@@ -17,6 +17,9 @@ protected:
 
 	void Tick(float _DeltaTime) override;
 
+	void SpawnBall();
+
+	void KillBall();
 
 private:
 	class BrickEditor* Editor;
@@ -25,6 +28,8 @@ private:
 
 	class AScore* score;
 	FVector2D UIPos = {0,0};
+
+	bool bIsBonusActive = false;
 
 	std::vector<class ABall*> Balls;
 };
