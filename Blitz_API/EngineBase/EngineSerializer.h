@@ -3,23 +3,22 @@
 #include <string>
 #include "EngineMath.h"
 
-// 설명 :
+// 다양한 데이타 타입을 바이너리로 저장,로드할수 있도록, 직렬화,역직렬화를 지원하는 클래스 
 class UEngineSerializer
 {
 public:
-	// constrcuter destructer
+	//초기화,정리
 	UEngineSerializer();
 	~UEngineSerializer();
 
-	// delete Function
-	UEngineSerializer(const UEngineSerializer& _Other) = delete;
-	UEngineSerializer(UEngineSerializer&& _Other) noexcept = delete;
-	UEngineSerializer& operator=(const UEngineSerializer& _Other) = delete;
-	UEngineSerializer& operator=(UEngineSerializer&& _Other) noexcept = delete;
-
-	// 데이터의 크기
+	// 쓰기 -------------------------------------------------------
+	// 주어진 데이타를 _Size만큼 저장, 근데 왜 unsigned int?
+	// Data의 크기가 모자라면, 벡터크기 확장
 	void Write(void* _Data, unsigned int _Size);
 
+	// 연산자 오버로드들.. <<로 데이타 밀어넣기.
+	// 필요한 자료형별로 다 만들어준다.템플릿 사용불가.
+	// 연산오버로드에서 *아닌 &를 사용하는 이유?
 	void operator<<(int& _Data)
 	{
 		Write(&_Data, sizeof(int));
@@ -42,8 +41,7 @@ public:
 
 	void operator<<(std::string& _Data)
 	{
-		// int하나랑 포인터 하나 들고 있죠?
-		// 길이도 같이 저장해야 한다.
+		// 스트링은 먼저 문자열길이를 int로 저장후,데이타 저장
 		int Size = static_cast<int>(_Data.size());
 		operator<<(Size);
 		Write(&_Data[0], static_cast<int>(_Data.size()));
@@ -64,6 +62,7 @@ public:
 		}
 	}
 
+	// 읽기 -------------------------------------------------------
 	void Read(void* _Data, unsigned int _Size);
 
 	void operator>>(int& _Data)
@@ -88,13 +87,9 @@ public:
 
 	void operator>>(std::string& _Data)
 	{
-		// int하나랑 포인터 하나 들고 있죠?
-		// 길이도 같이 저장해야 한다.
 		int Size;
 		operator>>(Size);
-		// 사이즈를 읽어낸다.
 		_Data.resize(Size);
-
 		Read(&_Data[0], static_cast<int>(_Data.size()));
 	}
 
@@ -109,21 +104,22 @@ public:
 
 		for (size_t i = 0; i < _vector.size(); i++)
 		{
-			// 자료형 변환이 안된다는 것이다.
 			operator>>(_vector[i]);
 		}
 	}
 
+	//--------------기타 함수들
+	// 
 	void* GetDataPtr()
 	{
 		return &Data[0];
 	}
-
+	// 데이타의 읽기위치 관리 
 	int GetWriteOffset()
 	{
 		return WriteOffset;
 	}
-
+	// 크기 모자랄땐 확장 
 	void DataResize(int _Value)
 	{
 		Data.resize(_Value);
@@ -132,34 +128,18 @@ public:
 protected:
 
 private:
-	// 모든 데이터는 바이트 덩어리이다.
-	// 그대신 클래스의 경우에는 중간에 바이트 패딩등등을 때문에 
-	// 빈공간이 생긴다.
-
 	// 얼마나 데이터가 채워졌냐?
 	int WriteOffset = 0;
 
 	// 얼마나 데이터가 채워졌냐?
 	int ReadOffset = 0;
 
-	// 자료형이라는게 존재하지 않죠?
 	std::vector<char> Data;
 };
 
-// 언리얼 에서 인터페이스라고 불리는 존재를 만들때
-// 앞에 I를 붙입니다.
+// 인터페이스 클래스
 class ISerializObject
 {
-	// 인터페이스가 뭐지?
-	// 1. 맴버변수가 없음
-	// 크기를 가지지 않아. 가상함수 테이블의 크기만 가지는 경우.
-	// 2. 구현이 없음
-	// 오로지 함수가 존재할거다라는 인터페이스로만 이루어져 있다.
-	// 이 조건을 만족하면 
-	// 다중상속에 부담이 없다. 
-	// *. C++로 치자면 오로지 순수가상함수로만 구성된 클래스를 
-	// 언리얼은 아닙니다. 순수가상함수를 막아서 못쓰거든요.
-	// 3. 내부 가상함수들은 Private이 존재할수 없다.
 
 public:
 	// 데이터를 직렬화(압축)
@@ -168,14 +148,3 @@ public:
 	virtual void DeSerialize(UEngineSerializer& _Ser) = 0;
 };
 
-//class Test
-//{
-//	// 정한다고 하면
-//	// Data 5 바이트 할당
-//	//             [C][V][V][V][V]
-//	// 직렬화의 첫번째 의미
-//	// 데이터의 최적화
-//
-//	bool Check; // [C][ ][ ][ ][v][v][v][v]
-//	int Value;  // 
-//};

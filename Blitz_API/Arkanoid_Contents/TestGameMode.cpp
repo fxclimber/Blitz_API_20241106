@@ -34,10 +34,6 @@ void ATestGameMode::BeginPlay()
 	score->SetOrder(ERenderOrder::UI);
 	score->SetTextScale({ 32, 32 });
 
-	//UIPos = UIScore->GetActorLocation();
-
-
-
 	GetWorld()->SetCameraToMainPawn(false);
 
 	Editor = GetWorld()->SpawnActor<BrickEditor>();

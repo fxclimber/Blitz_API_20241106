@@ -58,11 +58,8 @@ public:
 		_Ser >> SpriteIndex;
 	}
 
-	bool IsCollide = false;
 };
 
-// 사람들이 가장 먼저 원하는 기능.
-// 플레이어가 어느 타일 위에 존재하는지 알고 싶어요.
 class BrickEditor : public AActor, public ISerializObject
 {
 public:
