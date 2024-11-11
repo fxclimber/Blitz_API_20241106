@@ -24,17 +24,13 @@ void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _
 		AllBricks[y].resize(_Count.X);;
 	}
 
-	// 타일맵의 핵심 0, 0을 두가지를 정해야 한다.
-	// 타일로서의 0,0이 어디야.
-	// 타일의 위치는 월드로서의 타일맵 * 인덱스가 된다.
+	// 타일의 위치는 월드로서의 타일맵 * 인덱스
 	float WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize().Half().X;
 	//float WinSize = Globals::WinSize.X;//터지냐....왜........
 	float AllSpriteWidth = (_BrickSize.X * static_cast<float>(_Count.X)) / 2;
 	float gap = WinSize - AllSpriteWidth;
 	PlusPos = { gap, Height };
 	SetActorLocation(PlusPos);
-
-
 }
 
 FVector2D BrickEditor::IndexToBrickLocation(FIntPoint _Index)
@@ -52,7 +48,7 @@ FIntPoint BrickEditor::LocationToIndex(FVector2D _Location)
 
 void BrickEditor::SetBrickLocation(FVector2D _Location, int _SpriteIndex)
 {
-	FVector2D TilePos = _Location - GetActorLocation();
+	FVector2D TilePos = _Location - GetActorLocation();//개별위치-액터위치
 
 	FIntPoint Point = LocationToIndex(TilePos);
 
@@ -93,38 +89,6 @@ void BrickEditor::SetBrickIndex(FIntPoint _Index, int _SpriteIndex)
 {
 	SetBrickIndex(_Index, { 0,0 }, BrickSize, _SpriteIndex);
 }
-
-// _SpriteScale : 벽돌 개별크기, 벽돌 개별위치 계산
-//void BrickEditor::SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex)
-//{
-//	if (true == IsIndexOver(_Index))
-//	{
-//		return;
-//	}
-//
-//	// 미리 다 만들지 않고
-//	// 지금 스프라이트 랜더러를 만든다.
-//	if (nullptr == AllBricks[_Index.Y][_Index.X].SpriteRenderer)
-//	{
-//		USpriteRenderer* NewSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-//		NewSpriteRenderer->SetComponentScale(BrickSize);
-//		AllBricks[_Index.Y][_Index.X].SpriteRenderer = NewSpriteRenderer;
-//	}
-//
-//	// 스프라이트를 저장해 놨으므로.	// 그 이름으로 세팅해주면 된다.
-//	USpriteRenderer* FindSprite = AllBricks[_Index.Y][_Index.X].SpriteRenderer;
-//	FindSprite->SetSprite(SpriteName, _SpriteIndex);
-//
-//	FVector2D TileLocation = IndexToBrickLocation(_Index) + PlusPos;
-//	FindSprite->SetComponentScale(_SpriteScale);
-//	// 아래쪽에 있을수록 랜더링이 나중에 된다.
-//	FindSprite->SetOrder(_Index.Y);
-//
-//	AllBricks[_Index.Y][_Index.X].SpriteRenderer->SetComponentLocation(TileLocation + BrickSize.Half() + _Pivot);
-//	AllBricks[_Index.Y][_Index.X].Pivot = _Pivot;
-//	AllBricks[_Index.Y][_Index.X].Scale = _SpriteScale;//개별 벽돌의 스케일을 저장
-//	AllBricks[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
-//}
 
 
 void BrickEditor::SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex)
@@ -180,30 +144,6 @@ void BrickEditor::SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _S
 	AllBricks[_Index.Y][_Index.X].Scale = _SpriteScale;
 	AllBricks[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
 }
-
-
-
-
-// 특정 위치에 해당하는 벽돌 참조를 얻기
-ABrick* BrickEditor::GetBrickRef(FVector2D _Location)
-{
-	FIntPoint Point = LocationToIndex(_Location);
-
-	return GetBrickRef(Point);
-}
-
-// 인덱스를 기반으로 특정위치의 벽돌포인터 리턴 
-ABrick* BrickEditor::GetBrickRef(FIntPoint _Index)
-{
-	if (true == IsIndexOver(_Index))
-	{
-		return nullptr;
-	}
-
-	return &AllBricks[_Index.Y][_Index.X];
-}
-
-
 
 
 

@@ -17,10 +17,6 @@ enum BrickType
 class ABrick : public ISerializObject
 {
 public:
-	// 이런 클래스를 저장할때
-	// 내부 정부는 다 저장해야 한다.
-	// 그중에서 쓸모없는게 누군가요?
-	// 가상함수 테이블
 	USpriteRenderer* SpriteRenderer;
 
 	bool IsMove = true;
@@ -46,7 +42,7 @@ public:
 		_Ser << SpriteIndex;
 		_Ser << HP;
 	}
-
+	// 직렬화 데이타 로드
 	void DeSerialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
@@ -63,33 +59,27 @@ public:
 class BrickEditor : public AActor, public ISerializObject
 {
 public:
-	// constrcuter destructer
 	BrickEditor();
 	~BrickEditor(){}
-
+	//hp set
 	void SetBrickHp(FIntPoint _Index, int _Hp);
-
+	// sprite set
 	void SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int _SpriteIndex);
-
+	// brick type set (hp,sprite)
 	void setBrickType(FIntPoint _Index, BrickType _Type);
-
-	// 타일 이미지는 sprite 1개에서 
+	// 자료구조에 넣기,자료구조 크기조절,액터(벽돌더미)위치셋
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize);
-
-	// 여기에서    이 인덱스에다가    이스프라이트 
+	// 위치,인덱스 정해서, SetBrickIndex호출 
 	void SetBrickLocation(FVector2D _Location, int _SpriteIndex);
-
+	// 오버로딩 SetBrickIndex호출-벡터
 	void SetBrickIndex(FIntPoint _Index, int _SpriteIndex);
-	// _SpriteScale : 벽돌 개별크기, 벽돌 개별위치 계산
+	// 개별 스프라이트 세팅들.
 	void SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex);
-
-	ABrick* GetBrickRef(FIntPoint _Index);
-	ABrick* GetBrickRef(FVector2D _Location);
-
+	// 벽돌의 위치를 계산하여 BrickPositions에 저장
 	FVector2D IndexToBrickLocation(FIntPoint _Index);
-
+	// 개별위치/벽돌크기 가 인덱스별 위치
 	FIntPoint LocationToIndex(FVector2D _Location);
-
+	// 인덱스는 벽돌x,y갯수보다 작고,0보다 커야한다
 	bool IsIndexOver(FIntPoint _Index);
 
 	// 데이터를 직렬화(압축)
