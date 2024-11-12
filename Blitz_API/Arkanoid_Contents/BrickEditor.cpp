@@ -1,6 +1,7 @@
 #include "PreCompiledFile.h"
 #include "BrickEditor.h"
 
+#include <EngineBase/EngineRandom.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/SpriteRenderer.h>
 #include <EngineCore/EngineAPICore.h>
@@ -302,8 +303,15 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 
 void BrickEditor::SpawnFX(FVector2D _brickPos)
 {
-	BonusA = GetWorld()->SpawnActor<Brick>();
-	BonusA->SetActorLocation(_brickPos);
+	UEngineRandom Random;
+	int Value = Random.RandomInt(0, 30);
+	int fmod = Value%3;
+
+	if (fmod == 0)
+	{
+		BonusA = GetWorld()->SpawnActor<Brick>();
+		BonusA->SetActorLocation(_brickPos);
+	}
 }
 
 void BrickEditor::SetBrickHp(FIntPoint _Index, int _Hp)
@@ -355,10 +363,10 @@ void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 	}
 }
 
-void BrickEditor::StartStage()
-{
-	stageStartTime = std::chrono::steady_clock::now();
-}
+//void BrickEditor::StartStage()
+//{
+//	stageStartTime = std::chrono::steady_clock::now();
+//}
 
 float BrickEditor::GetElapsedTime() const
 {

@@ -16,7 +16,7 @@ ABall::ABall()
 
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetSprite("ball_red.png");
-	SpriteRenderer->SetComponentScale({ 22, 22 });
+	SpriteRenderer->SetComponentScale({ 20, 20 });
 	SpriteRenderer->SetOrder(ERenderOrder::UI);
     IsMove = false;
 }
@@ -73,7 +73,7 @@ void ABall::UpdatePosition(float deltaTime)
     bool hasCollided = false; // 충돌 여부
 
     // 왼쪽 벽에 닿았다
-    if (MaxLeft > ballPos.X && !hasCollided)
+    if (MaxLeft >= ballPos.X && !hasCollided)
     {
         Reflect({ 1, 0 });
         ballPos.X = MaxLeft + 0.1f; // 벽에서 약간 떨어지게 위치 조정
@@ -81,7 +81,7 @@ void ABall::UpdatePosition(float deltaTime)
     }
 
     // 오른쪽 벽에 닿았다
-    if (MaxRight < ballPos.X && !hasCollided)
+    if (MaxRight <= ballPos.X && !hasCollided)
     {
         Reflect({ -1, 0 });
         ballPos.X = MaxRight - 0.1f;
@@ -89,7 +89,7 @@ void ABall::UpdatePosition(float deltaTime)
     }
 
     // 아랫벽에 닿았다
-    if (MaxBottom < ballPos.Y && !hasCollided)
+    if (MaxBottom <= ballPos.Y && !hasCollided)
     {
         Reflect({ 0, 1 });
         ballPos.Y = MaxBottom - 0.1f;
@@ -97,7 +97,7 @@ void ABall::UpdatePosition(float deltaTime)
     }
 
     // 위쪽 벽에 닿았다
-    if (MaxTop > ballPos.Y && !hasCollided)
+    if (MaxTop >= ballPos.Y && !hasCollided)
     {
         Reflect({ 0, -1 });
         ballPos.Y = MaxTop + 0.1f;

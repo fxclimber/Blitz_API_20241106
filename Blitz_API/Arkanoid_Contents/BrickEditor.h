@@ -86,9 +86,9 @@ public:
 	void Serialize(UEngineSerializer& _Ser);
 	// 데이터를 복구(할때)
 	void DeSerialize(UEngineSerializer& _Ser);
-
+	// 게임모드에서 호출하는 충돌체크함수
 	FVector2D CheckCollision(class ABall* Ball, FIntPoint brickIndex);
-
+	// 인덱스는 범위내 확인용으로만.
 	FVector2D CheckCollision(const FVector2D& playerPos, const FVector2D& playerSize, FIntPoint brickIndex);
 
 	FVector2D GetBrickSize()
@@ -99,42 +99,46 @@ public:
 	{
 		return BrickCount;
 	}
-
+	// 인덱스,컴포넌트(렌더러)체크하고, 실버블록효과,hp==0일때 destroy
 	void RemoveBlock(FIntPoint brickIndex);
-
+	// 에디터의 액터위치x는 자동으로 중심에 오게 되있으므로, y는 의도적으로 조절하기위함
 	void SetBricksHeight(float _height)
 	{
 		Height = _height;
 	}
-
+	// 기존에 게임모드-비긴플레이에서 스폰하던것을 조건별로 스폰가능하게 함수로 추출
 	void SpawnFX(FVector2D _brickPos);
-
-	void StartStage();
+	// 플레이시간 계산용 시간함수 
+	//void StartStage();
+	// 플레이시간 계산용 시간함수 
 	float GetElapsedTime() const;
-
+	// 게임모드에서 ui에 넘길 점수
 	int GetScore()const
 	{
 		return Score;
 	}
+	// 맵저장시 디폴트벽돌의 랜덤갯수 다르게 주기위함.
 	int RandomBrick = 5;
 
 protected:
 
 private:
-	// 값형이니까 그냥 생겨버리는것.
 	FIntPoint BrickCount;
 	std::string SpriteName;
 	FVector2D BrickSize;//벽돌 개별크기
-	float Height = 0;
-	FVector2D PlusPos;
+
+	float Height = 0;// 벽돌 세부위치y 조절용
+	FVector2D PlusPos;//액터 위치 조정용
+
 	std::vector<std::vector<ABrick>> AllBricks;
-	std::vector<std::vector<FVector2D>> BrickPositions;
+	std::vector<std::vector<FVector2D>> BrickPositions;// 이넘 (위치) 저장용
+	// b눌러서 보너스볼 생성
 	class Brick* BonusA;
-	FVector2D brickPos;
+	FVector2D brickPos;// 벽돌개개의 위치
 
 	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
 	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
-	float Duration;
+	//float Duration;
 	int Score = 0;
 
 

@@ -67,7 +67,7 @@ BonusType Brick::GetRandomBonusType()
     UEngineRandom Random;
     int Value = Random.RandomInt(0, 6);
     UEngineDebug::CoreOutPutString("Value : " + Value , {200,300});
-        return static_cast<BonusType>(Value);
+    return static_cast<BonusType>(Value);
 }
 
 void Brick::MakeBonus()
@@ -82,7 +82,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_life", "powerup_life", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_life");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
             break;
         case BonusType::COPY:
@@ -90,7 +90,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_duplicate", "powerup_duplicate", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_duplicate");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
             break;
         case BonusType::SLOW:
@@ -98,7 +98,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_slow", "powerup_slow", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_slow");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
 
             break;
@@ -107,7 +107,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_laser", "powerup_laser", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_laser");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
             break;
         case BonusType::EXPAND:
@@ -115,7 +115,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_expand", "powerup_expand", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_expand");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
             break;
         case BonusType::CATCH:
@@ -123,7 +123,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_catch", "powerup_catch", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_catch");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
             break;
         case BonusType::WARP:
@@ -131,7 +131,7 @@ void Brick::MakeBonus()
             SpriteRenderer->SetComponentLocation(GetActorLocation());
             SpriteRenderer->CreateAnimation("powerup_warp", "powerup_warp", 1, 7, 0.1f, true);
             SpriteRenderer->ChangeAnimation("powerup_warp");
-            spriteScale = SpriteRenderer->SetSpriteScale(1.45f);
+            spriteScale = SpriteRenderer->SetSpriteScale(1.4f);
             SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
             break;
         default:
