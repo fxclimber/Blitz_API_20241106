@@ -5,7 +5,7 @@ class Map_Play : public AActor
 {
 public:
 	Map_Play();
-	~Map_Play();
+	~Map_Play(){}
 
 
 protected:

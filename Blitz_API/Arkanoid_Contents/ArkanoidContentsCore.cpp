@@ -8,13 +8,13 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
 
-#include "EndGameMode.h"
+//#include "EndGameMode.h"
 #include "TitleGameMode.h"
-#include "PlayGameMode.h"
+//#include "PlayGameMode.h"
 #include "Player.h"
 #include "Map_Play.h"
-#include "Map_Title.h"
-#include "Map_Ending.h"
+//#include "Map_Title.h"
+//#include "Map_Ending.h"
 
 #include "TileMapGameMode.h"
 #include "BrickEditorGameMode.h"
@@ -60,19 +60,7 @@ void ArkanoidContentsCore::BeginPlay()
 	}
 
 
-	// 폴더- 패들애니 테스트
-	{
-		//paddle_materialize
-		UEngineDirectory paddle_materialize;
-		paddle_materialize.MoveParentToDirectory(ImageRes);
-		paddle_materialize.Append("paddle_materialize");
-
-		UImageManager::GetInst().LoadFolder(paddle_materialize.GetPathToString());
-	}
-
-	
-
-	// 폴더- 보너스 아이템 
+	// 폴더- silver block fx
 	{
 		{
 			//powerup_laser
@@ -142,13 +130,11 @@ void ArkanoidContentsCore::BeginPlay()
 		UEngineDirectory Dir;
 		Dir.MoveParentToDirectory(ImageRes + "//Arkanoid_Items");
 		Dir.Append("Sprite_Static//Brick");
-
 		UImageManager::GetInst().LoadFolder(Dir.GetPathToString());
-
 	}
 
 	{
-		// brickFX
+		// brick exp FX
 		UEngineDirectory exp;
 		exp.MoveParentToDirectory(ImageRes);
 		exp.Append("exp");
@@ -163,20 +149,14 @@ void ArkanoidContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 770, 1000 });
 
 	// CreateLevel
-	UEngineAPICore::GetCore()->CreateLevel<APlayGameMode,Map_Play>("Play");
-	UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, Map_Title>("Title");
-	UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, Map_Ending>("Ending");
+	//UEngineAPICore::GetCore()->CreateLevel<APlayGameMode,Map_Play>("Play");
+	//UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, Map_Title>("Title");
+	//UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, Map_Ending>("Ending");
 
 	UEngineAPICore::GetCore()->CreateLevel<ATestGameMode, Map_Play>("Test");
-
-	//타일맵 테스트용 
-	//UEngineAPICore::GetCore()->CreateLevel<ATileMapGameMode, AActor>("Tile");
-	 UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, AActor>("Tile");
+	UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Test");
-
-
-	// UEngineAPICore::GetCore()->OpenLevel("");
 
 }
 

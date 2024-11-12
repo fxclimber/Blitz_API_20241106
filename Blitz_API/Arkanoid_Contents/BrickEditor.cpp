@@ -8,7 +8,6 @@
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
 #include "Ball.h"
-
 #include "Score.h"
 
 

@@ -138,7 +138,6 @@ private:
 
 	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
 	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
-	//float Duration;
 	int Score = 0;
 
 
