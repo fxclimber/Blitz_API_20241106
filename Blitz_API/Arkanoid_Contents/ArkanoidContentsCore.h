@@ -5,8 +5,8 @@
 class ArkanoidContentsCore : public UContentsCore
 {
 public:
-	ArkanoidContentsCore();
-	~ArkanoidContentsCore();
+	ArkanoidContentsCore(){}
+	~ArkanoidContentsCore(){}
 
 
 protected:

@@ -10,17 +10,6 @@
 
 APaddle::APaddle()
 {
-	//SetActorLocation({ 370,920 });
-
-	{
-		//SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();		
-		//SpriteRenderer->SetOrder(ERenderOrder::Bricks);
-
-		//SpriteRenderer->CreateAnimation("paddle_materialize", "paddle_materialize", 0, 14, 0.12f);
-		//SpriteRenderer->ChangeAnimation("paddle_materialize");
-		//SpriteRenderer->SetComponentScale({ 125, 34 });
-	}
-
 	this;
 	{
 	// static sprite
@@ -31,13 +20,6 @@ APaddle::APaddle()
 	}
 }
 
-APaddle::~APaddle()
-{
-}
-
-void APaddle::BeginPlay()
-{
-}
 
 void APaddle::Tick(float _DeltaTime)
 {
@@ -49,14 +31,6 @@ void APaddle::Tick(float _DeltaTime)
 	{
 		AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
 	}
-}
-
-void APaddle::MoveFunction(FVector2D _Dir)
-{
-}
-
-void APaddle::RunSoundPlay()
-{
 }
 
 

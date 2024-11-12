@@ -13,7 +13,7 @@ class Brick : public AActor
 {
 public:
 	Brick();
-	~Brick();
+	~Brick(){}
 
 	void BeginPlay() override;
 	void Tick(float _DeltaTime) override;

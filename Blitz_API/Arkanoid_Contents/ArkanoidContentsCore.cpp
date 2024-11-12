@@ -18,16 +18,8 @@
 
 #include "TileMapGameMode.h"
 #include "BrickEditorGameMode.h"
-
 #include "TestGameMode.h"
 
-ArkanoidContentsCore::ArkanoidContentsCore()
-{
-}
-
-ArkanoidContentsCore::~ArkanoidContentsCore()
-{
-}
 
 void ArkanoidContentsCore::BeginPlay()
 {

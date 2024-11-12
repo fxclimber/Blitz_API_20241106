@@ -6,15 +6,9 @@ class APaddle : public AActor
 {
 public:
 	APaddle();
-	~APaddle();
+	~APaddle(){}
 
-	void BeginPlay()override;
 	void Tick(float _DeltaTime) override;
-
-	void MoveFunction(FVector2D _Dir);
-
-	void RunSoundPlay();
-
 
 	FVector2D CheckCollision(const FVector2D& ballPos);
 	FVector2D PaddleScale = { 0,0 };

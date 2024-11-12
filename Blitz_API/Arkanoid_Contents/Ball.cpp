@@ -21,9 +21,6 @@ ABall::ABall()
     IsMove = false;
 }
 
-ABall::~ABall()
-{
-}
 
 void ABall::BeginPlay()
 {
