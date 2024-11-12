@@ -8,14 +8,9 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
 
-//#include "EndGameMode.h"
 #include "TitleGameMode.h"
-//#include "PlayGameMode.h"
 #include "Player.h"
 #include "Map_Play.h"
-//#include "Map_Title.h"
-//#include "Map_Ending.h"
-
 #include "TileMapGameMode.h"
 #include "BrickEditorGameMode.h"
 #include "TestGameMode.h"
@@ -49,15 +44,6 @@ void ArkanoidContentsCore::BeginPlay()
 
 	//UI
 	UImageManager::GetInst().CuttingSprite("Text_Num.png", { 64, 64 });
-
-	// 폴더 낱장 애니
-	{
-		UEngineDirectory BombDir;
-		BombDir.MoveParentToDirectory(ImageRes);
-		BombDir.Append("bomb");
-
-		UImageManager::GetInst().LoadFolder(BombDir.GetPathToString());
-	}
 
 
 	// 폴더- silver block fx
@@ -158,9 +144,4 @@ void ArkanoidContentsCore::BeginPlay()
 
 	UEngineAPICore::GetCore()->OpenLevel("Test");
 
-}
-
-void ArkanoidContentsCore::Tick()
-{
-	// 지금 전혀 용도를 찾지 못해서 사용하지 않는 함수입니다.
 }

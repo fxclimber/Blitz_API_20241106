@@ -6,8 +6,8 @@ class ATitleGameMode : public AGameMode
 {
 public:
 	// constrcuter destructer
-	ATitleGameMode();
-	~ATitleGameMode();
+	ATitleGameMode(){}
+	~ATitleGameMode(){}
 
 protected:
 	void BeginPlay() override;

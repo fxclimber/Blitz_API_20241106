@@ -303,8 +303,8 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 void BrickEditor::SpawnFX(FVector2D _brickPos)
 {
 	UEngineRandom Random;
-	int Value = Random.RandomInt(0, 30);
-	int fmod = Value%3;
+	int Value = Random.RandomInt(0, 100);
+	int fmod = Value%12;
 
 	if (fmod == 0)
 	{
@@ -362,11 +362,6 @@ void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 		break;
 	}
 }
-
-//void BrickEditor::StartStage()
-//{
-//	stageStartTime = std::chrono::steady_clock::now();
-//}
 
 float BrickEditor::GetElapsedTime() const
 {

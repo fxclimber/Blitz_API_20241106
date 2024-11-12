@@ -13,17 +13,8 @@
     <ClInclude Include="Player.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
-    <ClInclude Include="Bullet.h">
-      <Filter>ContentsObject\Play_old</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayMap.h">
-      <Filter>ContentsObject\Play_old</Filter>
-    </ClInclude>
     <ClInclude Include="TitleGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>ContentsObject\Title</Filter>
     </ClInclude>
     <ClInclude Include="Map_Title.h">
       <Filter>ContentsObject\Map</Filter>
@@ -81,17 +72,8 @@
     <ClCompile Include="Player.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
-    <ClCompile Include="Bullet.cpp">
-      <Filter>ContentsObject\Play_old</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayMap.cpp">
-      <Filter>ContentsObject\Play_old</Filter>
-    </ClCompile>
     <ClCompile Include="TitleGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>ContentsObject\Title</Filter>
     </ClCompile>
     <ClCompile Include="Map_Title.cpp">
       <Filter>ContentsObject\Map</Filter>
@@ -151,9 +133,6 @@
     </Filter>
     <Filter Include="ContentsObject\Global">
       <UniqueIdentifier>{f7445582-885d-4d6e-946a-2593ed4a2541}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ContentsObject\Title">
-      <UniqueIdentifier>{167cab3e-d0a5-4ac0-bf56-3404c6639209}</UniqueIdentifier>
     </Filter>
     <Filter Include="ContentsObject\Map">
       <UniqueIdentifier>{19111cb6-8dab-470b-8893-2d62e68f837a}</UniqueIdentifier>

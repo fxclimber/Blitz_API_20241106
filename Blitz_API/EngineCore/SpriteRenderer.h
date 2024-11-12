@@ -44,19 +44,10 @@ public:
 	USpriteRenderer();
 	~USpriteRenderer();
 
-	// delete Function
-	USpriteRenderer(const USpriteRenderer& _Other) = delete;
-	USpriteRenderer(USpriteRenderer&& _Other) noexcept = delete;
-	USpriteRenderer& operator=(const USpriteRenderer& _Other) = delete;
-	USpriteRenderer& operator=(USpriteRenderer&& _Other) noexcept = delete;
-
 	void Render(float _DeltaTime);
 	void BeginPlay() override;
 	void ComponentTick(float _DeltaTime) override;
 
-	// int를 주는 함수들은 일반적으로 Enum으로 대체해서 넣고 싶을때가 많다.
-	// 그런데 그건 커텐츠 만드는 사람이 만드는 자신만의 enum일 것이기 때문에 
-	// 템플릿을 사용하여 어떤 enum이건 받게 만드는 방식을 선호한다.
 	template<typename EnumType>
 	void SetOrder(EnumType _Order)
 	{

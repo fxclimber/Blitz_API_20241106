@@ -109,8 +109,6 @@ public:
 	// 기존에 게임모드-비긴플레이에서 스폰하던것을 조건별로 스폰가능하게 함수로 추출
 	void SpawnFX(FVector2D _brickPos);
 	// 플레이시간 계산용 시간함수 
-	//void StartStage();
-	// 플레이시간 계산용 시간함수 
 	float GetElapsedTime() const;
 	// 게임모드에서 ui에 넘길 점수
 	int GetScore()const
