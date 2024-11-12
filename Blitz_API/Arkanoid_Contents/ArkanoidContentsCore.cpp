@@ -8,11 +8,7 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineCore/ImageManager.h>
 
-#include "TitleGameMode.h"
-#include "Player.h"
 #include "Map_Play.h"
-#include "TileMapGameMode.h"
-#include "BrickEditorGameMode.h"
 #include "TestGameMode.h"
 
 
@@ -135,12 +131,7 @@ void ArkanoidContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 770, 1000 });
 
 	// CreateLevel
-	//UEngineAPICore::GetCore()->CreateLevel<APlayGameMode,Map_Play>("Play");
-	//UEngineAPICore::GetCore()->CreateLevel<ATitleGameMode, Map_Title>("Title");
-	//UEngineAPICore::GetCore()->CreateLevel<AEndGameMode, Map_Ending>("Ending");
-
 	UEngineAPICore::GetCore()->CreateLevel<ATestGameMode, Map_Play>("Test");
-	UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, AActor>("Tile");
 
 	UEngineAPICore::GetCore()->OpenLevel("Test");
 

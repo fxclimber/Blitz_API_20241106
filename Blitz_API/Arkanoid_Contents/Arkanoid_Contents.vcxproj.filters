@@ -4,50 +4,23 @@
     <ClInclude Include="PreCompiledFile.h">
       <Filter>PreCompiledFile</Filter>
     </ClInclude>
-    <ClInclude Include="PlayGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
     <ClInclude Include="ArkanoidContentsCore.h">
       <Filter>Core</Filter>
-    </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>ContentsObject\Global</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
-    <ClInclude Include="Map_Title.h">
-      <Filter>ContentsObject\Map</Filter>
     </ClInclude>
     <ClInclude Include="Map_Play.h">
       <Filter>ContentsObject\Map</Filter>
     </ClInclude>
-    <ClInclude Include="Map_Ending.h">
-      <Filter>ContentsObject\Map</Filter>
-    </ClInclude>
     <ClInclude Include="Paddle.h">
-      <Filter>Play</Filter>
+      <Filter>ContentsObject\Play</Filter>
     </ClInclude>
     <ClInclude Include="Brick.h">
-      <Filter>Play</Filter>
-    </ClInclude>
-    <ClInclude Include="EndGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
-    <ClInclude Include="TileMapGameMode.h">
-      <Filter>TileMapRef</Filter>
-    </ClInclude>
-    <ClInclude Include="ATileMap.h">
-      <Filter>TileMapRef</Filter>
+      <Filter>ContentsObject\Play</Filter>
     </ClInclude>
     <ClInclude Include="BrickEditor.h">
-      <Filter>Tools</Filter>
-    </ClInclude>
-    <ClInclude Include="BrickEditorGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
+      <Filter>ContentsObject\Tools</Filter>
     </ClInclude>
     <ClInclude Include="Ball.h">
-      <Filter>Play</Filter>
+      <Filter>ContentsObject\Play</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
       <Filter>ContentsObject\Global</Filter>
@@ -63,50 +36,23 @@
     <ClCompile Include="PreCompiledFile.cpp">
       <Filter>PreCompiledFile</Filter>
     </ClCompile>
-    <ClCompile Include="PlayGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
     <ClCompile Include="ArkanoidContentsCore.cpp">
       <Filter>Core</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>ContentsObject\Global</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="Map_Title.cpp">
-      <Filter>ContentsObject\Map</Filter>
     </ClCompile>
     <ClCompile Include="Map_Play.cpp">
       <Filter>ContentsObject\Map</Filter>
     </ClCompile>
-    <ClCompile Include="Map_Ending.cpp">
-      <Filter>ContentsObject\Map</Filter>
-    </ClCompile>
     <ClCompile Include="Paddle.cpp">
-      <Filter>Play</Filter>
+      <Filter>ContentsObject\Play</Filter>
     </ClCompile>
     <ClCompile Include="Brick.cpp">
-      <Filter>Play</Filter>
-    </ClCompile>
-    <ClCompile Include="EndGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp">
-      <Filter>TileMapRef</Filter>
-    </ClCompile>
-    <ClCompile Include="ATileMap.cpp">
-      <Filter>TileMapRef</Filter>
+      <Filter>ContentsObject\Play</Filter>
     </ClCompile>
     <ClCompile Include="BrickEditor.cpp">
-      <Filter>Tools</Filter>
-    </ClCompile>
-    <ClCompile Include="BrickEditorGameMode.cpp">
-      <Filter>ContentsObject\GameMode</Filter>
+      <Filter>ContentsObject\Tools</Filter>
     </ClCompile>
     <ClCompile Include="Ball.cpp">
-      <Filter>Play</Filter>
+      <Filter>ContentsObject\Play</Filter>
     </ClCompile>
     <ClCompile Include="ContentsEnum.cpp">
       <Filter>ContentsObject\Global</Filter>
@@ -137,16 +83,10 @@
     <Filter Include="ContentsObject\Map">
       <UniqueIdentifier>{19111cb6-8dab-470b-8893-2d62e68f837a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ContentsObject\Play_old">
-      <UniqueIdentifier>{51df0539-91f8-4c9c-8caa-27dcaec1cd05}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Play">
+    <Filter Include="ContentsObject\Play">
       <UniqueIdentifier>{f6654f5f-ae54-4cb8-a6a6-034ca1f526fb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="TileMapRef">
-      <UniqueIdentifier>{3c7a4cd1-42f3-4579-8b1a-ee2905f5378c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Tools">
+    <Filter Include="ContentsObject\Tools">
       <UniqueIdentifier>{bcd63494-c349-462d-ae3f-b153972cbf3c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>

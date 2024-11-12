@@ -59,29 +59,6 @@ void ATestGameMode::BeginPlay()
 		Editor->setBrickType({x,2}, BrickType::NotBreak);
 	}
 
-	//저장 벽돌 로드
-	{
-		//UEngineDirectory Dir;
-
-		//if (false == Dir.MoveParentToDirectory("Resources"))
-		//{
-		//	MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-		//	return;
-		//}
-
-		//Dir.Append("Data");
-
-		//std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		//UEngineFile NewFile = SaveFilePath;
-		//NewFile.FileOpen("rb");
-
-		//UEngineSerializer Ser;
-		//NewFile.Read(Ser);
-
-
-		//Editor->DeSerialize(Ser);
-	}
-
 	// Paddle
 	Paddle = GetWorld()->SpawnActor<APaddle>();
 	Paddle->SetActorLocation({385,950});

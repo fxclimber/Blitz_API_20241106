@@ -154,17 +154,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="ArkanoidContentsCore.h" />
-    <ClInclude Include="ATileMap.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
-    <ClInclude Include="BrickEditorGameMode.h" />
     <ClInclude Include="ContentsEnum.h" />
-    <ClInclude Include="EndGameMode.h" />
-    <ClInclude Include="Map_Ending.h" />
     <ClInclude Include="Map_Play.h" />
     <ClInclude Include="Paddle.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayGameMode.h" />
     <ClInclude Include="PreCompiledFile.h" />
     <ClInclude Include="BrickEditor.h" />
     <ClInclude Include="Score.h" />
@@ -172,23 +166,14 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="TileMapGameMode.h" />
-    <ClInclude Include="TitleGameMode.h" />
-    <ClInclude Include="Map_Title.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArkanoidContentsCore.cpp" />
-    <ClCompile Include="ATileMap.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
-    <ClCompile Include="BrickEditorGameMode.cpp" />
     <ClCompile Include="ContentsEnum.cpp" />
-    <ClCompile Include="EndGameMode.cpp" />
-    <ClCompile Include="Map_Ending.cpp" />
     <ClCompile Include="Map_Play.cpp" />
     <ClCompile Include="Paddle.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayGameMode.cpp" />
     <ClCompile Include="PreCompiledFile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
@@ -199,9 +184,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="TileMapGameMode.cpp" />
-    <ClCompile Include="TitleGameMode.cpp" />
-    <ClCompile Include="Map_Title.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
