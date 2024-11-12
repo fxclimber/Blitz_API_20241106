@@ -334,6 +334,7 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 
 BrickEditor::BrickEditor()
 {
+	BonusA = nullptr;
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	stageStartTime = std::chrono::steady_clock::now();
 

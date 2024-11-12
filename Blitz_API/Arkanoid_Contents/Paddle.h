@@ -21,7 +21,7 @@ private:
 	int MySpriteIndex = 0;
 	FVector2D Value;
 
-	class ABall* ball;
+	class ABall* ball=nullptr;
 	class USpriteRenderer* SpriteRenderer;
 
 };

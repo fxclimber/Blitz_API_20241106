@@ -3,11 +3,9 @@
 #include <vector>
 
 
-// Ό³Έν :
 class ATestGameMode : public AGameMode
 {
 public:
-	// constrcuter destructer
 	ATestGameMode(){}
 	~ATestGameMode(){}
 
@@ -19,18 +17,14 @@ protected:
 
 	void SpawnBall();
 
-	void KillBall();
-
 private:
 	class BrickEditor* Editor;
-	//class ABall* Ball;
 	class APaddle* Paddle;
+	std::vector<class ABall*> Balls;
 
 	class AScore* score;
 	FVector2D UIPos = {0,0};
 
 	bool bIsBonusActive = false;
-
-	std::vector<class ABall*> Balls;
 };
 

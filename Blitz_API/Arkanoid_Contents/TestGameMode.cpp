@@ -5,10 +5,7 @@
 #include "Brick.h"
 #include "Paddle.h"
 
-
 #include <format>
-
-
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -17,10 +14,7 @@
 #include <EngineBase/EngineRandom.h>
 
 #include "ContentsEnum.h"
-
 #include "Score.h"
-
-
 
 
 void ATestGameMode::BeginPlay()
@@ -36,6 +30,7 @@ void ATestGameMode::BeginPlay()
 
 	GetWorld()->SetCameraToMainPawn(false);
 
+	// BrickEditor
 	Editor = GetWorld()->SpawnActor<BrickEditor>();
 	Editor->SetBricksHeight(210);
 
@@ -87,13 +82,9 @@ void ATestGameMode::BeginPlay()
 		//Editor->DeSerialize(Ser);
 	}
 
+	// Paddle
 	Paddle = GetWorld()->SpawnActor<APaddle>();
 	Paddle->SetActorLocation({385,950});
-
-	//Ball = GetWorld()->SpawnActor<ABall>();
-	//Ball->SetDir({0.15f, 1.f});
-	//Ball->SetSpeed(650.0f);
-	//Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 
 	// 시작 볼 1개 
 	Balls.push_back(GetWorld()->SpawnActor<ABall>());
@@ -103,54 +94,22 @@ void ATestGameMode::BeginPlay()
 		Ball->SetSpeed(650.0f);
 		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 	}
-
-
-
 }
 
 void ATestGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-
-	{
-		// 볼1개일때 
-		//if (!Ball->GetIsMove()) // 공이 정지 상태일 때 (IsMove가 false일 때)
-		//{
-		//	// 공을 패들의 위치에 고정
-		//	Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
-
-		//	// 버튼이 눌리면 공을 이동 상태로 전환
-		//	if (UEngineInput::GetInst().IsDown(VK_SPACE))
-		//	{
-		//		Ball->SetIsMove(true);  // 공의 움직임 시작
-		//		Ball->SetSpeed(650.0f); // 초기 속도
-		//	}
-		//}
-
-
-		//Editor->CheckCollision(Ball, {0, 0});
-
-		//FVector2D ballPos = Ball->GetActorLocation();
-		//FVector2D normal = Paddle->CheckCollision(ballPos);
-		//if (normal != FVector2D{ 0, 0 }) 
-		//{
-		//	Ball->SetDir(normal);
-		//}
-	}
-
 	if (UEngineInput::GetInst().IsDown('B'))
 	{ // B 를 누르면 보너스상태
 		bIsBonusActive = true;  
 	}
-
 
 	if (true == bIsBonusActive)  
 	{	//보너스상태에선 3개 추가스폰
 		SpawnBall();
 		bIsBonusActive = false;  // 보너스 상태 초기화
 	}
-
 
 	// 볼이 여러개일때
 	for (ABall* Ball : Balls)
@@ -178,7 +137,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 		}
 	}
 
-
+	// score
 	AScore::ScoreUI = Editor->GetScore()*32;
 	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
 
@@ -192,8 +151,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore*32));
-		//UEngineDebug::CoreOutPutString("move : " + std::to_string(Ball->GetIsMove()));
-
 	}
 
 }
@@ -211,10 +168,3 @@ void ATestGameMode::SpawnBall()
 			Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 		}
 }
-
-void ATestGameMode::KillBall()
-{
-
-}
-
-
