@@ -63,7 +63,6 @@ void ABall::Reflect(const FVector2D& normal)
 
 void ABall::UpdatePosition(float deltaTime)
 {
-
     // 벽 충돌 체크 및 속도 반사
     int MaxTop = 101, MaxBottom = 999, MaxLeft = 46, MaxRight = 725;
     FVector2D ballPos = GetActorLocation();

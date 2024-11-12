@@ -16,9 +16,6 @@ Brick::Brick()
     MakeBonusRenderer();
 }
 
-Brick::~Brick()
-{
-}
 
 void Brick::BeginPlay()
 {
