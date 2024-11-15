@@ -36,5 +36,33 @@
     <Filter Include="Input">
       <UniqueIdentifier>{bcd0d7d8-78aa-42fc-9e23-2c8f9522c559}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{c64c1593-7bc1-4447-930a-49b85bc7f202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\fmod">
+      <UniqueIdentifier>{b74c58a5-67ee-417f-84f3-a743d9271d91}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\fmod\Release">
+      <UniqueIdentifier>{c5f0e3c2-c1fb-4ed6-8be4-4eeb96807c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\fmod\Debug">
+      <UniqueIdentifier>{6c03dec6-243b-474a-ae13-c2af9830b778}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmodL.dll">
+      <Filter>ThirdParty\fmod\Debug</Filter>
+    </None>
+    <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmod.dll">
+      <Filter>ThirdParty\fmod\Release</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmodL_vc.lib">
+      <Filter>ThirdParty\fmod\Debug</Filter>
+    </Library>
+    <Library Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmod_vc.lib">
+      <Filter>ThirdParty\fmod\Release</Filter>
+    </Library>
   </ItemGroup>
 </Project>
