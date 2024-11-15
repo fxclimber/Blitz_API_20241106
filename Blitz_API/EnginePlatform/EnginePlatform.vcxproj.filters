@@ -12,6 +12,30 @@
     </ClInclude>
     <ClInclude Include="EngineWinImage.h" />
     <ClInclude Include="EngineWinDebug.h" />
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod.hpp">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod_codec.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod_common.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod_dsp.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod_dsp_effects.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod_errors.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\fmod\Inc\fmod_output.h">
+      <Filter>ThirdParty\fmod\Inc</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineWindow.cpp">
@@ -42,27 +66,31 @@
     <Filter Include="ThirdParty\fmod">
       <UniqueIdentifier>{b74c58a5-67ee-417f-84f3-a743d9271d91}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty\fmod\Release">
-      <UniqueIdentifier>{c5f0e3c2-c1fb-4ed6-8be4-4eeb96807c1a}</UniqueIdentifier>
+    <Filter Include="ThirdParty\fmod\Bin">
+      <UniqueIdentifier>{7018e4a7-3158-457a-823f-75c061e87bd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ThirdParty\fmod\Debug">
+    <Filter Include="ThirdParty\fmod\Inc">
+      <UniqueIdentifier>{1abc50a6-cf70-4dc7-8955-a0ccbc661f5e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\fmod\Bin\Debug">
       <UniqueIdentifier>{6c03dec6-243b-474a-ae13-c2af9830b778}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty\fmod\Bin\Release">
+      <UniqueIdentifier>{c5f0e3c2-c1fb-4ed6-8be4-4eeb96807c1a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ThirdParty\fmod\Debug\fmodL.dll">
-      <Filter>ThirdParty\fmod\Debug</Filter>
-    </None>
-    <None Include="ThirdParty\fmod\Release\fmod.dll">
-      <Filter>ThirdParty\fmod\Release</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Library Include="ThirdParty\fmod\Debug\fmodL_vc.lib">
-      <Filter>ThirdParty\fmod\Debug</Filter>
-    </Library>
-    <Library Include="ThirdParty\fmod\Release\fmod_vc.lib">
-      <Filter>ThirdParty\fmod\Release</Filter>
-    </Library>
+    <CopyFileToFolders Include="ThirdParty\fmod\Debug\fmodL.dll">
+      <Filter>ThirdParty\fmod\Bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\fmod\Debug\fmodL_vc.lib">
+      <Filter>ThirdParty\fmod\Bin\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\fmod\Release\fmod.dll">
+      <Filter>ThirdParty\fmod\Bin\Release</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\fmod\Release\fmod_vc.lib">
+      <Filter>ThirdParty\fmod\Bin\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>
