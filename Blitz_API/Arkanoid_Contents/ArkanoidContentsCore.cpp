@@ -1,7 +1,7 @@
 #include "PreCompiledFile.h"
 #include "ArkanoidContentsCore.h"
 #include <EngineCore/EngineAPICore.h>
-
+#include <EnginePlatform/EngineSound.h>
 #include <EngineBase/EngineDirectory.h>
 
 #include <EngineBase/EngineDebug.h>
@@ -14,7 +14,7 @@
 
 void ArkanoidContentsCore::BeginPlay()
 {
-
+	//------- image load -------------------------------------------------
 	UEngineDirectory Dir;
 
 	std::string ImageRes = "Resources//Images";
@@ -34,7 +34,26 @@ void ArkanoidContentsCore::BeginPlay()
 		std::string FilePath = ImageFiles[i].GetPathToString();
 		UImageManager::GetInst().Load(FilePath);
 	}
+	//------- sound load -------------------------------------------------
+	{
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Sound");
+		std::vector<UEngineFile> ImageFiles = Dir.GetAllFile();
+		for (size_t i = 0; i < ImageFiles.size(); i++)
+		{
+			std::string FilePath = ImageFiles[i].GetPathToString();
+			UEngineSound::Load(FilePath);
+		}
 
+	}
+
+
+	//--------------------------------------------------------
 	// 자르는 작업 <- 텍스쳐 모두 로딩되야함
 	UImageManager::GetInst().CuttingSprite("Player_Right.png", { 128, 128 });
 

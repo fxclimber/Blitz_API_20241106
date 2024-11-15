@@ -294,6 +294,7 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
 
 		SpawnFX(brickPos);
+		BallSoundPlayer = UEngineSound::Play("BlockCrashBall.wav");
 	}
 }
 

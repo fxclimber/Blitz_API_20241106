@@ -1,6 +1,7 @@
 #pragma once
 #include <EngineCore/GameMode.h>
 #include <vector>
+#include <EnginePlatform/EngineSound.h>
 
 
 class ATestGameMode : public AGameMode
@@ -26,5 +27,8 @@ private:
 	FVector2D UIPos = {0,0};
 
 	bool bIsBonusActive = false;
+
+	// sound
+
 };
 

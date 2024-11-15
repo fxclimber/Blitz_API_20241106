@@ -10,8 +10,6 @@
     <ClInclude Include="EngineInput.h">
       <Filter>Input</Filter>
     </ClInclude>
-    <ClInclude Include="EngineWinImage.h" />
-    <ClInclude Include="EngineWinDebug.h" />
     <ClInclude Include="ThirdParty\fmod\Inc\fmod.h">
       <Filter>ThirdParty\fmod\Inc</Filter>
     </ClInclude>
@@ -36,6 +34,15 @@
     <ClInclude Include="ThirdParty\fmod\Inc\fmod_output.h">
       <Filter>ThirdParty\fmod\Inc</Filter>
     </ClInclude>
+    <ClInclude Include="EngineWinImage.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineSound.h">
+      <Filter>Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="EngineWinDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="EngineWindow.cpp">
@@ -47,8 +54,15 @@
     <ClCompile Include="EngineInput.cpp">
       <Filter>Input</Filter>
     </ClCompile>
-    <ClCompile Include="EngineWinImage.cpp" />
-    <ClCompile Include="EngineWinDebug.cpp" />
+    <ClCompile Include="EngineWinImage.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineSound.cpp">
+      <Filter>Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="EngineWinDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Window">
@@ -78,18 +92,24 @@
     <Filter Include="ThirdParty\fmod\Bin\Release">
       <UniqueIdentifier>{c5f0e3c2-c1fb-4ed6-8be4-4eeb96807c1a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{e07c6208-1352-4950-a518-9e5ec9c205e7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{bff8a4d2-d65a-4113-8b60-a5e882bc030b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <CopyFileToFolders Include="ThirdParty\fmod\Debug\fmodL.dll">
+    <CopyFileToFolders Include="ThirdParty\fmod\Bin\Debug\fmodL_vc.lib">
       <Filter>ThirdParty\fmod\Bin\Debug</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\fmod\Debug\fmodL_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\fmod\Bin\Debug\fmodL.dll">
       <Filter>ThirdParty\fmod\Bin\Debug</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\fmod\Release\fmod.dll">
+    <CopyFileToFolders Include="ThirdParty\fmod\Bin\Release\fmod.dll">
       <Filter>ThirdParty\fmod\Bin\Release</Filter>
     </CopyFileToFolders>
-    <CopyFileToFolders Include="ThirdParty\fmod\Release\fmod_vc.lib">
+    <CopyFileToFolders Include="ThirdParty\fmod\Bin\Release\fmod_vc.lib">
       <Filter>ThirdParty\fmod\Bin\Release</Filter>
     </CopyFileToFolders>
   </ItemGroup>

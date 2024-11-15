@@ -4,6 +4,8 @@
 #include <EngineBase/EngineSerializer.h>
 #include "Brick.h"
 #include <chrono>
+#include <EnginePlatform/EngineSound.h>
+
 
 enum BrickType
 {
@@ -138,6 +140,7 @@ private:
 	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
 	int Score = 0;
 
+	USoundPlayer BallSoundPlayer;
 
 };
 
