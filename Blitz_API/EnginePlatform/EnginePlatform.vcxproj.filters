@@ -50,18 +50,18 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmodL.dll">
+    <None Include="ThirdParty\fmod\Debug\fmodL.dll">
       <Filter>ThirdParty\fmod\Debug</Filter>
     </None>
-    <None Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmod.dll">
+    <None Include="ThirdParty\fmod\Release\fmod.dll">
       <Filter>ThirdParty\fmod\Release</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmodL_vc.lib">
+    <Library Include="ThirdParty\fmod\Debug\fmodL_vc.lib">
       <Filter>ThirdParty\fmod\Debug</Filter>
     </Library>
-    <Library Include="C:\Program Files (x86)\FMOD SoundSystem\FMOD Studio API Windows\api\core\lib\x64\fmod_vc.lib">
+    <Library Include="ThirdParty\fmod\Release\fmod_vc.lib">
       <Filter>ThirdParty\fmod\Release</Filter>
     </Library>
   </ItemGroup>
