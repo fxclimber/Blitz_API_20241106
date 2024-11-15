@@ -18,19 +18,39 @@ APaddle::APaddle()
 	SpriteRenderer->SetSprite("paddle_small.png");
 	PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
 	}
+	Vel = { 0.f,0.f };
 }
 
 
 void APaddle::Tick(float _DeltaTime)
 {
+
+	// 벽 충돌 체크 및 속도 반사
+	int MaxTop = 101, MaxBottom = 980, MaxLeft = 46, MaxRight = 725;
+	if ((GetActorLocation().X - PaddleScale.X/2) <= MaxLeft)
+	{
+		AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
+	}
+	if ((GetActorLocation().X + PaddleScale.X/2 )>= MaxRight)
+	{
+		AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
+	}
+
+
 	if (true == UEngineInput::GetInst().IsPress('D'))
 	{
 		AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
+		Vel = (FVector2D::RIGHT * _DeltaTime * Speed);
+		UEngineDebug::CoreOutPutString("Vel : " + std::to_string(Vel.X));
 	}
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
+		Vel = (FVector2D::LEFT * _DeltaTime * Speed);
+		UEngineDebug::CoreOutPutString("Vel : " + std::to_string(Vel.X));
+
 	}
+
 }
 
 

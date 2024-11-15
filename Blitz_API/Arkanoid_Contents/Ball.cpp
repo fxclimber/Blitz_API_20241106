@@ -19,6 +19,7 @@ ABall::ABall()
 	SpriteRenderer->SetComponentScale({ 20, 20 });
 	SpriteRenderer->SetOrder(ERenderOrder::UI);
     IsMove = false;
+    IsEndPos = false;
 }
 
 
@@ -61,7 +62,7 @@ void ABall::Reflect(const FVector2D& normal)
 void ABall::UpdatePosition(float deltaTime)
 {
     // 벽 충돌 체크 및 속도 반사
-    int MaxTop = 101, MaxBottom = 999, MaxLeft = 46, MaxRight = 725;
+    int MaxTop = 101, MaxBottom = 1000, MaxLeft = 46, MaxRight = 725;
     FVector2D ballPos = GetActorLocation();
     FVector2D ballScale = GetRender()->GetComponentScale();
     float tolerance = 0.02f + ballScale.X / 2;
@@ -90,6 +91,7 @@ void ABall::UpdatePosition(float deltaTime)
         Reflect({ 0, 1 });
         ballPos.Y = MaxBottom - 0.1f;
         hasCollided = true;
+        IsEndPos = true;
     }
 
     // 위쪽 벽에 닿았다

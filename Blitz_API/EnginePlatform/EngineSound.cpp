@@ -73,6 +73,15 @@ void UEngineSound::Release()
 }
 
 
+UEngineSound::~UEngineSound()
+{
+	if (nullptr != SoundHandle)
+	{
+		SoundHandle->release();
+		SoundHandle = nullptr;
+	}
+}
+
 // 경로 저장
 void UEngineSound::Load(std::string_view _Path)
 {

@@ -45,7 +45,7 @@ class UEngineSound : public UEngineResources
 {
 public:
 	UEngineSound(){}
-	~UEngineSound(){}
+	~UEngineSound();
 
 	static void Load(std::string_view _Path);
 	static void Load(std::string_view _Name, std::string_view _Path);

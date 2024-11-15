@@ -38,7 +38,10 @@ public:
 	void MoveFunction(const FVector2D& velocity);
 	void Reflect(const FVector2D& normal);
 	void UpdatePosition(float deltaTime);
-
+	bool GetIsEndPos()
+	{
+		return IsEndPos;
+	}
 
 private:
 	float Speed = 1.0f;
@@ -47,6 +50,7 @@ private:
 	// 볼의 이동속도
 	FVector2D Value;
 	class USpriteRenderer* SpriteRenderer;
+	bool IsEndPos;
 
 };
 
