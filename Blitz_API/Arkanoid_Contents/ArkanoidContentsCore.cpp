@@ -60,7 +60,7 @@ void ArkanoidContentsCore::BeginPlay()
 	//UI
 	UImageManager::GetInst().CuttingSprite("Text_Num.png", { 64, 64 });
 
-
+	//----------------폴더 애니들 ----------------------------------------
 	// 폴더- silver block fx
 	{
 		{
@@ -144,6 +144,8 @@ void ArkanoidContentsCore::BeginPlay()
 
 	}
 
+
+	//-------------------------------근간이 되는 부분들 ---------------------------------
 	// 윈도우 
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowTitle("Blitz_Window");
 	// 이거 꼭 호출해줘야 합니다.
@@ -151,7 +153,7 @@ void ArkanoidContentsCore::BeginPlay()
 
 	// CreateLevel
 	UEngineAPICore::GetCore()->CreateLevel<ATestGameMode, Map_Play>("Test");
-
+	// OpenLevel
 	UEngineAPICore::GetCore()->OpenLevel("Test");
 
 }

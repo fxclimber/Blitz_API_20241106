@@ -218,18 +218,6 @@ void UImageManager::CuttingSprite(std::string_view _KeyName, FVector2D _CuttingS
 	Sprite->SetName(UpperName);
 	Image->SetName(UpperName);
 
-	//if (0 != (Image->GetImageScale().iX() % _CuttingSize.iX()))
-	//{
-	//	MSGASSERT("스프라이트 컷팅에 x가 딱 떨어지지 않습니다." + std::string(_KeyName));
-	//	return;
-	//}
-
-	//if (0 != (Image->GetImageScale().iY() % _CuttingSize.iY()))
-	//{
-	//	MSGASSERT("스프라이트 컷팅에 y가 딱 떨어지지 않습니다." + std::string(_KeyName));
-	//	return;
-	//}
-
 	int SpriteX = Image->GetImageScale().iX() / _CuttingSize.iX();
 	int SpriteY = Image->GetImageScale().iY() / _CuttingSize.iY();
 
@@ -317,9 +305,6 @@ UEngineSprite* UImageManager::FindSprite(std::string_view _KeyName)
 		return nullptr;
 	}
 
-	//std::map<std::string, UEngineSprite*>::iterator FindIter = Sprites.find(UpperName);
-
-	// 이걸로 
 	return Sprites[UpperName];
 }
 
@@ -329,7 +314,6 @@ UEngineWinImage* UImageManager::FindImage(std::string_view _KeyName)
 
 	if (false == Images.contains(UpperName))
 	{
-		// MSGASSERT("로드하지 않은 스프라이트를 사용하려고 했습니다" + std::string(_KeyName));
 		return nullptr;
 	}
 
@@ -337,7 +321,6 @@ UEngineWinImage* UImageManager::FindImage(std::string_view _KeyName)
 	return Images[UpperName];
 }
 
-// 기존의 이미지를 찾아 잘라낸 후 새로운 스프라이트 이미지를 만듭니다.
 // _NewSpriteKeyName : 새로운 키 값
 // _StartPos : 기존 이미지에서 잘라낼 좌상단 값
 // _CuttingSize : 이미지 사이즈

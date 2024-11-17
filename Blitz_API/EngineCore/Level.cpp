@@ -46,7 +46,6 @@ ULevel::~ULevel()
 	}
 }
 
-// 내가 CurLevel 됐을대
 void ULevel::LevelChangeStart()
 {
 	{
@@ -64,7 +63,6 @@ void ULevel::LevelChangeStart()
 
 }
 
-// 나 이제 새로운 레벨로 바뀔거야.
 void ULevel::LevelChangeEnd()
 {
 	{
@@ -96,7 +94,6 @@ void ULevel::Tick(float _DeltaTime)
 
 		BeginPlayList.clear();
 
-		// todtjdtl 
 		AActor::ComponentBeginPlay();
 	}
 
@@ -123,14 +120,12 @@ void ULevel::Render(float _DeltaTime)
 	ScreenClear();
 
 	// 지금 이제 랜더링의 주체가 USpriteRenderer 바뀌었다.
-	// 액터를 기반으로 랜더링을 돌리는건 곧 지워질 겁니다.
 
 	// 액터가 SpriteRenderer를 만들면
 	// Level도 그 스프라이트 랜더러를 알아야 한다.
 
 	if (true == IsCameraToMainPawn)
 	{
-		// CameraPivot = FVector2D(-1280, -720) * 0.5f;
 		CameraPos = MainPawn->GetTransform().Location + CameraPivot;
 	}
 
@@ -164,7 +159,7 @@ void ULevel::Render(float _DeltaTime)
 
 void ULevel::Release(float _DeltaTime)
 {
-	// 릴리즈 순서는 말단부터 돌려야 합니다.
+	// 릴리즈 순서는 말단부터 
 
 	std::map<int, std::list<class USpriteRenderer*>>::iterator StartOrderIter = Renderers.begin();
 	std::map<int, std::list<class USpriteRenderer*>>::iterator EndOrderIter = Renderers.end();
@@ -250,12 +245,6 @@ void ULevel::PushRenderer(class USpriteRenderer* _Renderer)
 
 void ULevel::ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder)
 {
-	//std::vector<int> Value;
-	// 벡터는 리무브가 없다.
-	//Value.remove
-
-	// 0번에 들어있었을 것이다.
-	// 별로 빠른 함수는 아닙니다.
 	Renderers[_PrevOrder].remove(_Renderer);
 
 	Renderers[_Renderer->GetOrder()].push_back(_Renderer);

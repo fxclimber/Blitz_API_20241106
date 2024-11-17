@@ -1,22 +1,14 @@
 #pragma once
 #include <string>
 
-// 설명 :
 class UObject
 {
 public:
-	// constrcuter destructer
 	UObject();
 
 	// 혹여나 자식들의 소멸자가 호출 안되는 경우를 막기위에서
 	// 가상함수 테이블을 만들 것이므로 왠만하면 자식쪽의 소멸자가 호출안되는 경우는 없을 것이다.
 	virtual ~UObject();
-
-	// delete Function
-	UObject(const UObject& _Other) = delete;
-	UObject(UObject&& _Other) noexcept = delete;
-	UObject& operator=(const UObject& _Other) = delete;
-	UObject& operator=(UObject&& _Other) noexcept = delete;
 
 	std::string GetName() const
 	{
@@ -45,7 +37,6 @@ public:
 		return IsDestroyValue;
 	}
 
-	// 바로 죽겠죠?
 	// _Time 시간후에 죽어라.
 	void Destroy(float _Time = 0.0f)
 	{

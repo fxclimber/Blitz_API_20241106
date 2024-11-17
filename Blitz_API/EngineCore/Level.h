@@ -37,8 +37,6 @@ public:
 		ActorPtr->World = this;
 
 		BeginPlayList.push_back(ActorPtr);
-		// NewActor->BeginPlay();
-		// AllActors.push_back(NewActor);
 		return NewActor;
 	}
 
@@ -90,11 +88,6 @@ private:
 
 		BeginPlayList.push_back(GameMode);
 		BeginPlayList.push_back(MainPawn);
-
-		//GameMode->BeginPlay();
-		//MainPawn->BeginPlay();
-		//AllActors.push_back(GameMode);
-		//AllActors.push_back(MainPawn);
 	}
 
 
@@ -102,13 +95,6 @@ private:
 	void PushRenderer(class USpriteRenderer* _Renderer);
 	void ChangeRenderOrder(class USpriteRenderer* _Renderer, int _PrevOrder);
 
-	// 헝가리안 표기법
-	// 이름은 마음대로
-	// 맴버변수의 이름은 대문자
-	// 음역하지마세요
-	// dujumsaigury
-	// 영어의미로 해주시면 됩니다.
-	// 맨앞만 
 	class AGameMode* GameMode = nullptr;
 
 	// 주인공

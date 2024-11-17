@@ -39,8 +39,6 @@ double UEngineTimer::DEnd()
 
 void UEngineTimer::TimeCheck()
 {
-	// QueryPerformanceCounter(&PrevTime); 이전에 재었던 시간이 남아있을 것이다.
-
 	QueryPerformanceCounter(&CurTime);
 
 	// 사이간격이 나옵니다.

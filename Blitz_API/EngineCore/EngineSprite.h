@@ -17,7 +17,6 @@ public:
 		// 잘라서 쓰겠다.
 	};
 
-	// constrcuter destructer
 	UEngineSprite();
 	~UEngineSprite();
 

@@ -20,23 +20,6 @@ public:
 
 #pragma region 포인터형
 
-	//static UEngineInput* GetInst()
-	//{
-	//	if (nullptr == Inst)
-	//	{
-	//		Inst = new UEngineInput();
-	//	}
-	//	return Inst;
-	//}
-
-	//static void DestroyInst()
-	//{
-	//	if (nullptr == Inst)
-	//	{
-	//		delete Inst;
-	//		Inst = nullptr;
-	//	}
-	//}
 
 #pragma endregion
 

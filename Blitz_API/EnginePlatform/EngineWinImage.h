@@ -15,17 +15,10 @@
 class UEngineWinImage : public UObject
 {
 public:
-	// constrcuter destructer
 	UEngineWinImage();
 	~UEngineWinImage();
 
-	// delete Function
-	UEngineWinImage(const UEngineWinImage& _Other) = delete;
-	UEngineWinImage(UEngineWinImage&& _Other) noexcept = delete;
-	UEngineWinImage& operator=(const UEngineWinImage& _Other) = delete;
-	UEngineWinImage& operator=(UEngineWinImage&& _Other) noexcept = delete;
 
-	// void Load(std::string_view _Path);
 	HDC GetDC()
 	{
 		return ImageDC;
@@ -64,7 +57,6 @@ protected:
 
 private:
 	// BMP 이미지 파일 그 자체에요
-	// FVector2D Size;
 	HDC ImageDC = nullptr;
 	HBITMAP hBitMap = nullptr;
 

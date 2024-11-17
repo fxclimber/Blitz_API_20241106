@@ -11,11 +11,8 @@ enum class PivotType
 	Top,
 };
 
-// 설명 :
 class USpriteRenderer : public USceneComponent
 {
-	// 애가 다 담당한다.
-	// 클래스를 심화분류해서
 public:
 	class FrameAnimation
 	{
@@ -40,7 +37,6 @@ public:
 
 
 public:
-	// constrcuter destructer
 	USpriteRenderer();
 	~USpriteRenderer();
 

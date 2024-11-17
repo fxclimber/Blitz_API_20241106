@@ -1,8 +1,6 @@
 #include "PreCompiledFile.h"
 #include "EngineInput.h"
 
-// UEngineInput UEngineInput::Inst = UEngineInput();
-// UEngineInput* UEngineInput::Inst = nullptr;
 
 // Input 내부에 Key 내부의 keyCheck 함수
 void UEngineInput::UEngineKey::KeyCheck(float _DeltaTime)

@@ -59,7 +59,6 @@ std::string UEnginePath::GetExtension()
 bool UEnginePath::IsExists()
 {
 	// C++이 빌드되는곳에서는 모두다 동일하게 돌아간다.
-	// std::filesystem::create_directory()
 	return std::filesystem::exists(Path);
 }
 
@@ -85,9 +84,6 @@ void UEnginePath::Append(std::string_view _AppendName)
 
 bool UEnginePath::MoveParentToDirectory(std::string_view _Path)
 {
-	// 이런 경우에는 더미를 만드는게 좋다.
-
-	// Path = L"D:\\Project\\GM2\\API\\App\\AAA.png"
 	UEnginePath DummyPath = UEnginePath(Path);
 
 	if (false == DummyPath.IsDirectory())
@@ -96,7 +92,6 @@ bool UEnginePath::MoveParentToDirectory(std::string_view _Path)
 		return false;
 	}
 
-	// 이게 무한 루프 걸리는 코드 입니다.
 	bool Result = false;
 	std::filesystem::path CurPath = DummyPath.Path;
 
@@ -123,7 +118,6 @@ bool UEnginePath::MoveParentToDirectory(std::string_view _Path)
 
 	return Result;
 
-	// Path = DummyPath;
 }
 
 

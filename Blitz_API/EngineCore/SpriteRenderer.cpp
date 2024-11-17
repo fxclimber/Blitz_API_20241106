@@ -13,9 +13,6 @@ USpriteRenderer::~USpriteRenderer()
 {
 }
 
-// SpriteRenderer : public URenderer
-// MeshRenderer : public URenderer
-// StaticMeshRenderer : public URenderer
 void USpriteRenderer::Render(float _DeltaTime)
 {
 	// 일단 여기서 다 짠다.
@@ -63,7 +60,6 @@ void USpriteRenderer::Render(float _DeltaTime)
 		}
 
 
-		//         2 3 4           0
 		CurIndex = Indexs[CurAnimation->CurIndex];
 		// ++CurAnimation->CurIndex;
 	}
@@ -89,18 +85,12 @@ void USpriteRenderer::Render(float _DeltaTime)
 
 	Trans.Location += Pivot;
 
-	// Trans.Location -= 카메라포스
-
 	CurData.Image->CopyToTrans(BackBufferImage, Trans, CurData.Transform);
 }
 
 void USpriteRenderer::BeginPlay()
 {
-	// 부모 클래스의 함수를 호출하는걸 깜빡하면 안된다.
-	// 습관되면 가장 언리얼 학습에서 걸림돌이 되는 습관이 된다.
 	Super::BeginPlay();
-
-	// 스프라이트 랜더러가 
 
 	AActor* Actor = GetActor();
 	ULevel* Level = Actor->GetWorld();
@@ -318,7 +308,6 @@ void USpriteRenderer::SetCameraEffectScale(float _Effect)
 	CameraEffectScale = _Effect;
 }
 
-// 여러분들이 애니메이션을 하거나
 void USpriteRenderer::SetPivotType(PivotType _Type)
 {
 	if (PivotType::Center == _Type)

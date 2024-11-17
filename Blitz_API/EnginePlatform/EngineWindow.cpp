@@ -2,25 +2,6 @@
 #include "EngineWindow.h"
 #include <EngineBase/EngineDebug.h>
 
-//class AActor
-//{
-//    Player* NewPlayer; // <= 망했다.
-//};
-//
-//class Player : public AActor
-//{
-//
-//};
-
-// 레벨이 높은 헤더는 레벨이 낮은 
-// #include <EngineCore/EngineAPICore.h>
-
-//#ifdef _WINDOWS
-//#include <Windows.h>
-//#elseif _리눅스
-//#include <Windows.h>
-//#elseif 안드로이드
-//#endif 
 
 HINSTANCE UEngineWindow::hInstance = nullptr;
 std::map<std::string, WNDCLASSEXA> UEngineWindow::WindowClasss;
@@ -38,10 +19,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         EndPaint(hWnd, &ps);
     }
     break;
-    //case WM_SIZING:
-    //{
-    //    int a = 0;
-    //}
     break;
     case WM_DESTROY:
         --WindowCount;
@@ -77,7 +54,7 @@ void UEngineWindow::EngineWindowInit(HINSTANCE _Instance)
 
 int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelegate _FrameFunction)
 {
-    // 단축키 인데 게임
+    // 단축키
     // HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_WINDOWSPROJECT2));
     MSG msg = MSG();
 
@@ -128,20 +105,12 @@ int UEngineWindow::WindowMessageLoop(EngineDelegate _StartFunction, EngineDelega
 
 void UEngineWindow::CreateWindowClass(const WNDCLASSEXA& _Class)
 {
-    // 일반적인 맵의 사용법
 
     std::map<std::string, WNDCLASSEXA>::iterator EndIter = WindowClasss.end();
     std::map<std::string, WNDCLASSEXA>::iterator FindIter = WindowClasss.find(std::string(_Class.lpszClassName));
 
-    // ckw
     if (EndIter != FindIter)
     {
-        // std::string ErrorText = "같은 이름의 윈도우 클래스를 2번 등록했습니다" + std::string(_Class.lpszClassName);
-
-        // std::string 내부에 들고 있는 맴버변수 => std::string => std::vector<char>
-        // std::vector<char> char* = new char[100];
-        // ErrorText const char* 리턴해주는 함수가 c_str()
-        // const char* Text = ErrorText.c_str();
         MSGASSERT(std::string(_Class.lpszClassName) + " 같은 이름의 윈도우 클래스를 2번 등록했습니다");
         return;
     }
@@ -231,7 +200,6 @@ void UEngineWindow::SetWindowPosAndScale(FVector2D _Pos, FVector2D _Scale)
     if (false == WindowSize.EqualToInt(_Scale))
     {
         // 화면의 크기와 전히 동일한 크기여야 한다.
-        // 여러번 호출하면 기존에 만들었던 녀석이 Leck이 되므로
         // 화면크기를 조정할 때마다 삭제해줘야 한다.
         if (nullptr != BackBufferImage)
         {
