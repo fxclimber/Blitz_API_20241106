@@ -15,12 +15,17 @@
 
 #include "ContentsEnum.h"
 #include "Score.h"
-
+#include "Fade.h"
 
 void ATestGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
+	{
+		AFade* Actor = GetWorld()->SpawnActor<AFade>();
+		//Actor->FadeOut();
+		Actor->GetBackSpriteRenderer()->SetAlphafloat(0.f);
+	}
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
 	score->SetActorLocation({ 755,50 });

@@ -15,10 +15,17 @@
 class UEngineWinImage : public UObject
 {
 public:
+	// constrcuter destructer
 	UEngineWinImage();
 	~UEngineWinImage();
 
+	// delete Function
+	UEngineWinImage(const UEngineWinImage& _Other) = delete;
+	UEngineWinImage(UEngineWinImage&& _Other) noexcept = delete;
+	UEngineWinImage& operator=(const UEngineWinImage& _Other) = delete;
+	UEngineWinImage& operator=(UEngineWinImage&& _Other) noexcept = delete;
 
+	// void Load(std::string_view _Path);
 	HDC GetDC()
 	{
 		return ImageDC;
@@ -45,6 +52,12 @@ public:
 		const FTransform& _LTImageTrans,
 		UColor _Color = UColor(255, 0, 255, 0));
 
+	void CopyToAlpha(UEngineWinImage* _TargetImage,
+		const FTransform& _RenderTrans,
+		const FTransform& _LTImageTrans,
+		unsigned char _Alpha);
+
+
 	void Load(UEngineWinImage* _TargetImage, std::string_view _Path);
 
 	// 이미지 크기를 리턴
@@ -53,10 +66,18 @@ public:
 		return { Info.bmWidth, Info.bmHeight };
 	}
 
+	UColor GetColor(FVector2D _Point, UColor _DefaultColor = UColor::WHITE)
+	{
+		return GetColor(_Point.ConvertToPoint(), _DefaultColor);
+	}
+
+	UColor GetColor(FIntPoint _Point, UColor _DefaultColor);
+
 protected:
 
 private:
 	// BMP 이미지 파일 그 자체에요
+	// FVector2D Size;
 	HDC ImageDC = nullptr;
 	HBITMAP hBitMap = nullptr;
 

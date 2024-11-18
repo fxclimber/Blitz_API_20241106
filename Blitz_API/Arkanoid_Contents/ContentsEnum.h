@@ -13,6 +13,7 @@ enum class ERenderOrder
 	NEW = 1000,
 	UI = 2000,
 	FX = 2001,
+	FADE = 20000,
 };
 enum class WhereIsBall
 {

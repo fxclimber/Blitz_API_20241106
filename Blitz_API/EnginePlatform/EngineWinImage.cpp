@@ -166,6 +166,47 @@ void UEngineWinImage::CopyToTrans(UEngineWinImage* _TargetImage, const FTransfor
 	);
 }
 
+void UEngineWinImage::CopyToAlpha(UEngineWinImage* _TargetImage,
+	const FTransform& _RenderTrans,
+	const FTransform& _LTImageTrans,
+	unsigned char _Alpha)
+{
+
+	// 알파 블랜드는 알파 채널이라는 것을 이용해서 알파를 적용시킨다.
+	// 이미지는 
+	// R G B A 로 이루어져 있다. 컬러채널이라고 부른다.
+
+	// 0이면 검은색
+	// 255면 흰색입니다.
+	// 알파블랜드가 알파를 적용시키는 부분은
+	// 알파채널이 255인 부분만 적용시킵니다.
+	// 이 채널은 포토샵에서 윈도우 => 채널창에서 확인할 수 있습니다.
+
+	BLENDFUNCTION BLEND;
+	BLEND.BlendOp = AC_SRC_OVER;
+	BLEND.BlendFlags = 0;
+	BLEND.AlphaFormat = AC_SRC_ALPHA;
+	BLEND.SourceConstantAlpha = _Alpha;
+
+	HDC CopyDC = ImageDC;
+	HDC TargetDC = _TargetImage->ImageDC;
+	FVector2D LeftTop = _RenderTrans.CenterLeftTop();
+
+	AlphaBlend(
+		TargetDC,
+		LeftTop.iX(),
+		LeftTop.iY(),
+		_RenderTrans.Scale.iX(),
+		_RenderTrans.Scale.iY(),
+		CopyDC,
+		_LTImageTrans.Location.iX(),
+		_LTImageTrans.Location.iY(),
+		_LTImageTrans.Scale.iX(),
+		_LTImageTrans.Scale.iY(),
+		BLEND
+	);
+}
+
 void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path)
 {
 	// Png랑 Bmp일때 로드하는 방식이 달라진다.
@@ -252,4 +293,35 @@ void UEngineWinImage::Load(UEngineWinImage* _TargetImage, std::string_view _Path
 	ImageDC = NewImageDC;
 
 	GetObject(hBitMap, sizeof(BITMAP), &Info);
+}
+
+UColor UEngineWinImage::GetColor(FIntPoint _Point, UColor _DefaultColor = UColor::WHITE)
+{
+	if (0 > _Point.X)
+	{
+		return _DefaultColor;
+	}
+
+	if (0 > _Point.Y)
+	{
+		return _DefaultColor;
+	}
+
+	if (Info.bmWidth <= _Point.X)
+	{
+		return _DefaultColor;
+	}
+
+	if (Info.bmHeight <= _Point.Y)
+	{
+		return _DefaultColor;
+	}
+
+	// ::꼭 붙여야 한다. 명시적으로 전역에 존재하는 윈도우
+	// UEngineWinImage::GetPixel 혼돈이 올수 있다.
+
+	// RGBA
+	// 1111
+	UColor ResultColor = ::GetPixel(ImageDC, _Point.X, _Point.Y);
+	return ResultColor;
 }

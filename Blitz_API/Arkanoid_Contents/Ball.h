@@ -1,5 +1,6 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <chrono>
 
 class ABall : public AActor
 {
@@ -38,10 +39,10 @@ public:
 	void MoveFunction(const FVector2D& velocity);
 	void Reflect(const FVector2D& normal);
 	void UpdatePosition(float deltaTime);
-	bool GetIsEndPos()
-	{
-		return IsEndPos;
-	}
+	bool Stop=false;
+	float GetElapsedTime() const;
+	FVector2D SavePos = {0,0};
+	float EndTime = 0.0f;
 
 private:
 	float Speed = 1.0f;
@@ -50,7 +51,7 @@ private:
 	// 볼의 이동속도
 	FVector2D Value;
 	class USpriteRenderer* SpriteRenderer;
-	bool IsEndPos;
+	std::chrono::time_point<std::chrono::steady_clock> StopTime;
 
 };
 

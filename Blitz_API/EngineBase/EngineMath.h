@@ -1,4 +1,42 @@
 #pragma once
+// FVector로 통일하겠습니다.
+// FVector2D xy
+// FVector3D xyz
+// FVector4D xyzw
+// FVector4D == FVector;
+
+
+class UEngineMath
+{
+public:
+	static float Sqrt(float _Value)
+	{
+		return ::sqrtf(_Value);
+	}
+
+	template <typename DataType>
+	DataType ClampMax(DataType value, DataType maxValue)
+	{
+		return (value > maxValue) ? maxValue : value;
+	}
+
+	template <typename DataType>
+	DataType ClampMin(DataType value, DataType minValue)
+	{
+		return (value < minValue) ? minValue : value;
+	}
+
+	template <typename DataType>
+	static DataType Clamp(DataType value, DataType minValue, DataType maxValue)
+	{
+		if (value < minValue)
+			return minValue;
+		else if (value > maxValue)
+			return maxValue;
+		else
+			return value;
+	}
+};
 
 class FVector2D
 {
@@ -41,7 +79,16 @@ public:
 	{
 		return static_cast<int>(Y);
 	}
-	class FIntPoint ConvertToPoint() const;
+
+	float hX() const
+	{
+		return X * 0.5f;
+	}
+
+	float hY() const
+	{
+		return Y * 0.5f;
+	}
 
 	// X든 Y든 0이있으면 터트리는 함수.
 	bool IsZeroed() const
@@ -54,9 +101,18 @@ public:
 		return { X * 0.5f, Y * 0.5f };
 	}
 
+	// 빗변의 길이입니다.
 	float Length() const
 	{
-		return sqrtf(X * X + Y * Y);
+		return UEngineMath::Sqrt(X * X + Y * Y);
+	}
+
+	class FIntPoint ConvertToPoint() const;
+
+	static FVector2D Normalize(FVector2D _Value)
+	{
+		_Value.Normalize();
+		return _Value;
 	}
 
 	void Normalize()
@@ -83,7 +139,7 @@ public:
 		return Result;
 	}
 
-	FVector2D operator+(FVector2D _Other) const
+	FVector2D operator+(const FVector2D& _Other) const
 	{
 		FVector2D Result;
 		Result.X = X + _Other.X;
@@ -91,7 +147,15 @@ public:
 		return Result;
 	}
 
-	FVector2D operator-(FVector2D _Other) const
+	FVector2D& operator-=(const FVector2D& _Other)
+	{
+		X -= _Other.X;
+		Y -= _Other.Y;
+		return *this;
+	}
+
+
+	FVector2D operator-(const FVector2D& _Other) const
 	{
 		FVector2D Result;
 		Result.X = X - _Other.X;
@@ -99,6 +163,13 @@ public:
 		return Result;
 	}
 
+	FVector2D operator-() const
+	{
+		FVector2D Result;
+		Result.X = -X;
+		Result.Y = -Y;
+		return Result;
+	}
 
 	FVector2D operator/(int _Value) const
 	{
@@ -117,7 +188,7 @@ public:
 	}
 
 	// ture가 나오는 
-	bool operator==(FVector2D _Other) const
+	bool operator==(const FVector2D& _Other) const
 	{
 		return X == _Other.X && Y == _Other.Y;
 	}
@@ -126,15 +197,37 @@ public:
 	// const가 붙은 함수에서는 const가 붙은 함수 호출할수 없다.
 	bool EqualToInt(FVector2D _Other) const
 	{
+		// const FVector* const Ptr;
+		// this = nullptr;
 		return iX() == _Other.iX() && iY() == _Other.iY();
 	}
 
-	FVector2D& operator+=(FVector2D _Other)
+	//bool Compare(FVector2D _Other, float _limite = 0.0f) const
+	//{
+	//	return X == _Other.X && Y == _Other.Y;
+	//}
+
+	FVector2D& operator+=(const FVector2D& _Other)
 	{
 		X += _Other.X;
 		Y += _Other.Y;
 		return *this;
 	}
+
+	FVector2D& operator*=(const FVector2D& _Other)
+	{
+		X *= _Other.X;
+		Y *= _Other.Y;
+		return *this;
+	}
+
+	FVector2D& operator*=(float _Other)
+	{
+		X *= _Other;
+		Y *= _Other;
+		return *this;
+	}
+
 
 	std::string ToString()
 	{
@@ -149,20 +242,88 @@ public:
 	}
 };
 
+enum class ECollisionType
+{
+	Point,
+	Rect,
+	CirCle, // 타원이 아닌 정방원 
+	Max
+
+	//AABB,
+	//OBB,
+};
+
+// 대부분 오브젝트에서 크기와 위치는 한쌍입니다.
+// 그래서 그 2가지를 모두 묶는 자료형을 만들어서 그걸 써요.
 class FTransform
 {
+private:
+	friend class CollisionFunctionInit;
+
+	static std::function<bool(const FTransform&, const FTransform&)> AllCollisionFunction[static_cast<int>(ECollisionType::Max)][static_cast<int>(ECollisionType::Max)];
+
 public:
+	static bool Collision(ECollisionType _LeftType, const FTransform& _Left, ECollisionType _RightType, const FTransform& _Right);
+
+	// 완전히 같은 형의 함수죠?
+	static bool PointToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool PointToRect(const FTransform& _Left, const FTransform& _Right);
+
+	static bool RectToRect(const FTransform& _Left, const FTransform& _Right);
+	static bool RectToCirCle(const FTransform& _Left, const FTransform& _Right);
+
+	static bool CirCleToCirCle(const FTransform& _Left, const FTransform& _Right);
+	static bool CirCleToRect(const FTransform& _Left, const FTransform& _Right);
+
+
 	FVector2D Scale;
 	FVector2D Location;
+
 
 	FVector2D CenterLeftTop() const
 	{
 		return Location - Scale.Half();
 	}
 
+	FVector2D CenterLeftBottom() const
+	{
+		FVector2D Location;
+		Location.X = Location.X - Scale.hX();
+		Location.Y = Location.Y + Scale.hY();
+		return Location;
+	}
+
+	float CenterLeft() const
+	{
+		return Location.X - Scale.hX();
+	}
+
+	float CenterTop() const
+	{
+		return Location.Y - Scale.hY();
+	}
+
+	FVector2D CenterRightTop() const
+	{
+		FVector2D Location;
+		Location.X = Location.X + Scale.hX();
+		Location.Y = Location.Y - Scale.hY();
+		return Location;
+	}
+
 	FVector2D CenterRightBottom() const
 	{
 		return Location + Scale.Half();
+	}
+
+	float CenterRight() const
+	{
+		return Location.X + Scale.hX();
+	}
+
+	float CenterBottom() const
+	{
+		return Location.Y + Scale.hY();
 	}
 };
 
@@ -216,21 +377,16 @@ public:
 		return *this;
 	}
 
-	FIntPoint operator*(const FIntPoint& Other) const
-	{
-		return FIntPoint(X * Other.X, Y * Other.Y);
-	}
-};
 
-class EngineMath
-{
 };
-
 
 
 class UColor
 {
 public:
+	static const UColor WHITE;
+	static const UColor BLACK;
+
 	union
 	{
 		int Color;
@@ -242,6 +398,18 @@ public:
 			unsigned char A;
 		};
 	};
+
+	UColor(unsigned long _Value)
+		:Color(_Value)
+	{
+
+	}
+
+	bool operator==(const UColor& _Other)
+	{
+		return R == _Other.R && G == _Other.G && B == _Other.B;
+	}
+
 
 	UColor(unsigned char _R, unsigned char _G, unsigned char _B, unsigned char _A)
 		:R(_R), G(_G), B(_B), A(_A)

@@ -17,6 +17,8 @@ APaddle::APaddle()
 	SpriteRenderer->SetOrder(ERenderOrder::Bricks);
 	SpriteRenderer->SetSprite("paddle_small.png");
 	PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
+	//SpriteRenderer->SetAlphafloat(static_cast<float>(0.2f));//SetAlphafloat Å×½ºÆ®
+
 	}
 	Vel = { 0.f,0.f };
 }

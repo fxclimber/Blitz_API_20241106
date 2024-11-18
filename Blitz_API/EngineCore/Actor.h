@@ -1,9 +1,12 @@
 #pragma once
 #include <EngineBase/Object.h>
 #include <EngineBase/EngineMath.h>
+#include <EngineBase/TimeEvent.h>
+
 
 #include "EngineSprite.h"
 
+// 설명 :
 class AActor : public UObject
 {
 public:
@@ -11,14 +14,21 @@ public:
 
 	friend class ULevel;
 
+	// constrcuter destructer
 	AActor();
 	~AActor();
 
+	// delete Function
+	AActor(const AActor& _Other) = delete;
+	AActor(AActor&& _Other) noexcept = delete;
+	AActor& operator=(const AActor& _Other) = delete;
+	AActor& operator=(AActor&& _Other) noexcept = delete;
 
 	// 이 객체가 레벨에서 처음 Tick을 돌리기 직전에 실행된다.
 	virtual void BeginPlay() {}
 
-	virtual void Tick(float _DeltaTime) {}
+	// 델타타임이란 무엇인가?
+	virtual void Tick(float _DeltaTime);
 
 	virtual void LevelChangeStart() {}
 	virtual void LevelChangeEnd() {}
@@ -59,6 +69,9 @@ public:
 		// 내가 널 만든 레벨이야.
 		ComponentPtr->ParentActor = this;
 
+		// 생성될때 하지 않습니다.
+		// NewComponent->BeginPlay();
+		// 만들기만 하고 실행 안한 상태가 된것.
 		Components.push_back(NewComponent);
 
 		// BeginPlay가 실행안된 컴포넌트들을 다 자료구조에 담는다.
@@ -66,7 +79,9 @@ public:
 		return NewComponent;
 	}
 
+
 protected:
+	UTimeEvent TimeEventer;
 
 private:
 	static void ComponentBeginPlay();
@@ -75,9 +90,11 @@ private:
 	static std::list<class UActorComponent*> ComponentList;
 
 	void ReleaseCheck(float _DeltaTime) override;
+	void ReleaseTimeCheck(float _DeltaTime) override;
 
 	class ULevel* World = nullptr;
 	FTransform Transform;
+
 
 	std::list<class UActorComponent*> Components;
 };

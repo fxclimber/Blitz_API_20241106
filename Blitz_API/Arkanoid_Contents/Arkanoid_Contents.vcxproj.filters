@@ -31,6 +31,13 @@
     <ClInclude Include="Score.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
+    <ClInclude Include="Map_Die.h">
+      <Filter>ContentsObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="DieGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Fade.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -63,6 +70,13 @@
     <ClCompile Include="Score.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
+    <ClCompile Include="Map_Die.cpp">
+      <Filter>ContentsObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="DieGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Fade.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="ContentsObject">

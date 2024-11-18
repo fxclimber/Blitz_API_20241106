@@ -9,8 +9,9 @@
 #include <EngineCore/ImageManager.h>
 
 #include "Map_Play.h"
+#include "Map_Die.h"
 #include "TestGameMode.h"
-
+#include "DieGameMode.h"
 
 void ArkanoidContentsCore::BeginPlay()
 {
@@ -153,6 +154,7 @@ void ArkanoidContentsCore::BeginPlay()
 
 	// CreateLevel
 	UEngineAPICore::GetCore()->CreateLevel<ATestGameMode, Map_Play>("Test");
+	UEngineAPICore::GetCore()->CreateLevel<DieGameMode, Map_Die>("Die");
 	// OpenLevel
 	UEngineAPICore::GetCore()->OpenLevel("Test");
 
