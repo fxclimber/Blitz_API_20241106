@@ -8,13 +8,29 @@ AFade* AFade::MainFade = nullptr;
 
 AFade::AFade()
 {
-	BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-	BackSpriteRenderer->SetOrder(ERenderOrder::FADE);
-	BackSpriteRenderer->SetSprite("Fade.bmp");
-	FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
-	BackSpriteRenderer->SetComponentLocation(MapScale.Half());
-	BackSpriteRenderer->SetCameraEffect(false);
-	BackSpriteRenderer->SetAlphaChar(200);
+	{
+		//BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		//BackSpriteRenderer->SetOrder(ERenderOrder::FADE);
+		//BackSpriteRenderer->SetSprite("Fade.bmp");
+		//FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
+		//BackSpriteRenderer->SetComponentLocation(MapScale.Half());
+		//BackSpriteRenderer->SetCameraEffect(false);
+		//BackSpriteRenderer->SetAlphaChar(200);
+	}
+
+	{
+		BackSpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+		BackSpriteRenderer->SetSprite("Map_Ending001_1000.png");
+		BackSpriteRenderer->SetOrder(ERenderOrder::FADE);
+
+		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+		BackSpriteRenderer->SetComponentScale(WinSize);
+		FVector2D MapScale = BackSpriteRenderer->SetSpriteScale(1.0f);
+		BackSpriteRenderer->SetComponentLocation(MapScale.Half());
+
+		BackSpriteRenderer->SetCameraEffect(false);
+		BackSpriteRenderer->SetAlphaChar(200);
+	}
 }
 
 AFade::~AFade()
@@ -35,14 +51,14 @@ void AFade::FadeIn()
 {
 	FadeValue = 0.0f;
 	FadeDir = 1.0f;
-	TimeEventer.PushEvent(2.0f, std::bind(&AFade::FadeChange, this), true, false);
+	TimeEventer.PushEvent(5.0f, std::bind(&AFade::FadeChange, this), true, false);
 }
 
 void AFade::FadeOut()
 {
 	FadeValue = 1.0f;
 	FadeDir = -1.0f;
-	TimeEventer.PushEvent(2.0f, std::bind(&AFade::FadeChange, this), true, false);
+	TimeEventer.PushEvent(5.0f, std::bind(&AFade::FadeChange, this), true, false);
 }
 
 void AFade::LevelChangeStart()

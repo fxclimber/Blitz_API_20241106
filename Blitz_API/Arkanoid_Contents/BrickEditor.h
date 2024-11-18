@@ -62,7 +62,12 @@ class BrickEditor : public AActor, public ISerializObject
 {
 public:
 	BrickEditor();
-	~BrickEditor(){}
+	~BrickEditor()
+	{
+	}
+
+	void Tick(float _DeltaTime) override;
+
 	//hp set
 	void SetBrickHp(FIntPoint _Index, int _Hp);
 	// sprite set

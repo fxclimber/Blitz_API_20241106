@@ -279,19 +279,26 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(1.3f);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("brick_silver_shine", "brick_silver_shine", 0, 9, 0.12f, true);
+		// Animation* curanimation = nullptr;
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("brick_silver_shine");
 	}
 
 	if (AllBricks[brickIndex.Y][brickIndex.X].HP == 0)
 	{
+
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSpriteScale(0.9f);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp", "exp", 1, 8, 0.09f, true);
+		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp", "exp", 1, 8, 0.09f, false);
+		
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp");
+		// curanimation = nullptr;
 
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy(0.5f);
-		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+		//if (AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->IsCurAnimationEnd())
+		//{
+		//	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy();
+		//	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
+		//}
 
 		SpawnFX(brickPos);
 		BallSoundPlayer = UEngineSound::Play("BlockCrashBall.wav");
@@ -329,6 +336,7 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 
 	AllBricks[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
 	AllBricks[_Index.Y][_Index.X].SpriteRenderer->SetSprite(_Sprite, _SpriteIndex);
+	
 }
 
 
@@ -338,6 +346,27 @@ BrickEditor::BrickEditor()
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	stageStartTime = std::chrono::steady_clock::now();
 
+}
+void BrickEditor::Tick(float _DeltaTime)
+{
+	Super::Tick(_DeltaTime);
+
+	for (size_t y = 0; y < AllBricks.size(); ++y)
+	{
+		for (size_t x = 0; x < AllBricks[y].size(); ++x)
+		{
+			if (0 < AllBricks[y][x].HP)
+			{
+				continue;
+			}
+
+			if (AllBricks[y][x].SpriteRenderer && AllBricks[y][x].SpriteRenderer->IsCurAnimationEnd())
+			{
+				AllBricks[y][x].SpriteRenderer->Destroy();
+				AllBricks[y][x].SpriteRenderer = nullptr;
+			}
+		}
+	}
 }
 void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 {
@@ -350,6 +379,7 @@ void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 
 		SetBrickSprite(_Index, "Brick", randomIndex);
 		SetBrickHp(_Index, 1);
+
 		break;
 	case HPBrick:
 		SetBrickSprite(_Index, "Brick", 6);

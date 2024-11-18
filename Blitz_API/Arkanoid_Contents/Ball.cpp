@@ -29,6 +29,12 @@ void ABall::BeginPlay()
 {
 
 	Super::BeginPlay();
+
+    {
+        Fade = GetWorld()->SpawnActor<AFade>();
+        Fade->GetBackSpriteRenderer()->SetAlphafloat(0.f);
+    }
+
     //AFade* MainFade = GetWorld()->SpawnActor<AFade>();
     //MainFade->LevelChangeStart();
     //MainFade->FadeIn();
@@ -53,8 +59,6 @@ void ABall::Tick(float _DeltaTime)
 
 
 
-
-
     // 벽 충돌 체크 및 속도 반사
     int MaxTop = 101, MaxBottom = 980, MaxLeft = 46, MaxRight = 725;
     FVector2D ballPos = GetActorLocation();
@@ -69,21 +73,21 @@ void ABall::Tick(float _DeltaTime)
     else if(false == GetIsMove())
     {
         MoveFunction({ 0, 0 });
-
-        // DeltaTime 누적
-        EndTime += _DeltaTime;  // 덮어쓰는 대신 누적
-
-        if (EndTime > 20.f)
-        {
-            // 상태 갱신 및 초기화
-            //Value = { 0, -1 };
-            //IsMove = true;  // 상태 갱신
-            //EndTime = 0.0f; // 타이머 초기화
-            //SetActorLocation(SavePos);  // 위치 복원
-            //SpriteRenderer->SetActive(true);  // 스프라이트 활성화
-        }
     }
 
+    if (false == GetIsMove())
+    {
+        float a = Fade->GetBackSpriteRenderer()->GetAlpha();
+
+        if (a>0.99f)
+        {
+            SetActorLocation(SavePos);
+            //MoveFunction({0.1,-1.f});
+            Fade->FadeOut();
+            FadeOver = true;
+            SpriteRenderer->SetActive(true);
+        }
+    }
 
 }
 
@@ -141,23 +145,25 @@ void ABall::UpdatePosition(float deltaTime)
 
             //EndTime = 0.f;
 
-            Value = { 0,0 };
+            //Value = { 0,0 };
             SpriteRenderer->SetActive(false);
             SavePos = GetActorLocation();
             SetActorLocation({0,0});
+            IsMove = false;
 
-
+            Fade->FadeIn();
+            FadeOver = false;
             //StopTime = std::chrono::steady_clock::now();
 
-            SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-            SpriteRenderer->SetSprite("Map_Ending001_1000.png");
-            SpriteRenderer->SetOrder(ERenderOrder::UI);
+            //SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
+            //SpriteRenderer->SetSprite("Map_Ending001_1000.png");
+            //SpriteRenderer->SetOrder(ERenderOrder::UI);
 
 
-            FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-            SpriteRenderer->SetComponentScale(WinSize);
-            FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
-            SpriteRenderer->SetComponentLocation(MapScale.Half());
+            //FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+            //SpriteRenderer->SetComponentScale(WinSize);
+            //FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
+            //SpriteRenderer->SetComponentLocation(MapScale.Half());
 
 
             //SpriteRenderer->
@@ -183,9 +189,3 @@ void ABall::UpdatePosition(float deltaTime)
     }
 }
 
-float ABall::GetElapsedTime() const
-{
-    auto Now = std::chrono::steady_clock::now();
-    auto Duration = std::chrono::duration<float>(Now - StopTime);  // 초 단위로 변환
-    return Duration.count();  // float 타입으로 반환
-}

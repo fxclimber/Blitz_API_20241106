@@ -124,6 +124,11 @@ public:
 		Alpha = _Value;
 	}
 
+	unsigned char GetAlpha()
+	{
+		return Alpha;
+	}
+
 	void SetAnimationSpeed(float _Speed)
 	{
 		CurAnimationSpeed = _Speed;

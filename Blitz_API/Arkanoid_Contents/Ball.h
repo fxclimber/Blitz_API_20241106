@@ -43,7 +43,10 @@ public:
 	float GetElapsedTime() const;
 	FVector2D SavePos = {0,0};
 	float EndTime = 0.0f;
-
+	bool GetFadeOver()
+	{
+		return FadeOver;
+	}
 private:
 	float Speed = 1.0f;
 	int MySpriteIndex = 0;
@@ -51,7 +54,7 @@ private:
 	// 볼의 이동속도
 	FVector2D Value;
 	class USpriteRenderer* SpriteRenderer;
-	std::chrono::time_point<std::chrono::steady_clock> StopTime;
-
+	class AFade* Fade;
+	bool FadeOver=true;
 };
 

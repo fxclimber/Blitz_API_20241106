@@ -21,11 +21,6 @@ void ATestGameMode::BeginPlay()
 {
 	Super::BeginPlay();
 
-	{
-		AFade* Actor = GetWorld()->SpawnActor<AFade>();
-		//Actor->FadeOut();
-		Actor->GetBackSpriteRenderer()->SetAlphafloat(0.f);
-	}
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
 	score->SetActorLocation({ 755,50 });
@@ -89,6 +84,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 		//	bIsBonusActive = true;
 		//}
 
+	
 
 		if (UEngineInput::GetInst().IsDown('B'))
 		{
@@ -100,8 +96,11 @@ void ATestGameMode::Tick(float _DeltaTime)
 				{
 					if (Ball != nullptr && !Ball->GetIsMove())
 					{
-						Ball->SetSpeed(650.0f);
-						Ball->SetIsMove(true);
+						if (Ball->GetFadeOver())
+						{
+							Ball->SetSpeed(650.0f);
+							Ball->SetIsMove(true);
+						}
 					}
 				}
 			}
@@ -120,25 +119,28 @@ void ATestGameMode::Tick(float _DeltaTime)
 	{
 		if (Ball == nullptr) continue; // null 체크
 
-		if (!Ball->GetIsMove())
+		if (Ball->GetFadeOver())
 		{
-			Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
-
-			if (UEngineInput::GetInst().IsDown(VK_SPACE))
+			if (!Ball->GetIsMove())
 			{
-				Ball->SetIsMove(true);
-				Ball->SetSpeed(650.0f);
-				Ball->SetDir({ paddleVel*2, -1.0f }); // 패들의 속도를 반영하여 방향 설정
-			}
-		}
-		// 각 Ball에 대해 충돌 체크
-		Editor->CheckCollision(Ball, { 0, 0 });
+				Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 
-		FVector2D ballPos = Ball->GetActorLocation();
-		FVector2D normal = Paddle->CheckCollision(ballPos);
-		if (normal != FVector2D{ 0, 0 })
-		{
-			Ball->SetDir(normal);
+				if (UEngineInput::GetInst().IsDown(VK_SPACE))
+				{
+					Ball->SetIsMove(true);
+					Ball->SetSpeed(650.0f);
+					Ball->SetDir({ paddleVel*2, -1.0f }); // 패들의 속도를 반영하여 방향 설정
+				}
+			}
+			// 각 Ball에 대해 충돌 체크
+			Editor->CheckCollision(Ball, { 0, 0 });
+
+			FVector2D ballPos = Ball->GetActorLocation();
+			FVector2D normal = Paddle->CheckCollision(ballPos);
+			if (normal != FVector2D{ 0, 0 })
+			{
+				Ball->SetDir(normal);
+			}
 		}
 	}
 	

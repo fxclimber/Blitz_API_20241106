@@ -19,12 +19,6 @@ public:
 	UTimeEvent();
 	~UTimeEvent();
 
-	// delete Function
-	UTimeEvent(const UTimeEvent& _Other) = delete;
-	UTimeEvent(UTimeEvent&& _Other) noexcept = delete;
-	UTimeEvent& operator=(const UTimeEvent& _Other) = delete;
-	UTimeEvent& operator=(UTimeEvent&& _Other) noexcept = delete;
-
 	//             1.0f 1초뒤에      이 함수 실행해라.
 	void PushEvent(float _Time, std::function<void()> _Function, bool _IsUpdate = false, bool _Loop = false)
 	{
