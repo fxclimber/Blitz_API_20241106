@@ -12,6 +12,7 @@
 #include <EngineBase/EngineFile.h>
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
+#include <EngineBase/EngineMath.h>
 
 #include "ContentsEnum.h"
 #include "Score.h"
@@ -35,7 +36,7 @@ void ATestGameMode::BeginPlay()
 	Editor->SetBricksHeight(210);
 
 	FVector2D Size = { 57,26 };
-	FIntPoint Num = { 10,8 };
+	FIntPoint Num = { 5,8 };
 	Editor->Create("Brick", Num, Size);
 
 
@@ -67,7 +68,7 @@ void ATestGameMode::BeginPlay()
 	Balls.push_back(GetWorld()->SpawnActor<ABall>());
 	for (ABall* Ball : Balls)
 	{
-		Ball->SetDir({ 0.15f, 1.f });
+		Ball->SetDir({ 0.02f, 1.f });
 		Ball->SetSpeed(650.0f);
 		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 	}
@@ -78,41 +79,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 	Super::Tick(_DeltaTime);
 
 	float paddleVel = Paddle->GetVel().X;
-
-		//if (UEngineInput::GetInst().IsDown('B'))
-		//{ // B 를 누르면 보너스상태
-		//	bIsBonusActive = true;
-		//}
-
-	
-
-		if (UEngineInput::GetInst().IsDown('B'))
-		{
-			bIsBonusActive = true;
-
-			if (paddleVel > 0.0f)
-			{
-				for (ABall* Ball : Balls)
-				{
-					if (Ball != nullptr && !Ball->GetIsMove())
-					{
-						if (Ball->GetFadeOver())
-						{
-							Ball->SetSpeed(650.0f);
-							Ball->SetIsMove(true);
-						}
-					}
-				}
-			}
-		}
-
-		if (true == bIsBonusActive)
-		{	//보너스상태에선 3개 추가스폰
-			SpawnBall();
-			bIsBonusActive = false;  // 보너스 상태 초기화
-		}
-
-
 
 	// 볼이 여러개일때
 	for (ABall* Ball : Balls)
@@ -129,7 +95,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 				{
 					Ball->SetIsMove(true);
 					Ball->SetSpeed(650.0f);
-					Ball->SetDir({ paddleVel*2, -1.0f }); // 패들의 속도를 반영하여 방향 설정
+					Ball->SetDir({ (paddleVel)*0.5f+0.01f, -1.0f }); // 패들의 속도를 반영하여 방향 설정
 				}
 			}
 			// 각 Ball에 대해 충돌 체크
@@ -166,14 +132,25 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 void ATestGameMode::SpawnBall()
 {
-	Balls.push_back(GetWorld()->SpawnActor<ABall>());
-	Balls.push_back(GetWorld()->SpawnActor<ABall>());
-	Balls.push_back(GetWorld()->SpawnActor<ABall>());
-
-	for (ABall* Ball : Balls)
+	if (Balls.size() > 3)
 	{
-		Ball->SetDir({ 0.0f, 1.f });
-		Ball->SetSpeed(650.0f);
-		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
+		return;
+	}
+	else
+	{
+		UEngineRandom Random;
+
+		for (size_t i = 0; i < 3; i++)
+		{
+			float randomf = Random.Randomfloat(0.01f,.02f);
+
+			ABall* Ball0 = GetWorld()->SpawnActor<ABall>();
+			Ball0->SetDir({ randomf, 1.f });
+			Ball0->SetSpeed(350.0f);
+			Ball0->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
+			Ball0->GetRender()->SetSprite("ball_blue.png");
+			Balls.push_back(Ball0);
+		}
+
 	}
 }

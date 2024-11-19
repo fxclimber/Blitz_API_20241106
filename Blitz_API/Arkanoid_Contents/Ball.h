@@ -47,6 +47,8 @@ public:
 	{
 		return FadeOver;
 	}
+
+
 private:
 	float Speed = 1.0f;
 	int MySpriteIndex = 0;

@@ -292,13 +292,6 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp", "exp", 1, 8, 0.09f, false);
 		
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp");
-		// curanimation = nullptr;
-
-		//if (AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->IsCurAnimationEnd())
-		//{
-		//	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->Destroy();
-		//	AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer = nullptr;
-		//}
 
 		SpawnFX(brickPos);
 		BallSoundPlayer = UEngineSound::Play("BlockCrashBall.wav");
@@ -311,8 +304,11 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 void BrickEditor::SpawnFX(FVector2D _brickPos)
 {
 	UEngineRandom Random;
+
 	int Value = Random.RandomInt(0, 100);
-	int fmod = Value%12;
+	//int fmod = Value%12;
+
+	OutputDebugString(std::to_string(Value).c_str());
 
 	//if (fmod == 0)
 	{
@@ -377,7 +373,7 @@ void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 	{
 	case Default:
 
-		SetBrickSprite(_Index, "Brick", randomIndex);
+		SetBrickSprite(_Index, "Brick", 3);
 		SetBrickHp(_Index, 1);
 
 		break;

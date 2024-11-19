@@ -123,7 +123,7 @@ public:
 		return Score;
 	}
 	// 맵저장시 디폴트벽돌의 랜덤갯수 다르게 주기위함.
-	int RandomBrick = 5;
+	int RandomBrick = 1;
 
 protected:
 

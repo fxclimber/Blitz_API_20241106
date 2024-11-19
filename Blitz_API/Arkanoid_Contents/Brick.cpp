@@ -9,8 +9,10 @@
 #include "ContentsEnum.h"
 #include <thread>
 #include <chrono>
+#include <EngineBase/TimeEvent.h>
 
 #include "Paddle.h"
+#include "TestGameMode.h"
 
 
 Brick::Brick()
@@ -36,11 +38,17 @@ void Brick::Tick(float _DeltaTime)
     FTransform TransLeft = SpriteRenderer->GetActorTransform();
     FTransform TransRight = APaddle::MainPaddle->GetSpriteRenderer()->GetActorTransform();
 
-    if (FTransform::RectToRect(TransLeft, TransRight))
+    if (spriteName == "powerup_duplicate")
     {
-        if (nullptr != this)
+        if (FTransform::RectToRect(TransLeft, TransRight))
         {
-            Destroy();
+            if (nullptr != this)
+            {
+                ATestGameMode* GameMode = GetWorld()->GetGameMode<ATestGameMode>();
+                GameMode->SpawnBall();
+                Destroy();
+                //TimeEvent();
+            }
         }
     }
 }
@@ -63,7 +71,7 @@ void Brick::MakeBonus()
     BonusType randomBonus = GetRandomBonusType();
 
     // 각 BonusType에 따른 스프라이트 이름
-    std::string spriteName;
+    //std::string spriteName;
     switch (randomBonus)
     {
     case BonusType::LIFE:     spriteName = "powerup_life";      break;
@@ -96,3 +104,14 @@ void Brick::MakeBonusRenderer()
     SpriteRenderer->SetOrder(ERenderOrder::UI);
 
 }
+
+void Brick::TimeEvent()
+{
+    ATestGameMode* GameMode = GetWorld()->GetGameMode<ATestGameMode>();
+    std::vector<ABall*> Balls = GameMode->Balls;
+    
+    ABall* BallInstance = Balls[0] ;
+        BallInstance->Destroy(1.f);
+}
+
+

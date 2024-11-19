@@ -42,6 +42,9 @@ public:
 	void MakeBonus();
 	void MakeBonusRenderer();
 
+	std::string spriteName;
+
+	void TimeEvent();
 
 protected:
 
