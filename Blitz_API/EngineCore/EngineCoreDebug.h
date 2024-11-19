@@ -2,6 +2,13 @@
 
 namespace UEngineDebug
 {
+	enum class EDebugPosType
+	{
+		Rect,
+		Circle,
+	};
+
+	// MainWindow가 있다.
 
 	void SetIsDebug(bool _IsDebug);
 
@@ -11,9 +18,9 @@ namespace UEngineDebug
 
 	void CoreOutPutString(std::string_view _Text, FVector2D _Pos);
 
+	void CoreDebugRender(FTransform _Trans, EDebugPosType _Type);
 
-	void PrintEngineDebugText();
+	// 분리해야 하겠네요
 
-	void CoreOutPutNum(std::string_view _Text, float _Num, FVector2D _Pos);
-
+	void PrintEngineDebugRender();
 }

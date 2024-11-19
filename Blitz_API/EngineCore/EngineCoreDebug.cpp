@@ -12,18 +12,9 @@ namespace UEngineDebug
 		FVector2D Pos;
 	};
 
-	class DebugNumberInfo
-	{
-	public:
-		std::string Text;
-		float Num;
-		FVector2D Pos;
-	};
-
 
 	// 선언
 	std::vector<DebugTextInfo> DebugTexts;
-	std::vector<DebugNumberInfo> Num;
 
 
 	// #ifdef _DEBUG
@@ -48,28 +39,57 @@ namespace UEngineDebug
 
 	void CoreOutPutString(std::string_view _Text)
 	{
+		if (false == IsDebug)
+		{
+			return;
+		}
+
+		// #ifdef _DEBUG
+				// 바로 출력하지 않는다.
 		DebugTexts.push_back({ _Text.data(), EngineTextPos });
 		EngineTextPos.Y += 20;
+		// endif 
 	}
 
 	void CoreOutPutString(std::string_view _Text, FVector2D _Pos)
 	{
-		DebugTexts.push_back({ _Text.data(), _Pos });
-	}
-	void CoreOutPutNum(std::string_view _Text, float _Num , FVector2D _Pos)
-	{
+		if (false == IsDebug)
+		{
+			return;
+		}
 		// #ifdef _DEBUG
-		Num.push_back({ _Text.data(), _Num, _Pos });
+		DebugTexts.push_back({ _Text.data(), _Pos });
 		// #endif
 	}
 
-	void PrintEngineDebugText()
+	class DebugRenderInfo
+	{
+	public:
+		FTransform Trans;
+		EDebugPosType Type;
+	};
+
+
+	std::vector<DebugRenderInfo> DebugPoses;
+
+	void CoreDebugRender(FTransform _Trans, EDebugPosType _Type)
 	{
 		if (false == IsDebug)
 		{
 			return;
 		}
 
+		DebugPoses.push_back({ _Trans, _Type });
+	}
+
+	void PrintEngineDebugRender()
+	{
+		if (false == IsDebug)
+		{
+			return;
+		}
+
+		// void WinAPIOutPutString(UEngineWinImage * _Image, std::string_view _Text, FVector2D _Pos);
 		UEngineWinImage* BackBuffer = UEngineAPICore::GetCore()->GetMainWindow().GetBackBuffer();
 
 		for (size_t i = 0; i < DebugTexts.size(); i++)
@@ -80,6 +100,34 @@ namespace UEngineDebug
 
 		EngineTextPos = FVector2D::ZERO;
 		DebugTexts.clear();
+
+		for (size_t i = 0; i < DebugPoses.size(); i++)
+		{
+
+			EDebugPosType Type = DebugPoses[i].Type;
+
+			FVector2D LT = DebugPoses[i].Trans.CenterLeftTop();
+			FVector2D RB = DebugPoses[i].Trans.CenterRightBottom();
+			switch (Type)
+			{
+			case UEngineDebug::EDebugPosType::Rect:
+				Rectangle(BackBuffer->GetDC(), LT.iX(), LT.iY(), RB.iX(), RB.iY());
+				break;
+			case UEngineDebug::EDebugPosType::Circle:
+				Ellipse(BackBuffer->GetDC(), LT.iX(), LT.iY(), RB.iX(), RB.iY());
+				break;
+			default:
+				break;
+			}
+		}
+
+		DebugPoses.clear();
+
 	}
 
+
+	void CoreDebugBox(FTransform _Trans)
+	{
+
+	}
 }

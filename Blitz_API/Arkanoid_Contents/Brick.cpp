@@ -38,7 +38,12 @@ void Brick::Tick(float _DeltaTime)
 
     if (FTransform::RectToRect(TransLeft, TransRight))
     {
-        Destroy();
+        if (nullptr != this)
+        {
+            SpriteRenderer->SetActive(false);
+            //Destroy();
+            int a = 0;
+        }
     }
 }
 
