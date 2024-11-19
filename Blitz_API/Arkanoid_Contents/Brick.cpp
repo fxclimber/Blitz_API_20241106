@@ -112,6 +112,8 @@ void Brick::TimeEvent()
     
     ABall* BallInstance = Balls[0] ;
         BallInstance->Destroy(1.f);
+        //타임이벤트는 보너스가 죽으면, 함수포인터를 갖고있을수없으므로,사용불가
+        // destroy()를 타이머넣어서 주면, 이후에 겜모드에서 포인터를 호출해서 널포인터문제 
 }
 
 
