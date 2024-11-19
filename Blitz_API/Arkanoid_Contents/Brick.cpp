@@ -40,9 +40,7 @@ void Brick::Tick(float _DeltaTime)
     {
         if (nullptr != this)
         {
-            SpriteRenderer->SetActive(false);
-            //Destroy();
-            int a = 0;
+            Destroy();
         }
     }
 }

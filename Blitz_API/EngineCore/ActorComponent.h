@@ -28,6 +28,23 @@ public:
 		return ParentActor;
 	}
 
+
+	bool IsActive() override
+	{
+		// 랜더러는 자신을 가진 액터에게 종속된다.
+		// 부모도        true            true
+		return UObject::IsActive() && GetActor()->IsActive();
+	}
+
+
+	bool IsDestroy() override
+	{
+		// 부모도        true            true
+		return UObject::IsDestroy() || GetActor()->IsDestroy();
+	}
+
+
+
 protected:
 
 private:
