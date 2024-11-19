@@ -10,10 +10,15 @@
 #include <thread>
 #include <chrono>
 
+#include "Paddle.h"
+
+
 Brick::Brick()
 {
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
     MakeBonusRenderer();
+
+    
 }
 
 
@@ -23,7 +28,18 @@ void Brick::BeginPlay()
 
 void Brick::Tick(float _DeltaTime)
 {
+    Super::Tick(_DeltaTime);
+
 	AddActorLocation(Value * _DeltaTime * Speed);
+
+    
+    FTransform TransLeft = SpriteRenderer->GetActorTransform();
+    FTransform TransRight = APaddle::MainPaddle->GetSpriteRenderer()->GetActorTransform();
+
+    if (FTransform::RectToRect(TransLeft, TransRight))
+    {
+        Destroy();
+    }
 }
 
 
@@ -34,6 +50,8 @@ BonusType Brick::GetRandomBonusType()
     int Value = Random.RandomInt(0, 6);
     UEngineDebug::CoreOutPutString("Value : " + Value , {200,300});
     return static_cast<BonusType>(Value);
+
+    
 }
 
 

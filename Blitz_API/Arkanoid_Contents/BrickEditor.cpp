@@ -314,7 +314,7 @@ void BrickEditor::SpawnFX(FVector2D _brickPos)
 	int Value = Random.RandomInt(0, 100);
 	int fmod = Value%12;
 
-	if (fmod == 0)
+	//if (fmod == 0)
 	{
 		BonusA = GetWorld()->SpawnActor<Brick>();
 		BonusA->SetActorLocation(_brickPos);

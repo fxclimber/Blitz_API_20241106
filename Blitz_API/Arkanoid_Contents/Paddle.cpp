@@ -7,16 +7,18 @@
 #include <EngineCore/EngineCoreDebug.h>
 #include "ContentsEnum.h"
 
+APaddle* APaddle::MainPaddle = nullptr;
 
 APaddle::APaddle()
 {
-	this;
+	MainPaddle = this;
 	{
 	// static sprite
 	SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 	SpriteRenderer->SetOrder(ERenderOrder::Bricks);
 	SpriteRenderer->SetSprite("paddle_small.png");
 	PaddleScale = SpriteRenderer->SetSpriteScale(1.0f);
+
 	//SpriteRenderer->SetAlphafloat(static_cast<float>(0.2f));//SetAlphafloat Å×½ºÆ®
 
 	}

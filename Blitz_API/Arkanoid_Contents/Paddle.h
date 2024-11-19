@@ -5,6 +5,8 @@
 class APaddle : public AActor
 {
 public:
+	static APaddle* MainPaddle;
+
 	APaddle();
 	~APaddle(){}
 
@@ -15,6 +17,11 @@ public:
 	FVector2D GetVel()
 	{
 		return Vel;
+	}
+
+	USpriteRenderer* GetSpriteRenderer()
+	{
+		return SpriteRenderer;
 	}
 
 protected:
