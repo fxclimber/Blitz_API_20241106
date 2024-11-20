@@ -35,10 +35,31 @@ void ATestGameMode::BeginPlay()
 	Editor = GetWorld()->SpawnActor<BrickEditor>();
 	Editor->SetBricksHeight(210);
 
+// 플레이 게임모드에서 파일로드 
+{
+	UEngineDirectory Dir;
+	if (false == Dir.MoveParentToDirectory("Resources"))
+	{
+		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+		return;
+	}
+	Dir.Append("Data");
+	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+	UEngineFile NewFile = SaveFilePath;
+	NewFile.FileOpen("rb");
+	UEngineSerializer Ser;
+	NewFile.Read(Ser);
+	Editor->DeSerialize(Ser);
+}
+
+
+
+
+
 	FVector2D Size = { 57,26 };
 	FIntPoint Num = { 5,8 };
 	Editor->Create("Brick", Num, Size);
-
+	Editor->SetActorLocation(FVector2D{50,300});
 
 	for (int y = 0; y < Num.Y; y++)
 	{
@@ -46,19 +67,19 @@ void ATestGameMode::BeginPlay()
 		{
 			int randomIndex = std::rand() % 5;//일반벽돌색 5개
 
-			Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1);
-			Editor->setBrickType({ x,y }, BrickType::Default);
+			//Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1);
+			//Editor->setBrickType({ x,y }, BrickType::Default);
 		}
 	}
 
-	for (int x = 0; x < Num.X; x++)
-	{
-		Editor->setBrickType({x,3}, BrickType::HPBrick);
-	}
-	for (int x = 0; x < Num.X; x++)
-	{
-		Editor->setBrickType({x,2}, BrickType::NotBreak);
-	}
+	//for (int x = 0; x < Num.X; x++)
+	//{
+	//	Editor->setBrickType({x,3}, BrickType::HPBrick);
+	//}
+	//for (int x = 0; x < Num.X; x++)
+	//{
+	//	Editor->setBrickType({x,2}, BrickType::NotBreak);
+	//}
 
 	// Paddle
 	Paddle = GetWorld()->SpawnActor<APaddle>();

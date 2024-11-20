@@ -54,6 +54,7 @@ public:
 		_Ser >> Scale;
 		_Ser >> Pivot;
 		_Ser >> SpriteIndex;
+		_Ser >> HP;
 	}
 
 };

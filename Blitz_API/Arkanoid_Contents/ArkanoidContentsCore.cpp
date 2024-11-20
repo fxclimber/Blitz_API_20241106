@@ -159,6 +159,6 @@ void ArkanoidContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, Map_Die>("Editor");
 
 	// OpenLevel
-	UEngineAPICore::GetCore()->OpenLevel("Editor");
+	UEngineAPICore::GetCore()->OpenLevel("Test");
 
 }

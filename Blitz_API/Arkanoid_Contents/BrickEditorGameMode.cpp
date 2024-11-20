@@ -15,7 +15,7 @@ void BrickEditorGameMode::BeginPlay()
 	{
 		//FVector2D Size = Globals::BrickSize; //{ 65,30 };
 		FVector2D Size = { 57,26 };
-		FIntPoint Num = { 10,18 };
+		FIntPoint Num = { 6,4 };
 		Editor = GetWorld()->SpawnActor<BrickEditor>();
 		Editor->Create("Brick", Num, Size);
 		for (int y = 0; y < Num.X; y++)
@@ -28,32 +28,9 @@ void BrickEditorGameMode::BeginPlay()
 	}
 
 
-	// 플레이 게임모드에서 파일로드 
-	//{
-	//	UEngineDirectory Dir;
-	//	if (false == Dir.MoveParentToDirectory("Resources"))
-	//	{
-	//		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-	//		return;
-	//	}
-	//	Dir.Append("Data");
-	//	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-	//	UEngineFile NewFile = SaveFilePath;
-	//	NewFile.FileOpen("rb");
-	//	UEngineSerializer Ser;
-	//	NewFile.Read(Ser);
-	//	Editor->DeSerialize(Ser);
-	//}
 }
 void BrickEditorGameMode::Tick(float _DeltaTime)
 {
-	// 맵이동 키입력
-	//if (true == UEngineInput::GetInst().IsDown('R'))
-	//{
-	//	UEngineAPICore::GetCore()->OpenLevel("Ending");
-	//}
-
-	// 위치에 생성
 
 	static bool IsSpaceBarPressed = false;
 	static int CustomIndex = 0;
@@ -79,18 +56,6 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
 		Editor->SetBrickLocation(MousePos, CustomIndex);
 	}
-	//if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
-	//{
-	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	Editor->SetBrickLocation(MousePos, 5);
-	//}
-	//if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
-	//{
-	//	FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-	//	Editor->SetBrickLocation(MousePos, 6);
-	//}
-
-
 
 
 

@@ -26,7 +26,6 @@ void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _
 
 	// 타일의 위치는 월드로서의 타일맵 * 인덱스
 	float WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize().Half().X;
-	//float WinSize = Globals::WinSize.X;//터지냐....왜........
 	float AllSpriteWidth = (_BrickSize.X * static_cast<float>(_Count.X)) / 2;
 	float gap = WinSize - AllSpriteWidth;
 	PlusPos = { gap, Height };
@@ -39,24 +38,11 @@ FVector2D BrickEditor::IndexToBrickLocation(FIntPoint _Index)
 	return FVector2D(_Index.X * BrickSize.X, _Index.Y * BrickSize.Y);
 }
 
-//FIntPoint BrickEditor::LocationToIndex(FVector2D _Location)
-//{
-//	FVector2D Location = _Location / BrickSize;
-//	int LocationX = static_cast<int>(std::floor(Location.X));
-//	int LocationY = static_cast<int>(std::floor(Location.Y));
-//
-//	return FIntPoint(LocationX, LocationY);
-//}
-
-
-
 
 FIntPoint BrickEditor::LocationToIndex(FVector2D _Location)
 {
-	// 벽돌의 시작점을 기준으로 좌표 조정
-	FVector2D AlignedLocation = _Location - FVector2D(BrickSize.X*2, 0.f);
 
-	FVector2D Location = AlignedLocation / BrickSize;
+	FVector2D Location = _Location / BrickSize;
 
 	int LocationX = static_cast<int>(std::floor(Location.X));
 	int LocationY = static_cast<int>(std::floor(Location.Y));
