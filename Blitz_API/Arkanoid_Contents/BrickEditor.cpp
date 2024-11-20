@@ -39,12 +39,31 @@ FVector2D BrickEditor::IndexToBrickLocation(FIntPoint _Index)
 	return FVector2D(_Index.X * BrickSize.X, _Index.Y * BrickSize.Y);
 }
 
+//FIntPoint BrickEditor::LocationToIndex(FVector2D _Location)
+//{
+//	FVector2D Location = _Location / BrickSize;
+//	int LocationX = static_cast<int>(std::floor(Location.X));
+//	int LocationY = static_cast<int>(std::floor(Location.Y));
+//
+//	return FIntPoint(LocationX, LocationY);
+//}
+
+
+
+
 FIntPoint BrickEditor::LocationToIndex(FVector2D _Location)
 {
-	FVector2D Location = _Location / BrickSize;
+	// 벽돌의 시작점을 기준으로 좌표 조정
+	FVector2D AlignedLocation = _Location - FVector2D(BrickSize.X*2, 0.f);
 
-	return FIntPoint(Location.iX(), Location.iY());
+	FVector2D Location = AlignedLocation / BrickSize;
+
+	int LocationX = static_cast<int>(std::floor(Location.X));
+	int LocationY = static_cast<int>(std::floor(Location.Y));
+
+	return FIntPoint(LocationX, LocationY);
 }
+
 
 void BrickEditor::SetBrickLocation(FVector2D _Location, int _SpriteIndex)
 {
@@ -83,6 +102,21 @@ bool BrickEditor::IsIndexOver(FIntPoint _Index)
 	}
 
 	return false;
+}
+
+ABrick* BrickEditor::GetBrickRef(FIntPoint _Index)
+{
+	if (true == IsIndexOver(_Index))
+	{
+		return nullptr;
+	}
+	return &AllBricks[_Index.Y][_Index.X];
+}
+
+ABrick* BrickEditor::GetBrickRef(FVector2D _Location)
+{
+	FIntPoint Point = LocationToIndex(_Location);
+	return GetBrickRef(Point);
 }
 
 void BrickEditor::SetBrickIndex(FIntPoint _Index, int _SpriteIndex)

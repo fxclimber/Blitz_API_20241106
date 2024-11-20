@@ -89,6 +89,10 @@ public:
 	// 인덱스는 벽돌x,y갯수보다 작고,0보다 커야한다
 	bool IsIndexOver(FIntPoint _Index);
 
+
+	ABrick* GetBrickRef(FIntPoint _Index);
+	ABrick* GetBrickRef(FVector2D _Location);
+
 	// 데이터를 직렬화(압축)
 	void Serialize(UEngineSerializer& _Ser);
 	// 데이터를 복구(할때)

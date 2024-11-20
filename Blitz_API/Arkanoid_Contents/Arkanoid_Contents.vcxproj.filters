@@ -40,6 +40,9 @@
     <ClInclude Include="Fade.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
+    <ClInclude Include="BrickEditorGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -80,6 +83,9 @@
     </ClCompile>
     <ClCompile Include="Fade.cpp">
       <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="BrickEditorGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

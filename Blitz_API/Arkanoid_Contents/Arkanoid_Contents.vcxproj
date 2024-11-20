@@ -156,6 +156,7 @@
     <ClInclude Include="ArkanoidContentsCore.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="Brick.h" />
+    <ClInclude Include="BrickEditorGameMode.h" />
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="DieGameMode.h" />
     <ClInclude Include="Fade.h" />
@@ -174,6 +175,7 @@
     <ClCompile Include="ArkanoidContentsCore.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="Brick.cpp" />
+    <ClCompile Include="BrickEditorGameMode.cpp" />
     <ClCompile Include="ContentsEnum.cpp" />
     <ClCompile Include="DieGameMode.cpp" />
     <ClCompile Include="Fade.cpp" />
