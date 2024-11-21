@@ -7,6 +7,7 @@
 #include <EnginePlatform/EngineSound.h>
 
 
+// Hp와 sprite를 결정하는 enum
 enum BrickType
 {
 	Default,
@@ -21,11 +22,9 @@ class ABrick : public ISerializObject
 public:
 	USpriteRenderer* SpriteRenderer;
 
-	bool IsMove = true;
 	int BrickType = -1;
 	FVector2D Scale;
 	FVector2D Pivot;
-	int SpriteIndex;
 	int HP = 400001;
 
 	// 데이터를 직렬화(압축)
@@ -37,24 +36,18 @@ public:
 			SpriteName = SpriteRenderer->GetCurSpriteName();
 		}
 		_Ser << SpriteName;
-		_Ser << IsMove;
 		_Ser << BrickType;
 		_Ser << Scale;
 		_Ser << Pivot;
-		_Ser << SpriteIndex;
-		_Ser << HP;
 	}
 	// 직렬화 데이타 로드
 	void DeSerialize(UEngineSerializer& _Ser)
 	{
 		std::string SpriteName;
 		_Ser >> SpriteName;
-		_Ser >> IsMove;
 		_Ser >> BrickType;
 		_Ser >> Scale;
 		_Ser >> Pivot;
-		_Ser >> SpriteIndex;
-		_Ser >> HP;
 	}
 
 };
@@ -78,11 +71,11 @@ public:
 	// 자료구조에 넣기,자료구조 크기조절,액터(벽돌더미)위치셋
 	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize);
 	// 위치,인덱스 정해서, SetBrickIndex호출 
-	void SetBrickLocation(FVector2D _Location, int _SpriteIndex);
+	void SetBrickLocation(FVector2D _Location, BrickType _Type);
 	// 오버로딩 SetBrickIndex호출-벡터
-	void SetBrickIndex(FIntPoint _Index, int _SpriteIndex);
+	void SetBrickIndex(FIntPoint _Index, int _SpriteIndex, int _HP);
 	// 개별 스프라이트 세팅들.
-	void SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex);
+	void SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex, int _HP);
 	// 벽돌의 위치를 계산하여 BrickPositions에 저장
 	FVector2D IndexToBrickLocation(FIntPoint _Index);
 	// 개별위치/벽돌크기 가 인덱스별 위치

@@ -36,11 +36,11 @@ public:
 		return IsMove;
 	}
 
-	void MoveFunction(const FVector2D& velocity);
+	void MoveFunction(const FVector2D& _dir);
 	void Reflect(const FVector2D& normal);
 	void UpdatePosition(float deltaTime);
 	bool Stop=false;
-	float GetElapsedTime() const;
+	//float GetElapsedTime() const;
 	FVector2D SavePos = {0,0};
 	float EndTime = 0.0f;
 	bool GetFadeOver()

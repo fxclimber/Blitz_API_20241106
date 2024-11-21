@@ -23,7 +23,8 @@ void BrickEditorGameMode::BeginPlay()
 		{
 			for (int x = 0; x < Num.Y; x++)
 			{
-				Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 4);
+				Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 4, 40001);
+				Editor->setBrickType({ y,x }, BrickType::Default);
 			}
 		}
 	}
@@ -34,7 +35,7 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 {
 
 	static bool IsSpaceBarPressed = false;
-	static int CustomIndex = 0;
+	static BrickType BrickType = BrickType::Default;
 
 	if (UEngineInput::GetInst().IsPress(VK_SPACE))
 	{
@@ -42,20 +43,26 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 	}
 	if (IsSpaceBarPressed)
 	{
-		for (int i = 0; i <= 6; ++i)
+		if (UEngineInput::GetInst().IsPress('0'))
 		{
-			if (UEngineInput::GetInst().IsPress('0' + i))
-			{
-				CustomIndex = i;
-				IsSpaceBarPressed = false;
-				break;
-			}
+			BrickType = BrickType::Default;
+			IsSpaceBarPressed = false;
+		}
+		else if (UEngineInput::GetInst().IsPress('5'))
+		{
+			BrickType = BrickType::HPBrick;
+			IsSpaceBarPressed = false;
+		}
+		else if (UEngineInput::GetInst().IsPress('6'))
+		{
+			BrickType = BrickType::NotBreak;
+			IsSpaceBarPressed = false;
 		}
 	}
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		Editor->SetBrickLocation(MousePos, CustomIndex);
+		Editor->SetBrickLocation(MousePos, BrickType);
 	}
 
 

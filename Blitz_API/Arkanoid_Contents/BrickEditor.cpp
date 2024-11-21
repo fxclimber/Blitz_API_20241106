@@ -51,7 +51,7 @@ FIntPoint BrickEditor::LocationToIndex(FVector2D _Location)
 }
 
 
-void BrickEditor::SetBrickLocation(FVector2D _Location, int _SpriteIndex)
+void BrickEditor::SetBrickLocation(FVector2D _Location, BrickType _Type)
 {
 	FVector2D TilePos = _Location - GetActorLocation();//개별위치-액터위치
 
@@ -62,7 +62,8 @@ void BrickEditor::SetBrickLocation(FVector2D _Location, int _SpriteIndex)
 		return;
 	}
 
-	SetBrickIndex(Point, _SpriteIndex);
+	SetBrickIndex(Point, 0, 1);
+	setBrickType(Point, _Type);
 }
 
 bool BrickEditor::IsIndexOver(FIntPoint _Index)
@@ -101,17 +102,19 @@ ABrick* BrickEditor::GetBrickRef(FIntPoint _Index)
 
 ABrick* BrickEditor::GetBrickRef(FVector2D _Location)
 {
-	FIntPoint Point = LocationToIndex(_Location);
+	FVector2D TilePos = _Location - GetActorLocation();//개별위치-액터위치
+
+	FIntPoint Point = LocationToIndex(TilePos);
 	return GetBrickRef(Point);
 }
 
-void BrickEditor::SetBrickIndex(FIntPoint _Index, int _SpriteIndex)
+void BrickEditor::SetBrickIndex(FIntPoint _Index, int _SpriteIndex, int _HP)
 {
-	SetBrickIndex(_Index, { 0,0 }, BrickSize, _SpriteIndex);
+	SetBrickIndex(_Index, { 0,0 }, BrickSize, _SpriteIndex, _HP);
 }
 
 
-void BrickEditor::SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex)
+void BrickEditor::SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _SpriteScale, int _SpriteIndex, int _HP)
 {
 	// 인덱스가 범위를 벗어나면 리턴
 	if (IsIndexOver(_Index))
@@ -162,7 +165,7 @@ void BrickEditor::SetBrickIndex(FIntPoint _Index, FVector2D _Pivot, FVector2D _S
 	// AllBricks의 개별 벽돌 속성 설정
 	AllBricks[_Index.Y][_Index.X].Pivot = _Pivot;
 	AllBricks[_Index.Y][_Index.X].Scale = _SpriteScale;
-	AllBricks[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
+	AllBricks[_Index.Y][_Index.X].HP = _HP;
 }
 
 
@@ -194,7 +197,8 @@ void BrickEditor::DeSerialize(UEngineSerializer& _Ser)
 	{
 		for (int x = 0; x < LoadTiles[y].size(); x++)
 		{
-			SetBrickIndex({ x, y }, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, LoadTiles[y][x].SpriteIndex);
+			SetBrickIndex({ x, y }, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, 0, LoadTiles[y][x].HP);
+			setBrickType({ x, y }, static_cast<BrickType>(LoadTiles[y][x].BrickType));
 		}
 	}
 
@@ -351,7 +355,6 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 		return;
 	}
 
-	AllBricks[_Index.Y][_Index.X].SpriteIndex = _SpriteIndex;
 	AllBricks[_Index.Y][_Index.X].SpriteRenderer->SetSprite(_Sprite, _SpriteIndex);
 	
 }
@@ -390,21 +393,24 @@ void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 	//std::random
 	int randomIndex = (std::rand() % RandomBrick) ; // 인덱스가 0~4까지
 
+	ABrick* Brick = GetBrickRef(_Index);
+
 	switch (_Type)
 	{
 	case Default:
-
-		SetBrickSprite(_Index, "Brick", 3);
-		SetBrickHp(_Index, 1);
-
+		Brick->BrickType = _Type;
+		Brick->SpriteRenderer->SetSprite("Brick", 3);
+		Brick->HP = 1;
 		break;
 	case HPBrick:
-		SetBrickSprite(_Index, "Brick", 6);
-		SetBrickHp(_Index, 3);
+		Brick->BrickType = _Type;
+		Brick->SpriteRenderer->SetSprite("Brick", 6);
+		Brick->HP = 3;
 		break;
 	case NotBreak:
-		SetBrickSprite(_Index, "Brick", 5);
-		SetBrickHp(_Index, 400001);
+		Brick->BrickType = _Type;
+		Brick->SpriteRenderer->SetSprite("Brick", 5);
+		Brick->HP = 400001;
 		break;
 	default:
 		break;
