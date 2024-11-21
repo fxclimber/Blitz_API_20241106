@@ -2,6 +2,13 @@
 #include <EngineCore/Actor.h>
 #include <chrono>
 
+
+enum BallType
+{
+	Basic,
+	Bonus,
+};
+
 class ABall : public AActor
 {
 public:
@@ -47,6 +54,7 @@ public:
 	{
 		return FadeOver;
 	}
+	static BallType ballType;
 
 
 private:
@@ -58,5 +66,6 @@ private:
 	class USpriteRenderer* SpriteRenderer;
 	class AFade* Fade;
 	bool FadeOver=true;
+
 };
 

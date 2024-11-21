@@ -28,6 +28,11 @@ public:
 	void SetOrder(int _Order);
 
 	void SetValue(int _Score);
+	void SetFinalValue(int _FinalScore)
+	{
+		FinalScoreUI = _FinalScore;
+	}
+
 
 	std::vector<class USpriteRenderer*>* GetRenders()
 	{
@@ -35,12 +40,14 @@ public:
 	}
 
 	static int ScoreUI;
+	static int FinalScoreUI;
 
 protected:
 	void BeginPlay() override{}
 	void Tick(float _DeltaTime) override{}
 
 private:
+	
 	std::string TextSpriteName;
 	FVector2D TextScale;
 	std::vector<class USpriteRenderer*> Renders;

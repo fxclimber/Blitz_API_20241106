@@ -15,7 +15,7 @@ void BrickEditorGameMode::BeginPlay()
 	{
 		//FVector2D Size = Globals::BrickSize; //{ 65,30 };
 		FVector2D Size = { 57,26 };
-		FIntPoint Num = { 6,4 };
+		FIntPoint Num = { 11,6 };
 		//int score = 0;
 		Editor = GetWorld()->SpawnActor<BrickEditor>();
 		Editor->Create("Brick", Num, Size);
@@ -62,6 +62,7 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
+		//ABrick* brick = GetWorld()->SpawnActor<ABrick>();		
 		Editor->SetBrickLocation(MousePos, BrickType);
 	}
 
@@ -74,8 +75,12 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 		ABrick* BaseTile = Editor->GetBrickRef(MousePos);
 		if (BaseTile != nullptr && BaseTile->SpriteRenderer != nullptr)
 		{
-			BaseTile->SpriteRenderer->Destroy(0.0f);
+			BaseTile->BrickType = -1;
+			BaseTile->SpriteRenderer->Destroy();
 			BaseTile->SpriteRenderer = nullptr;
+
+			// BaseTile->SpriteRenderer->Destroy(0.0f);
+			// BaseTile->SpriteRenderer = nullptr;
 		}
 	}
 

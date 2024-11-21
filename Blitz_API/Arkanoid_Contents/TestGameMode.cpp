@@ -155,25 +155,19 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 void ATestGameMode::SpawnBall()
 {
-	if (Balls.size() > 3)
-	{
-		return;
-	}
-	else
-	{
 		UEngineRandom Random;
 
-		for (size_t i = 0; i < 3; i++)
-		{
-			float randomf = Random.Randomfloat(0.01f, .02f);
+	for (size_t i = 0; i < 3; i++)
+	{
+		float randomf = Random.Randomfloat(-0.03f, 0.01f);
 
-			ABall* Ball0 = GetWorld()->SpawnActor<ABall>();
-			Ball0->SetDir({ randomf, 1.f });
-			Ball0->SetSpeed(350.0f);
-			Ball0->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
-			Ball0->GetRender()->SetSprite("ball_blue.png");
-			Balls.push_back(Ball0);
-		}
-
+		ABall* Ball0 = GetWorld()->SpawnActor<ABall>();
+		Ball0->SetDir({ randomf, 1.f });
+		Ball0->SetSpeed(550.0f);
+		Ball0->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
+		Ball0->GetRender()->SetSprite("ball_blue.png");
+		Ball0->ballType = BallType::Bonus;
+		Balls.push_back(Ball0);
 	}
+
 }

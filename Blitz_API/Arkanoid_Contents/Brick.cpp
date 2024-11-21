@@ -60,7 +60,8 @@ BonusType Brick::GetRandomBonusType()
     UEngineRandom Random;
     int Value = Random.RandomInt(0, 6);
     UEngineDebug::CoreOutPutString("Value : " + Value , {200,300});
-    return static_cast<BonusType>(Value);
+    //return static_cast<BonusType>(Value);
+    return static_cast<BonusType>(1);
 
     
 }
@@ -85,9 +86,7 @@ void Brick::MakeBonus()
     }
 
     // 공통 설정 수행
-    //SpriteRenderer->SetSprite(spriteName);
-    // 보너스 테스트용 임시
-    SpriteRenderer->SetSprite("powerup_duplicate");
+    SpriteRenderer->SetSprite(spriteName);
     SpriteRenderer->SetComponentLocation(GetActorLocation());
     SpriteRenderer->CreateAnimation(spriteName, spriteName, 1, 7, 0.1f, true);
     SpriteRenderer->ChangeAnimation(spriteName);

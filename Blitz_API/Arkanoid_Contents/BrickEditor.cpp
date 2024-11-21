@@ -197,6 +197,11 @@ void BrickEditor::DeSerialize(UEngineSerializer& _Ser)
 	{
 		for (int x = 0; x < LoadTiles[y].size(); x++)
 		{
+			if (LoadTiles[y][x].BrickType == -1)
+			{
+				continue;
+			}
+
 			SetBrickIndex({ x, y }, LoadTiles[y][x].Pivot, LoadTiles[y][x].Scale, 0, LoadTiles[y][x].HP);
 			setBrickType({ x, y }, static_cast<BrickType>(LoadTiles[y][x].BrickType));
 		}
@@ -336,6 +341,7 @@ void BrickEditor::SpawnFX(FVector2D _brickPos)
 	OutputDebugString(std::to_string(Value).c_str());
 
 	//if (fmod == 0)
+	if(nullptr==BonusA)
 	{
 		BonusA = GetWorld()->SpawnActor<Brick>();
 		BonusA->SetActorLocation(_brickPos);
