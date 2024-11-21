@@ -68,7 +68,7 @@ public:
 	// brick type set (hp,sprite)
 	void setBrickType(FIntPoint _Index, BrickType _Type);
 	// 자료구조에 넣기,자료구조 크기조절,액터(벽돌더미)위치셋
-	void Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize);
+	BrickEditor* Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize);
 	// 위치,인덱스 정해서, SetBrickIndex호출 
 	void SetBrickLocation(FVector2D _Location, BrickType _Type);
 	// 오버로딩 SetBrickIndex호출-벡터
@@ -82,6 +82,10 @@ public:
 	// 인덱스는 벽돌x,y갯수보다 작고,0보다 커야한다
 	bool IsIndexOver(FIntPoint _Index);
 
+	int GetBrickType(const ABrick& brick)
+	{
+		return brick.BrickType; // 전달된 벽돌의 타입 반환
+	}
 
 	ABrick* GetBrickRef(FIntPoint _Index);
 	ABrick* GetBrickRef(FVector2D _Location);
@@ -135,6 +139,12 @@ public:
 	{
 		return DeathCount;
 	}
+
+	std::vector<std::vector<ABrick>> GetAllBricks()
+	{
+		return AllBricks;
+	}
+
 
 protected:
 

@@ -11,7 +11,7 @@
 #include "Score.h"
 
 
-void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize)
+BrickEditor* BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _BrickSize)
 {
 	SpriteName = _Sprite;
 	BrickSize = _BrickSize;
@@ -30,6 +30,7 @@ void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _
 	float gap = WinSize - AllSpriteWidth;
 	PlusPos = { gap, Height };
 	SetActorLocation(PlusPos);
+	return this;
 }
 
 FVector2D BrickEditor::IndexToBrickLocation(FIntPoint _Index)
@@ -446,8 +447,34 @@ float BrickEditor::GetElapsedTime() const
 
 bool BrickEditor::AreAllBricksNonBreakable(const std::vector<std::vector<ABrick>>& allBricks)
 {
-	if (DeathCount == (BrickCount.X-1))
+	int NotBreakcount = 0;
+
+	int totalX = 0; // 전체 x 좌표 갯수
+	int totalY = allBricks.size(); // 전체 y 좌표 갯수는 벡터의 행 개수
+
+	for (size_t y = 0; y < allBricks.size(); y++)
+	{
+		totalX += allBricks[y].size(); // 각 행에서 x의 갯수를 더함
+	}
+
+	for (size_t y = 0; y < allBricks.size(); y++)
+	{
+		for (size_t x = 0; x < allBricks[y].size(); x++)
+		{
+			if (AllBricks[y][x].BrickType == BrickType::NotBreak)
+			{
+				NotBreakcount++;
+			}			
+		}
+	}
+	int BreakCountTotal = totalX - NotBreakcount;
+	if (DeathCount == BreakCountTotal)
 	{
 		return GameClear=true;
 	}
+
+	UEngineDebug::CoreOutPutString("Number of Bricks : " + std::to_string(allBricks.size()));
+	UEngineDebug::CoreOutPutString("Number of BreakCountTotal : " + std::to_string(totalX));
+	UEngineDebug::CoreOutPutString("Number of BrickCount : " + std::to_string(GetBrickCount().X -1));
+	UEngineDebug::CoreOutPutString("Number of DeathCount : " + std::to_string(DeathCount));
 }

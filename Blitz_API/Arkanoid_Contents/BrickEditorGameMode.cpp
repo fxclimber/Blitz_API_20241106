@@ -48,12 +48,12 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 			BrickType = BrickType::Default;
 			IsSpaceBarPressed = false;
 		}
-		else if (UEngineInput::GetInst().IsPress('5'))
+		else if (UEngineInput::GetInst().IsPress('6'))
 		{
 			BrickType = BrickType::HPBrick;
 			IsSpaceBarPressed = false;
 		}
-		else if (UEngineInput::GetInst().IsPress('6'))
+		else if (UEngineInput::GetInst().IsPress('5'))
 		{
 			BrickType = BrickType::NotBreak;
 			IsSpaceBarPressed = false;
