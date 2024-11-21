@@ -10,7 +10,7 @@
 #include <EngineBase/EngineTimer.h>
 #include "ContentsEnum.h"
 #include "Fade.h"
-
+#include <EngineBase/EngineMath.h>
 
 ABall::ABall()
 {
@@ -58,21 +58,19 @@ void ABall::Tick(float _DeltaTime)
     }
     else if(false == GetIsMove())
     {
-        MoveFunction({ 0, 0 });
-    }
-
-    if (false == GetIsMove())
-    {
         float a = Fade->GetBackSpriteRenderer()->GetAlpha();
 
-        if (a>0.99f)
+        if (a > 0.99f)
         {
             SetActorLocation(SavePos);
             Fade->FadeOut();
             FadeOver = true;
             SpriteRenderer->SetActive(true);
         }
+
+        MoveFunction({ 0, 0 });
     }
+
 
 }
 
@@ -86,6 +84,7 @@ void ABall::Reflect(const FVector2D& normal)
 {
     float dotProduct = Value.Dot(normal);
     Value = Value - (normal * (2.0f * dotProduct));
+    Value.Normalize();
 }
 
 
@@ -107,6 +106,7 @@ void ABall::UpdatePosition(float deltaTime)
             Reflect({ 1.f, 0.01f });
             ballPos.X = MaxLeft + 0.3f; // 벽에서 약간 떨어지게 위치 조정
             hasCollided = true;
+            return;
         }
 
         // 오른쪽 벽에 닿았다
@@ -115,6 +115,7 @@ void ABall::UpdatePosition(float deltaTime)
             Reflect({ -1.f, -0.01f });
             ballPos.X = MaxRight - 0.3f;
             hasCollided = true;
+            return;
         }
 
         // 아랫벽에 닿았다
@@ -124,6 +125,7 @@ void ABall::UpdatePosition(float deltaTime)
                 Reflect({ 0.01f, 1.f });
                 ballPos.Y = MaxBottom - 0.3f;
                 hasCollided = true;
+                return;
             }
             {
                 //SpriteRenderer->SetActive(false);
@@ -135,7 +137,6 @@ void ABall::UpdatePosition(float deltaTime)
                 //FadeOver = false;
             }
 
-            return;
         }
 
         // 위쪽 벽에 닿았다
@@ -144,6 +145,7 @@ void ABall::UpdatePosition(float deltaTime)
             Reflect({ -0.01f, -1.f });
             ballPos.Y = MaxTop + 0.3f;
             hasCollided = true;
+            return;
         }
 
         // 위치 업데이트

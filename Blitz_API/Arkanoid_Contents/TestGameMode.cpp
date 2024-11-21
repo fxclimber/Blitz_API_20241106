@@ -86,8 +86,8 @@ void ATestGameMode::BeginPlay()
 	Balls.push_back(GetWorld()->SpawnActor<ABall>());
 	for (ABall* Ball : Balls)
 	{
-		Ball->SetDir({ 0.02f, 1.f });
-		Ball->SetSpeed(400.f);
+		Ball->SetDir({ 0.01f, 1.f });
+		Ball->SetSpeed(700.f);
 		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 	}
 }
