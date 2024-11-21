@@ -60,7 +60,7 @@ void ATestGameMode::BeginPlay()
 	else 
 	{
 		FVector2D Size = { 57,26 };
-		FIntPoint Num = { 5,8 };
+		FIntPoint Num = { 11,2 };
 		int score = 0;
 		Editor->Create("Brick", Num, Size);
 
@@ -139,6 +139,14 @@ void ATestGameMode::Tick(float _DeltaTime)
 	AScore::ScoreUI = Editor->GetScore() * 32;
 	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
 
+	// 클리어처리
+	if (true== Editor->GetGameClear())
+	{
+		score->SetFinalValue(AScore::ScoreUI);
+		UEngineAPICore::GetCore()->OpenLevel("Die");
+	}
+
+
 	// 확인용 로그들 
 	{
 		float fps = 1 / _DeltaTime;
@@ -149,6 +157,10 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore * 32));
+
+		UEngineDebug::CoreOutPutString("Number of Bricks : " + std::to_string(Editor->GetBrickCount().X));
+		UEngineDebug::CoreOutPutString("Number of DeathCount : " + std::to_string(Editor->GetDeathCount()));
+
 	}
 
 }
@@ -170,4 +182,25 @@ void ATestGameMode::SpawnBall()
 		Balls.push_back(Ball0);
 	}
 
+}
+
+void ATestGameMode::CheckStageClear()
+{
+	// 벽돌 상태 확인
+	//
+	{
+		// 점수 합산
+		int finalScore = Editor->GetScore() * 32;
+		score->SetValue(finalScore); // 점수 업데이트
+
+		// 최종 점수 저장
+		score->SetFinalValue(finalScore);
+
+		// 스테이지 클리어 처리
+		//HandleStageClear();
+	}
+}
+
+void ATestGameMode::HandleStageClear()
+{
 }

@@ -2,6 +2,7 @@
 #include "Score.h"
 
 int AScore::ScoreUI = 0; // 정적 변수 정의
+int AScore::FinalScoreUI = 0; // 정적 변수 정의 및 초기화
 
 AScore::AScore()
 {

@@ -49,7 +49,6 @@ public:
 		_Ser >> Scale;
 		_Ser >> Pivot;
 	}
-
 };
 
 class BrickEditor : public AActor, public ISerializObject
@@ -123,10 +122,23 @@ public:
 	// 맵저장시 디폴트벽돌의 랜덤갯수 다르게 주기위함.
 	int RandomBrick = 1;
 
+	bool AreAllBricksNonBreakable(const std::vector<std::vector<ABrick>>& allBricks);
+
+
+	bool GetGameClear()const
+	{
+		return GameClear;
+	}
+
+	FIntPoint BrickCount;
+	int GetDeathCount()
+	{
+		return DeathCount;
+	}
+
 protected:
 
 private:
-	FIntPoint BrickCount;
 	std::string SpriteName;
 	FVector2D BrickSize;//벽돌 개별크기
 
@@ -142,9 +154,9 @@ private:
 	WhereIsBall ballPosition = WhereIsBall::BOTTOM;
 	std::chrono::time_point<std::chrono::steady_clock> stageStartTime;
 	int Score = 0;
-
+	bool GameClear =false;
 	USoundPlayer BallSoundPlayer;
-
+	int DeathCount;
 };
 
 

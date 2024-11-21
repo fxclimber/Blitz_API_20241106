@@ -17,7 +17,7 @@ public:
 	{
 		if (_Max < _Min)
 		{
-			float SwapValue = _Min;
+			int SwapValue = _Min;
 			_Min = _Max;
 			_Max = SwapValue;
 		}

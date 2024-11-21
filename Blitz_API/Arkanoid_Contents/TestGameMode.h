@@ -12,6 +12,8 @@ public:
 
 	void SpawnBall();
 	std::vector<class ABall*> Balls;
+	void CheckStageClear();
+	void HandleStageClear();
 
 protected:
 	void BeginPlay() override;

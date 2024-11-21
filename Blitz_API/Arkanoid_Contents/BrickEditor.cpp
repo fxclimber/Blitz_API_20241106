@@ -226,7 +226,7 @@ FVector2D BrickEditor::CheckCollision(const FVector2D& ballPos, const FVector2D&
 	}
 
 	FVector2D HitResult;
-
+	
 	// 전체 벽돌 순회하며 충돌 검사
 	for (int y = 0; y < AllBricks.size(); ++y)
 	{
@@ -315,6 +315,7 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 
 	if (AllBricks[brickIndex.Y][brickIndex.X].HP == 0)
 	{
+		DeathCount += 1;
 
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
@@ -368,6 +369,7 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 
 BrickEditor::BrickEditor()
 {
+	DeathCount = 0;
 	BonusA = nullptr;
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	stageStartTime = std::chrono::steady_clock::now();
@@ -393,6 +395,18 @@ void BrickEditor::Tick(float _DeltaTime)
 			}
 		}
 	}
+
+	if (true == AreAllBricksNonBreakable(AllBricks))
+	{
+		GameClear = true;
+	}
+
+	//if (3.f < GetElapsedTime())
+	//{
+	//	GameClear = true;
+	//}
+
+
 }
 void BrickEditor::setBrickType(FIntPoint _Index, BrickType _Type)
 {
@@ -428,4 +442,12 @@ float BrickEditor::GetElapsedTime() const
 	auto Now = std::chrono::steady_clock::now();
 	auto Duration = std::chrono::duration<float>(Now - stageStartTime);  // 초 단위로 변환
 	return Duration.count();  // float 타입으로 반환
+}
+
+bool BrickEditor::AreAllBricksNonBreakable(const std::vector<std::vector<ABrick>>& allBricks)
+{
+	if (DeathCount == (BrickCount.X-1))
+	{
+		return GameClear=true;
+	}
 }
