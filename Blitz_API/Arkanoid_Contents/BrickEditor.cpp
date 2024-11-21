@@ -16,7 +16,7 @@ void BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVector2D _
 	SpriteName = _Sprite;
 	BrickSize = _BrickSize;
 	BrickCount = _Count;
-
+	//Score = _Score;
 	AllBricks.resize(_Count.Y);
 
 	for (size_t y = 0; y < AllBricks.size(); y++)
@@ -173,7 +173,7 @@ void BrickEditor::Serialize(UEngineSerializer& _Ser)
 	_Ser << BrickSize;
 	_Ser << SpriteName;
 	_Ser << AllBricks;
-	_Ser << Score;
+	//_Ser << Score;
 
 }
 
@@ -182,6 +182,7 @@ void BrickEditor::DeSerialize(UEngineSerializer& _Ser)
 	_Ser >> BrickCount;
 	_Ser >> BrickSize;
 	_Ser >> SpriteName;
+	//_Ser >> Score;
 
 	std::vector<std::vector<ABrick>> LoadTiles;
 	_Ser >> LoadTiles;
@@ -326,7 +327,7 @@ void BrickEditor::SpawnFX(FVector2D _brickPos)
 	UEngineRandom Random;
 
 	int Value = Random.RandomInt(0, 100);
-	//int fmod = Value%12;
+	int fmod = Value%12;//´ÜÁö ½ºÆù ºóµµÈ®·ü
 
 	OutputDebugString(std::to_string(Value).c_str());
 

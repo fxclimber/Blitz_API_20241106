@@ -85,7 +85,9 @@ void Brick::MakeBonus()
     }
 
     // 공통 설정 수행
-    SpriteRenderer->SetSprite(spriteName);
+    //SpriteRenderer->SetSprite(spriteName);
+    // 보너스 테스트용 임시
+    SpriteRenderer->SetSprite("powerup_duplicate");
     SpriteRenderer->SetComponentLocation(GetActorLocation());
     SpriteRenderer->CreateAnimation(spriteName, spriteName, 1, 7, 0.1f, true);
     SpriteRenderer->ChangeAnimation(spriteName);
@@ -105,7 +107,7 @@ void Brick::MakeBonusRenderer()
 
 }
 
-void Brick::TimeEvent()
+void Brick::TimeEvent()//지금 사용안하는중
 {
     ATestGameMode* GameMode = GetWorld()->GetGameMode<ATestGameMode>();
     std::vector<ABall*> Balls = GameMode->Balls;

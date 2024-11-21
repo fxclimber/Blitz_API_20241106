@@ -97,12 +97,12 @@ void ABall::UpdatePosition(float deltaTime)
         int MaxTop = 101, MaxBottom = 1000, MaxLeft = 49, MaxRight = 722;
         FVector2D ballPos = GetActorLocation();
         FVector2D ballScale = GetRender()->GetComponentScale();
-        float tolerance = 0.05f + ballScale.X / 2;
+        float tolerance = 0.15f + ballScale.X / 2;
 
         bool hasCollided = false; // 충돌 여부
 
         // 왼쪽 벽에 닿았다
-        if (MaxLeft >= ballPos.X && !hasCollided)
+        if (MaxLeft > ballPos.X && !hasCollided)
         {
             Reflect({ 1.f, 0.05f });
             ballPos.X = MaxLeft + 0.1f; // 벽에서 약간 떨어지게 위치 조정
@@ -110,7 +110,7 @@ void ABall::UpdatePosition(float deltaTime)
         }
 
         // 오른쪽 벽에 닿았다
-        if (MaxRight <= ballPos.X && !hasCollided)
+        if (MaxRight < ballPos.X && !hasCollided)
         {
             Reflect({ -1.f, -0.05f });
             ballPos.X = MaxRight - 0.1f;
@@ -118,30 +118,28 @@ void ABall::UpdatePosition(float deltaTime)
         }
 
         // 아랫벽에 닿았다
-        if (MaxBottom <= ballPos.Y && !hasCollided)
+        if (MaxBottom < ballPos.Y && !hasCollided)
         {
             {
-                SpriteRenderer->SetActive(false);
-                SavePos = GetActorLocation();
-                SetActorLocation({0,0});
-                IsMove = false;
-
-                Fade->FadeIn();
-                FadeOver = false;
-
-
+                Reflect({ 0.03f, 1.f });
+                ballPos.Y = MaxBottom - 0.1f;
+                hasCollided = true;
             }
             {
-                //Reflect({ 0.03f, 1.f });
-                //ballPos.Y = MaxBottom - 0.1f;
-                //hasCollided = true;
+                //SpriteRenderer->SetActive(false);
+                //SavePos = GetActorLocation();
+                //SetActorLocation({0,0});// Fade 위치때문에.
+                //IsMove = false;
+
+                //Fade->FadeIn();
+                //FadeOver = false;
             }
 
             return;
         }
 
         // 위쪽 벽에 닿았다
-        if (MaxTop >= ballPos.Y && !hasCollided)
+        if (MaxTop > ballPos.Y && !hasCollided)
         {
             Reflect({ -0.03f, -1.f });
             ballPos.Y = MaxTop + 0.1f;

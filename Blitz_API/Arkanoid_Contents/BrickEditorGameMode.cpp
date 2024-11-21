@@ -16,6 +16,7 @@ void BrickEditorGameMode::BeginPlay()
 		//FVector2D Size = Globals::BrickSize; //{ 65,30 };
 		FVector2D Size = { 57,26 };
 		FIntPoint Num = { 6,4 };
+		//int score = 0;
 		Editor = GetWorld()->SpawnActor<BrickEditor>();
 		Editor->Create("Brick", Num, Size);
 		for (int y = 0; y < Num.X; y++)

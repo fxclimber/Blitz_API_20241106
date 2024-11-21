@@ -50,16 +50,15 @@ void ATestGameMode::BeginPlay()
 	UEngineSerializer Ser;
 	NewFile.Read(Ser);
 	Editor->DeSerialize(Ser);
+	Editor->SetActorLocation(FVector2D{50,300});
 }
-
-
 
 
 
 	FVector2D Size = { 57,26 };
 	FIntPoint Num = { 5,8 };
-	Editor->Create("Brick", Num, Size);
-	Editor->SetActorLocation(FVector2D{50,300});
+	int score = 0;
+	Editor->Create("Brick", Num, Size );
 
 	for (int y = 0; y < Num.Y; y++)
 	{
@@ -80,6 +79,9 @@ void ATestGameMode::BeginPlay()
 	//{
 	//	Editor->setBrickType({x,2}, BrickType::NotBreak);
 	//}
+
+
+
 
 	// Paddle
 	Paddle = GetWorld()->SpawnActor<APaddle>();
@@ -106,9 +108,9 @@ void ATestGameMode::Tick(float _DeltaTime)
 	{
 		if (Ball == nullptr) continue; // null üũ
 
-		if (Ball->GetFadeOver())
+		if (true == Ball->GetFadeOver())
 		{
-			if (!Ball->GetIsMove())
+			if (false == Ball->GetIsMove())
 			{
 				Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 
