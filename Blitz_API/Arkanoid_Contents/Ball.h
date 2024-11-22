@@ -8,6 +8,7 @@ enum BallType
 	Basic,
 	Bonus,
 };
+//extern BallType ballType; // 외부 변수 선언
 
 class ABall : public AActor
 {
@@ -54,7 +55,7 @@ public:
 	{
 		return FadeOver;
 	}
-	static BallType ballType;
+	BallType ballType;
 
 
 private:

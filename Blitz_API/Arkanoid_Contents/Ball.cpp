@@ -12,7 +12,8 @@
 #include "Fade.h"
 #include <EngineBase/EngineMath.h>
 
-BallType ABall::ballType = BallType::Basic;
+//BallType ABall::ballType = BallType::Basic;
+//BallType ballType = Basic;
 
 ABall::ABall()
 {
@@ -23,6 +24,7 @@ ABall::ABall()
 	SpriteRenderer->SetOrder(ERenderOrder::UI);
     IsMove = false;
     SavePos = GetActorLocation();
+    ballType = BallType::Basic;
 }
 
 
@@ -119,11 +121,11 @@ void ABall::UpdatePosition(float deltaTime)
         // ¾Æ·§º®¿¡ ´ê¾Ò´Ù
         else if (MaxBottom < ballPos.Y)
         {
-            Reflect({ 0.f, -1.f });
-            ballPos.Y = MaxBottom - ballScale.Y;
-            hasCollided = true;
+            //Reflect({ 0.f, -1.f });
+            //ballPos.Y = MaxBottom - ballScale.Y;
+            //hasCollided = true;
 
-            if (BallType::Basic)
+            if (ballType  == BallType::Basic)
             {
                 SpriteRenderer->SetActive(false);
                 SavePos = GetActorLocation();
@@ -133,7 +135,7 @@ void ABall::UpdatePosition(float deltaTime)
                 Fade->FadeIn();
                 FadeOver = false;
             }
-            else if (BallType::Bonus)
+            else if (ballType  == BallType::Bonus)
             {
                 return;
             }
