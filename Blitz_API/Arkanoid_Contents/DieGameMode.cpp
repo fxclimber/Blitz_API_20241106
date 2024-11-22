@@ -15,7 +15,7 @@ void DieGameMode::BeginPlay()
 {
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
-	score->SetActorLocation({ 755,50 });
+	score->SetActorLocation({ 385,500 });
 	score->SetTextSpriteName("Text_Num.png");
 	score->SetOrder(ERenderOrder::UI);
 	score->SetTextScale({ 32, 32 });

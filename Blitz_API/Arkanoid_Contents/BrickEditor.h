@@ -126,9 +126,6 @@ public:
 	// 맵저장시 디폴트벽돌의 랜덤갯수 다르게 주기위함.
 	int RandomBrick = 1;
 
-	bool AreAllBricksNonBreakable(const std::vector<std::vector<ABrick>>& allBricks);
-
-
 	bool GetGameClear()const
 	{
 		return GameClear;
@@ -144,7 +141,6 @@ public:
 	{
 		return AllBricks;
 	}
-
 
 protected:
 
@@ -166,7 +162,9 @@ private:
 	int Score = 0;
 	bool GameClear =false;
 	USoundPlayer BallSoundPlayer;
-	int DeathCount;
+	int DeathCount = 0;
+
+	
 };
 
 

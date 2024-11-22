@@ -4,6 +4,7 @@
 #include <EngineCore/EngineAPICore.h>
 #include <EngineCore/SpriteRenderer.h>
 #include "ContentsEnum.h"
+#include <EnginePlatform/EngineInput.h>
 
 Map_Play::Map_Play()
 {
@@ -20,3 +21,4 @@ Map_Play::Map_Play()
 	}
 	
 }
+

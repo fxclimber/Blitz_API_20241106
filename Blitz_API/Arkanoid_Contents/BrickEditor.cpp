@@ -316,7 +316,6 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 
 	if (AllBricks[brickIndex.Y][brickIndex.X].HP == 0)
 	{
-		DeathCount += 1;
 
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetSprite("exp");
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->SetOrder(ERenderOrder::FX);
@@ -324,7 +323,7 @@ void BrickEditor::RemoveBlock(FIntPoint brickIndex)
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->CreateAnimation("exp", "exp", 1, 8, 0.09f, false);
 		
 		AllBricks[brickIndex.Y][brickIndex.X].SpriteRenderer->ChangeAnimation("exp");
-
+		DeathCount++;
 		SpawnFX(brickPos);
 		BallSoundPlayer = UEngineSound::Play("BlockCrashBall.wav");
 	}
@@ -370,7 +369,6 @@ void BrickEditor::SetBrickSprite(FIntPoint _Index, std::string_view _Sprite, int
 
 BrickEditor::BrickEditor()
 {
-	DeathCount = 0;
 	BonusA = nullptr;
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	stageStartTime = std::chrono::steady_clock::now();
@@ -396,16 +394,6 @@ void BrickEditor::Tick(float _DeltaTime)
 			}
 		}
 	}
-
-	//if (true == AreAllBricksNonBreakable(AllBricks))
-	//{
-	//	GameClear = true;
-	//}
-
-	//if (3.f < GetElapsedTime())
-	//{
-	//	GameClear = true;
-	//}
 
 
 }
@@ -445,37 +433,3 @@ float BrickEditor::GetElapsedTime() const
 	return Duration.count();  // float 타입으로 반환
 }
 
-bool BrickEditor::AreAllBricksNonBreakable(const std::vector<std::vector<ABrick>>& allBricks)
-{
-	//int NotBreakcount = 0;
-
-	//int totalX = 0; // 전체 x 좌표 갯수
-	//int totalY = static_cast<int>(allBricks.size()); // 전체 y 좌표 갯수는 벡터의 행 개수
-
-	//for (size_t y = 0; y < allBricks.size(); y++)
-	//{
-	//	totalX += allBricks[y].size(); // 각 행에서 x의 갯수를 더함
-	//}
-
-	//for (size_t y = 0; y < allBricks.size(); y++)
-	//{
-	//	for (size_t x = 0; x < allBricks[y].size(); x++)
-	//	{
-	//		if (AllBricks[y][x].BrickType == BrickType::NotBreak)
-	//		{
-	//			NotBreakcount++;
-	//		}			
-	//	}
-	//}
-	//int BreakCountTotal = totalX - NotBreakcount;
-	//if (DeathCount == BreakCountTotal)
-	//{
-	//	return GameClear=true;
-	//}
-
-	//UEngineDebug::CoreOutPutString("Number of Bricks : " + std::to_string(allBricks.size()));
-	//UEngineDebug::CoreOutPutString("Number of BreakCountTotal : " + std::to_string(totalX));
-	//UEngineDebug::CoreOutPutString("Number of BrickCount : " + std::to_string(GetBrickCount().X -1));
-	//UEngineDebug::CoreOutPutString("Number of DeathCount : " + std::to_string(DeathCount));
-	return true;
-}

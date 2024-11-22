@@ -73,13 +73,13 @@ void ArkanoidContentsCore::BeginPlay()
 			UImageManager::GetInst().LoadFolder(powerup_laser.GetPathToString());
 		}
 	}
-		//{
-		//	//edge_top
-		//	UEngineDirectory edge_top;
-		//	edge_top.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Static");
-		//	edge_top.Append("edge_top");
-		//	UImageManager::GetInst().LoadFolder(edge_top.GetPathToString());
-		//}
+		{
+			////edge_top
+			//UEngineDirectory edge_top;
+			//edge_top.MoveParentToDirectory(ImageRes + "//Arkanoid_Items//Sprite_Static");
+			//edge_top.Append("edge_top");
+			//UImageManager::GetInst().LoadFolder(edge_top.GetPathToString());
+		}
 
 	// 폴더- 보너스 아이템 
 	{

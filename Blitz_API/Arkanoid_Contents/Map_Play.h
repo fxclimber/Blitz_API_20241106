@@ -7,10 +7,8 @@ public:
 	Map_Play();
 	~Map_Play(){}
 
-
 protected:
 
 private:
-
 };
 

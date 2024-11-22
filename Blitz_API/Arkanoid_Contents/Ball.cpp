@@ -12,6 +12,8 @@
 #include "Fade.h"
 #include <EngineBase/EngineMath.h>
 
+#include "TestGameMode.h"
+
 //BallType ABall::ballType = BallType::Basic;
 //BallType ballType = Basic;
 
@@ -121,24 +123,33 @@ void ABall::UpdatePosition(float deltaTime)
         // 아랫벽에 닿았다
         else if (MaxBottom < ballPos.Y)
         {
-            //Reflect({ 0.f, -1.f });
-            //ballPos.Y = MaxBottom - ballScale.Y;
-            //hasCollided = true;
 
-            if (ballType  == BallType::Basic)
+            if (nullptr!=testmap->GetBt())
             {
-                SpriteRenderer->SetActive(false);
-                SavePos = GetActorLocation();
-                SetActorLocation({ 0,0 });// Fade 위치때문에.
-                IsMove = false;
+                Reflect({ 0.f, -1.f });
+                ballPos.Y = MaxBottom - ballScale.Y;
+                hasCollided = true;
+            }
+            else
+            {
+                if (ballType == BallType::Basic)
+                {
+                    SpriteRenderer->SetActive(false);
+                    SavePos = GetActorLocation();
+                    SetActorLocation({ 0,0 });// Fade 위치때문에.
+                    IsMove = false;
 
-                Fade->FadeIn();
-                FadeOver = false;
+                    Fade->FadeIn();
+                    FadeOver = false;
+                }
+                else if (ballType == BallType::Bonus)
+                {
+                    return;
+                }
             }
-            else if (ballType  == BallType::Bonus)
-            {
-                return;
-            }
+
+
+
         }
 
 

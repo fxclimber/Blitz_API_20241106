@@ -43,6 +43,9 @@
     <ClInclude Include="BrickEditorGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="Map_Bottom.h">
+      <Filter>ContentsObject\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -86,6 +89,9 @@
     </ClCompile>
     <ClCompile Include="BrickEditorGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Bottom.cpp">
+      <Filter>ContentsObject\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

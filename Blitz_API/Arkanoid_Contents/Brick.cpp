@@ -94,6 +94,7 @@ void Brick::MakeBonus()
     // 스프라이트 크기 및 위치 설정
     spriteScale = SpriteRenderer->SetSpriteScale(1.2f);
     SpriteRenderer->SetComponentLocation({ spriteScale.X / 2, 0.f });
+
 }
 
 void Brick::MakeBonusRenderer()

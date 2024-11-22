@@ -67,6 +67,6 @@ private:
 	class USpriteRenderer* SpriteRenderer;
 	class AFade* Fade;
 	bool FadeOver=true;
-
+	class ATestGameMode* testmap;
 };
 
