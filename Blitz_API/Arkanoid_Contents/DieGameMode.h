@@ -1,4 +1,7 @@
 #pragma once
+#include <EngineCore/GameMode.h>
+#include <vector>
+#include <EnginePlatform/EngineSound.h>
 
 
 class DieGameMode : public AGameMode
@@ -17,6 +20,11 @@ protected:
 
 	void Tick(float _DeltaTime) override;
 	bool IsOpenLevel=false;
+
+
+private:
+	class AScore* score;
+	FVector2D UIPos = { 0,0 };
 
 };
 

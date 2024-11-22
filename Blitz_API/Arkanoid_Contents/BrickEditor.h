@@ -140,7 +140,7 @@ public:
 		return DeathCount;
 	}
 
-	std::vector<std::vector<ABrick>> GetAllBricks()
+	std::vector<std::vector<ABrick>>& GetAllBricks()
 	{
 		return AllBricks;
 	}

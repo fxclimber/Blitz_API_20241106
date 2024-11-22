@@ -12,13 +12,14 @@ public:
 
 	void SpawnBall();
 	std::vector<class ABall*> Balls;
-	void CheckStageClear();
-	void HandleStageClear();
+	void CheckScore();
 	bool AreAllBricksNonBreakable();
 	bool GetGameClear()const
 	{
 		return GameClear;
 	}
+
+	int CountBreakableBricks();
 
 protected:
 	void BeginPlay() override;
@@ -38,6 +39,7 @@ private:
 	class Brick* BonusA;
 	bool GameClear = false;
 
+	int BreakCountTotal;
 	// sound
 
 };

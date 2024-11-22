@@ -397,10 +397,10 @@ void BrickEditor::Tick(float _DeltaTime)
 		}
 	}
 
-	if (true == AreAllBricksNonBreakable(AllBricks))
-	{
-		GameClear = true;
-	}
+	//if (true == AreAllBricksNonBreakable(AllBricks))
+	//{
+	//	GameClear = true;
+	//}
 
 	//if (3.f < GetElapsedTime())
 	//{
@@ -447,34 +447,35 @@ float BrickEditor::GetElapsedTime() const
 
 bool BrickEditor::AreAllBricksNonBreakable(const std::vector<std::vector<ABrick>>& allBricks)
 {
-	int NotBreakcount = 0;
+	//int NotBreakcount = 0;
 
-	int totalX = 0; // 전체 x 좌표 갯수
-	int totalY = allBricks.size(); // 전체 y 좌표 갯수는 벡터의 행 개수
+	//int totalX = 0; // 전체 x 좌표 갯수
+	//int totalY = static_cast<int>(allBricks.size()); // 전체 y 좌표 갯수는 벡터의 행 개수
 
-	for (size_t y = 0; y < allBricks.size(); y++)
-	{
-		totalX += allBricks[y].size(); // 각 행에서 x의 갯수를 더함
-	}
+	//for (size_t y = 0; y < allBricks.size(); y++)
+	//{
+	//	totalX += allBricks[y].size(); // 각 행에서 x의 갯수를 더함
+	//}
 
-	for (size_t y = 0; y < allBricks.size(); y++)
-	{
-		for (size_t x = 0; x < allBricks[y].size(); x++)
-		{
-			if (AllBricks[y][x].BrickType == BrickType::NotBreak)
-			{
-				NotBreakcount++;
-			}			
-		}
-	}
-	int BreakCountTotal = totalX - NotBreakcount;
-	if (DeathCount == BreakCountTotal)
-	{
-		return GameClear=true;
-	}
+	//for (size_t y = 0; y < allBricks.size(); y++)
+	//{
+	//	for (size_t x = 0; x < allBricks[y].size(); x++)
+	//	{
+	//		if (AllBricks[y][x].BrickType == BrickType::NotBreak)
+	//		{
+	//			NotBreakcount++;
+	//		}			
+	//	}
+	//}
+	//int BreakCountTotal = totalX - NotBreakcount;
+	//if (DeathCount == BreakCountTotal)
+	//{
+	//	return GameClear=true;
+	//}
 
-	UEngineDebug::CoreOutPutString("Number of Bricks : " + std::to_string(allBricks.size()));
-	UEngineDebug::CoreOutPutString("Number of BreakCountTotal : " + std::to_string(totalX));
-	UEngineDebug::CoreOutPutString("Number of BrickCount : " + std::to_string(GetBrickCount().X -1));
-	UEngineDebug::CoreOutPutString("Number of DeathCount : " + std::to_string(DeathCount));
+	//UEngineDebug::CoreOutPutString("Number of Bricks : " + std::to_string(allBricks.size()));
+	//UEngineDebug::CoreOutPutString("Number of BreakCountTotal : " + std::to_string(totalX));
+	//UEngineDebug::CoreOutPutString("Number of BrickCount : " + std::to_string(GetBrickCount().X -1));
+	//UEngineDebug::CoreOutPutString("Number of DeathCount : " + std::to_string(DeathCount));
+	return true;
 }
