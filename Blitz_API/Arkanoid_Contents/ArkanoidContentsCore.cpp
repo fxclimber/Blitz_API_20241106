@@ -65,6 +65,7 @@ void ArkanoidContentsCore::BeginPlay()
 
 	//UI
 	UImageManager::GetInst().CuttingSprite("Text_Num.png", { 64, 64 });
+	UImageManager::GetInst().CuttingSprite("Text_Letters.png", { 40, 40 });
 
 	//----------------폴더 애니들 ----------------------------------------
 	// 폴더- silver block fx

@@ -19,7 +19,7 @@
 #include "Fade.h"
 #include "Map_Bottom.h"
 #include "Map_Play.h"
-
+#include "UI.h"
 
 bool ATestGameMode::IsEnd = false;
 
@@ -33,6 +33,18 @@ void ATestGameMode::BeginPlay()
 
 	Bottom = GetWorld()->SpawnActor<Map_Bottom>();
 	Bottom->GetRender()->SetActive(false);
+
+	// UI text
+	//UILetters = GetWorld()->SpawnActor<ALetter>();
+	//UILetters->SetActorLocation({ 100,600 });
+	//UILetters->SetTextSpriteName("Text_Letters.png");
+	//UILetters->SetOrder(ERenderOrder::UI);
+	//UILetters->SetTextScale({ 40, 40 });
+	//UILetters->SetText("please");
+	//UILetters->SetText("press");
+	//UILetters->SetText("L");
+	UILetters = GetWorld()->SpawnActor<UI>();
+	IsUIMove = false;
 
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
@@ -239,9 +251,25 @@ void ATestGameMode::Tick(float _DeltaTime)
 		Editor->DeSerialize(Ser);
 
 		BreakCountTotal = CountBreakableBricks();
+		//if (nullptr != UILetters)
+		{
+			IsUIMove = true;
+			//UILetters->Destroy();
+			//UILetters->SetActive(false);
 
+			//UILetters->GetLetter()[0]->GetRenders()[0]->SetAlphafloat(0.f);
+			//UILetters->GetLetter()[0]->GetRenders()[0]->SetActive(false);
+			//UILetters->GetLetter()[1]->GetRenders()[0]->SetActive(false);
+			//UILetters->GetLetter()[2]->GetRenders()[0]->SetActive(false);
+			return;
+		}
 	}
 
+	if (true==IsUIMove)
+	{
+		FVector2D dir = { 200.f,300.f };
+		UILetters->AddActorLocation(dir * 500.f * _DeltaTime);
+	}
 }
 
 

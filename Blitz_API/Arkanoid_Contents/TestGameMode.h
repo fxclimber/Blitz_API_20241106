@@ -23,11 +23,11 @@ public:
 	int CountBreakableBricks();
 	static bool IsEnd;
 
-	int test();
 	Map_Bottom* GetBottom()	{
 		if (nullptr != Bottom){return Bottom;}
 		else{return nullptr;}
 	}
+	bool IsUIMove=false;
 
 protected:
 	void BeginPlay() override;
@@ -41,6 +41,7 @@ private:
 	class APaddle* Paddle = nullptr;
 	class AScore* score = nullptr;
 	class Map_Bottom* Bottom = nullptr;
+	class UI* UILetters = nullptr;
 	FVector2D UIPos = {0,0};
 
 	bool bIsBonusActive = false;

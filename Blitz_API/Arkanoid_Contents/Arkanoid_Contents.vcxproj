@@ -160,6 +160,7 @@
     <ClInclude Include="ContentsEnum.h" />
     <ClInclude Include="DieGameMode.h" />
     <ClInclude Include="Fade.h" />
+    <ClInclude Include="Letter.h" />
     <ClInclude Include="Map_Bottom.h" />
     <ClInclude Include="Map_Die.h" />
     <ClInclude Include="Map_Play.h" />
@@ -174,6 +175,7 @@
     </ClInclude>
     <ClInclude Include="TitleGameMode.h" />
     <ClInclude Include="TmpGameMode.h" />
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArkanoidContentsCore.cpp" />
@@ -183,6 +185,7 @@
     <ClCompile Include="ContentsEnum.cpp" />
     <ClCompile Include="DieGameMode.cpp" />
     <ClCompile Include="Fade.cpp" />
+    <ClCompile Include="Letter.cpp" />
     <ClCompile Include="Map_Bottom.cpp" />
     <ClCompile Include="Map_Die.cpp" />
     <ClCompile Include="Map_Play.cpp" />
@@ -200,6 +203,7 @@
     </ClCompile>
     <ClCompile Include="TitleGameMode.cpp" />
     <ClCompile Include="TmpGameMode.cpp" />
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

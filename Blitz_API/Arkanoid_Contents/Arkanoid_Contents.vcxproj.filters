@@ -55,6 +55,12 @@
     <ClInclude Include="Map_Title.h">
       <Filter>ContentsObject\Map</Filter>
     </ClInclude>
+    <ClInclude Include="Letter.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -110,6 +116,12 @@
     </ClCompile>
     <ClCompile Include="Map_Title.cpp">
       <Filter>ContentsObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="Letter.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>ContentsObject\Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
