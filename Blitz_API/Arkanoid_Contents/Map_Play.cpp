@@ -9,15 +9,15 @@
 Map_Play::Map_Play()
 {
 	{
-		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
-		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		SpriteRenderer->SetSprite("Map_Play003_1000.png");
+		SpriteRender = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRender->SetOrder(ERenderOrder::BACKGROUND);
+		SpriteRender->SetSprite("Map_Play003_1000.png");
 
 		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-		SpriteRenderer->SetComponentScale(WinSize);
+		SpriteRender->SetComponentScale(WinSize);
 
-		FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
-		SpriteRenderer->SetComponentLocation(MapScale.Half());
+		FVector2D MapScale = SpriteRender->SetSpriteScale(1.0f);
+		SpriteRender->SetComponentLocation(MapScale.Half());
 	}
 	
 }

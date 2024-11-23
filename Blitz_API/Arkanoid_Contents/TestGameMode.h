@@ -3,11 +3,12 @@
 #include <vector>
 #include <EnginePlatform/EngineSound.h>
 
+class Map_Bottom;
 
 class ATestGameMode : public AGameMode
 {
 public:
-	ATestGameMode(){}
+	ATestGameMode();
 	~ATestGameMode(){}
 
 	void SpawnBall();
@@ -23,9 +24,9 @@ public:
 	static bool IsEnd;
 
 	int test();
-	Map_Bottom* GetBt()
-	{
-		return bt;
+	Map_Bottom* GetBottom()	{
+		if (nullptr != Bottom){return Bottom;}
+		else{return nullptr;}
 	}
 
 protected:
@@ -35,13 +36,11 @@ protected:
 
 
 private:
-	class Map_Bottom* bt = nullptr;
-
-	class BrickEditor* Editor;
-	class BrickEditor* EditorLoad;
-	class APaddle* Paddle;
-
-	class AScore* score;
+	class BrickEditor* Editor=nullptr;
+	class BrickEditor* EditorLoad = nullptr;
+	class APaddle* Paddle = nullptr;
+	class AScore* score = nullptr;
+	class Map_Bottom* Bottom = nullptr;
 	FVector2D UIPos = {0,0};
 
 	bool bIsBonusActive = false;
@@ -50,7 +49,6 @@ private:
 	int TotalCount = 100;
 	int BreakCountTotal = 1000;
 	int DeathCount = 650;
-
 
 };
 

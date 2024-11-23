@@ -13,6 +13,7 @@
 #include <EngineBase/EngineMath.h>
 
 #include "TestGameMode.h"
+#include "Map_Bottom.h"
 
 //BallType ABall::ballType = BallType::Basic;
 //BallType ballType = Basic;
@@ -27,6 +28,7 @@ ABall::ABall()
     IsMove = false;
     SavePos = GetActorLocation();
     ballType = BallType::Basic;
+
 }
 
 
@@ -39,7 +41,7 @@ void ABall::BeginPlay()
         Fade = GetWorld()->SpawnActor<AFade>();
         Fade->GetBackSpriteRenderer()->SetAlphafloat(0.f);
     }
-
+    gamemode = GetWorld()->GetGameMode<ATestGameMode>();
 }
 
 void ABall::Tick(float _DeltaTime)
@@ -47,8 +49,17 @@ void ABall::Tick(float _DeltaTime)
     Super::Tick(_DeltaTime);
 
     SavePos = GetActorLocation();
+    //gamemode = dynamic_cast<ATestGameMode*>(gamemode);
 
 
+
+    if (nullptr == gamemode)
+    {
+        return;
+    }
+    bottom = nullptr;
+    bottom = gamemode->GetBottom();
+    bottomSpriteRender = bottom->GetRender();
 
     // 벽 충돌 체크 및 속도 반사
     int MaxTop = 101, MaxBottom = 1000, MaxLeft = 49, MaxRight = 722;
@@ -98,7 +109,7 @@ void ABall::UpdatePosition(float deltaTime)
     if (IsMove)
     {
         // 벽 충돌 체크 및 속도 반사
-        int MaxTop = 101, MaxBottom = 1000, MaxLeft = 49, MaxRight = 722;
+        int MaxTop = 101, MaxBottom = 960, MaxLeft = 49, MaxRight = 722;
         FVector2D ballPos = GetActorLocation();
         FVector2D ballScale = GetRender()->GetComponentScale();
         float tolerance = 0.15f + ballScale.X / 2;
@@ -124,13 +135,7 @@ void ABall::UpdatePosition(float deltaTime)
         else if (MaxBottom < ballPos.Y)
         {
 
-            if (nullptr!=testmap->GetBt())
-            {
-                Reflect({ 0.f, -1.f });
-                ballPos.Y = MaxBottom - ballScale.Y;
-                hasCollided = true;
-            }
-            else
+            if (false==bottomSpriteRender->IsActive())
             {
                 if (ballType == BallType::Basic)
                 {
@@ -147,7 +152,12 @@ void ABall::UpdatePosition(float deltaTime)
                     return;
                 }
             }
-
+            else
+            {
+                Reflect({ 0.f, -1.f });
+                ballPos.Y = MaxBottom - ballScale.Y;
+                hasCollided = true;
+            }
 
 
         }

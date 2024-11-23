@@ -10,6 +10,15 @@ public:
 
 	//void BeginPlay() override;
 	//void Tick(float _DeltaTime) override;
+	USpriteRenderer* GetRender()
+	{
+		return SpriteRender;
+	}
+
+protected:
+
+private:
+	USpriteRenderer* SpriteRender;
 
 
 

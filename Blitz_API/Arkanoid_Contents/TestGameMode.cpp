@@ -21,9 +21,16 @@
 
 bool ATestGameMode::IsEnd = false;
 
+ATestGameMode::ATestGameMode()
+{
+}
+
 void ATestGameMode::BeginPlay()
 {
 	Super::BeginPlay();
+
+	Bottom = GetWorld()->SpawnActor<Map_Bottom>();
+	Bottom->GetRender()->SetActive(false);
 
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
@@ -97,28 +104,20 @@ void ATestGameMode::BeginPlay()
 		Ball->SetSpeed(700.f);
 		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 	}
+
 }
 
 void ATestGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	bt = nullptr;
-	if (nullptr == bt)
+	if (false == Bottom-> GetRender()->IsActive())
 	{
 		if (UEngineInput::GetInst().IsDown(VK_RETURN))
 		{
-			bt = GetWorld()->SpawnActor<Map_Bottom>();
+			Bottom->GetRender()->SetActive(true);
 		}
 	}
-	//else if(nullptr != bt)
-	//{
-	//	if (UEngineInput::GetInst().IsPress(VK_RETURN))
-	//	{
-	//		bt->Destroy();
-	//		bt = nullptr;
-	//	}
-	//}
 
 
 	if (UEngineInput::GetInst().IsDown('P'))
@@ -192,6 +191,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 	}
 
 }
+
 
 void ATestGameMode::SpawnBall()
 {

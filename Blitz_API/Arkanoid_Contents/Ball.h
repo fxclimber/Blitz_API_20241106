@@ -2,6 +2,7 @@
 #include <EngineCore/Actor.h>
 #include <chrono>
 
+class ATestGameMode;
 
 enum BallType
 {
@@ -67,6 +68,11 @@ private:
 	class USpriteRenderer* SpriteRenderer;
 	class AFade* Fade;
 	bool FadeOver=true;
-	class ATestGameMode* testmap;
+
+	class Map_Bottom* bottom;
+	ATestGameMode* gamemode = nullptr;
+	class USpriteRenderer* bottomSpriteRender=nullptr;
+
+
 };
 
