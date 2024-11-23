@@ -171,6 +171,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TmpGameMode.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArkanoidContentsCore.cpp" />
@@ -194,6 +195,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TmpGameMode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

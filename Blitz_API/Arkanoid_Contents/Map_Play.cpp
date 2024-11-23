@@ -19,6 +19,5 @@ Map_Play::Map_Play()
 		FVector2D MapScale = SpriteRender->SetSpriteScale(1.0f);
 		SpriteRender->SetComponentLocation(MapScale.Half());
 	}
-	
 }
 

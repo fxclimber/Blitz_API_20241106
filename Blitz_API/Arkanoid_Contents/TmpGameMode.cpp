@@ -1,5 +1,5 @@
 #include "PreCompiledFile.h"
-#include "BrickEditorGameMode.h"
+#include "TmpGameMode.h"
 #include <EngineCore/Level.h>
 #include <EnginePlatform/EngineInput.h>
 #include <EngineCore/EngineAPICore.h>
@@ -7,38 +7,30 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 #include "ContentsEnum.h"
-// 타일찍고 저장할 수 있는 레벨
-void BrickEditorGameMode::BeginPlay()
+
+void TmpGameMode::BeginPlay()
 {
 	Super::BeginPlay();
-	//SetActorLocation(UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize().Half());
 	{
-		//FVector2D Size = Globals::BrickSize; //{ 65,30 };
 		FVector2D Size = { 57,26 };
 		FIntPoint Num = { 11,23 };
-		//int score = 0;
 		Editor = GetWorld()->SpawnActor<BrickEditor>();
 		Editor->Create("Brick", Num, Size);
-
 
 		for (int y = 0; y < Num.X; y++)
 		{
 			for (int x = 0; x < Num.Y; x++)
 			{
-				Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 4, 40001);
-				Editor->setBrickType({ y,x }, BrickType::Default);
+				//Editor->SetBrickIndex({ y,x }, { 0, 0 }, Size, 4, 40001);
+				//Editor->setBrickType({ y,x }, BrickType::Default);
 			}
 		}
-		Editor->SetActorLocation({80.f,300.f});
+		Editor->SetActorLocation({ 80.f,300.f });
 	}
-
-
 }
 
-
-void BrickEditorGameMode::Tick(float _DeltaTime)
+void TmpGameMode::Tick(float _DeltaTime)
 {
-
 	Super::Tick(_DeltaTime);
 
 	if (UEngineInput::GetInst().IsDown('P'))
@@ -48,7 +40,7 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 
 	if (UEngineInput::GetInst().IsDown('Q'))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Tmp");
+		UEngineAPICore::GetCore()->OpenLevel("Editor");
 	}
 
 	static bool IsSpaceBarPressed = false;
@@ -134,16 +126,5 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 		UEngineSerializer Ser;
 		NewFile.Read(Ser);
 		Editor->DeSerialize(Ser);
-	}
-
-	// 랜덤 사용 샘플
-	if (true == UEngineInput::GetInst().IsPress('P'))
-	{
-		UEngineRandom Random;
-		for (size_t i = 0; i < 10; i++)
-		{
-			int Value = Random.RandomInt(0, 100);
-			UEngineDebug::OutPutString(std::to_string(Value));
-		}
 	}
 }

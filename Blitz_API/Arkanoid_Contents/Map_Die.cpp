@@ -11,7 +11,7 @@ Map_Die::Map_Die()
 	{
 		USpriteRenderer* SpriteRenderer = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRenderer->SetOrder(ERenderOrder::BACKGROUND);
-		SpriteRenderer->SetSprite("Map_Ending001_1000.png");
+		SpriteRenderer->SetSprite("Map_Ending001_Close.png");
 
 		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 		SpriteRenderer->SetComponentScale(WinSize);
@@ -19,7 +19,6 @@ Map_Die::Map_Die()
 		FVector2D MapScale = SpriteRenderer->SetSpriteScale(1.0f);
 		SpriteRenderer->SetComponentLocation(MapScale.Half());
 	}
-	//GetWorld()->SpawnActor<Map_Bottom>();
 }
 
 void Map_Die::Tick(float _DeltaTime)

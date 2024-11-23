@@ -45,6 +45,13 @@ void ATestGameMode::BeginPlay()
 	Editor = GetWorld()->SpawnActor<BrickEditor>();
 	Editor->SetBricksHeight(210);
 
+	FVector2D Size = { 57,26 };
+	FIntPoint Num = { 11,2 };
+	int score = 0;
+	Editor->Create("Brick", Num, Size);
+
+
+
 	UEngineDirectory Dir;
 	if (false == Dir.MoveParentToDirectory("Resources"))
 	{
@@ -60,34 +67,34 @@ void ATestGameMode::BeginPlay()
 	// 그 경로의 파일 존재한다면 로드
 	if (true == Path.IsExists())
 	{
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("rb");
-		UEngineSerializer Ser;
-		NewFile.Read(Ser);
-		Editor->DeSerialize(Ser);
+		//UEngineFile NewFile = SaveFilePath;
+		//NewFile.FileOpen("rb");
+		//UEngineSerializer Ser;
+		//NewFile.Read(Ser);
+		//Editor->DeSerialize(Ser);
 	}
 	// 그 경로의 파일 존재하지 않는다면 디폴트 방식으로 생성
 	else 
 	{
-		FVector2D Size = { 57,26 };
-		FIntPoint Num = { 11,2 };
-		int score = 0;
-		EditorLoad = Editor->Create("Brick", Num, Size);
+		//FVector2D Size = { 57,26 };
+		//FIntPoint Num = { 11,2 };
+		//int score = 0;
+		//Editor->Create("Brick", Num, Size);
 
 		for (int y = 0; y < Num.Y; y++)
 		{
 			for (int x = 0; x < Num.X; x++)
 			{
 				int randomIndex = std::rand() % 5;//일반벽돌색 5개
-				Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
-				Editor->setBrickType({ x,y }, BrickType::Default);
+				//Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
+				//Editor->setBrickType({ x,y }, BrickType::Default);
 			}
 		}
 	}
 
 
 
-	BreakCountTotal = CountBreakableBricks();
+	//BreakCountTotal = CountBreakableBricks();
 
 
 
@@ -103,7 +110,7 @@ void ATestGameMode::BeginPlay()
 		Ball->SetSpeed(700.f);
 		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 	}
-
+	GameClear = false;
 }
 
 void ATestGameMode::Tick(float _DeltaTime)
@@ -126,6 +133,10 @@ void ATestGameMode::Tick(float _DeltaTime)
 	}
 
 
+	if (UEngineInput::GetInst().IsDown('Q'))
+	{
+		UEngineAPICore::GetCore()->OpenLevel("Tmp");
+	}
 
 
 
@@ -174,14 +185,18 @@ void ATestGameMode::Tick(float _DeltaTime)
 	DeathCount = Editor->GetDeathCount();
 	bool BrokenCount = AllBricksNonBreakable();
 
-	if (nullptr != Editor)
+	if (true == GameClear)
 	{
-			// 클리어처리
-			if (true == BrokenCount)
-			{
-				score->SetFinalValue(AScore::ScoreUI);
-				UEngineAPICore::GetCore()->OpenLevel("Die");
-			}
+		if (nullptr != Editor)
+		{
+				// 클리어처리
+				if (true == BrokenCount)
+				{
+					score->SetFinalValue(AScore::ScoreUI);
+					UEngineAPICore::GetCore()->OpenLevel("Die");
+				}
+		}
+
 	}
 
 	// 확인용 로그들 
@@ -194,6 +209,27 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore * 32));
+	}
+
+	// 벽돌로드 
+	if (true == UEngineInput::GetInst().IsPress('L'))
+	{
+		UEngineDirectory Dir;
+		if (false == Dir.MoveParentToDirectory("Resources"))
+		{
+			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			return;
+		}
+		Dir.Append("Data");
+		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+		UEngineFile NewFile = SaveFilePath;
+		NewFile.FileOpen("rb");
+		UEngineSerializer Ser;
+		NewFile.Read(Ser);
+		Editor->DeSerialize(Ser);
+
+		BreakCountTotal = CountBreakableBricks();
+
 	}
 
 }
@@ -234,6 +270,7 @@ int ATestGameMode::CountBreakableBricks()
 {
 	int DefaultCount = 0;
 	int HPBrickCount = 0;
+	GameClear = true;
 
 	std::vector<std::vector<ABrick>>& GetAllBricks = Editor->GetAllBricks();
 
@@ -270,5 +307,6 @@ bool ATestGameMode::AllBricksNonBreakable()
 
 	UEngineDebug::CoreOutPutString("GameMode-Number of Bricks : " + std::to_string(BreakCountTotal));
 	UEngineDebug::CoreOutPutString("GameMode-Number of DeathCount : " + std::to_string(DeathCount));
+	return false;
 }
 

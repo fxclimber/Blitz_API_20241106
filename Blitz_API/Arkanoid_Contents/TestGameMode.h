@@ -37,7 +37,7 @@ protected:
 
 private:
 	class BrickEditor* Editor=nullptr;
-	class BrickEditor* EditorLoad = nullptr;
+	//class BrickEditor* EditorLoad = nullptr;
 	class APaddle* Paddle = nullptr;
 	class AScore* score = nullptr;
 	class Map_Bottom* Bottom = nullptr;
@@ -49,6 +49,7 @@ private:
 	bool GameClear = false;
 	int BreakCountTotal = 11;
 	int DeathCount = 2;
+	std::string LoadFileName;
 
 };
 

@@ -49,7 +49,8 @@ void ABall::Tick(float _DeltaTime)
     Super::Tick(_DeltaTime);
 
     SavePos = GetActorLocation();
-    //gamemode = dynamic_cast<ATestGameMode*>(gamemode);
+    // 일반 다이나믹캐스트하려면
+    // gamemode = dynamic_cast<ATestGameMode*>(GetWorld()->GetGameMode());
 
 
 

@@ -13,6 +13,7 @@
 #include "TestGameMode.h"
 #include "DieGameMode.h"
 #include "BrickEditorGameMode.h"
+#include "TmpGameMode.h"
 
 void ArkanoidContentsCore::BeginPlay()
 {
@@ -161,11 +162,12 @@ void ArkanoidContentsCore::BeginPlay()
 	UEngineAPICore::GetCore()->GetMainWindow().SetWindowPosAndScale({ 0, 0 }, { 770, 1000 });
 
 	// CreateLevel
-	UEngineAPICore::GetCore()->CreateLevel<ATestGameMode, Map_Play>("Test");
+	UEngineAPICore::GetCore()->CreateLevel<ATestGameMode, Map_Play>("Play");
 	UEngineAPICore::GetCore()->CreateLevel<DieGameMode, Map_Die>("Die");
 	UEngineAPICore::GetCore()->CreateLevel<BrickEditorGameMode, Map_Die>("Editor");
+	UEngineAPICore::GetCore()->CreateLevel<TmpGameMode, Map_Die>("Tmp");
 
 	// OpenLevel
-	UEngineAPICore::GetCore()->OpenLevel("Test");
+	UEngineAPICore::GetCore()->OpenLevel("Play");
 
 }
