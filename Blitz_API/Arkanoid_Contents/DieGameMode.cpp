@@ -13,6 +13,8 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 #include "ContentsEnum.h"
+#include "Map_Play.h"
+#include "TestGameMode.h"
 
 DieGameMode::DieGameMode()
 {
@@ -43,6 +45,11 @@ void DieGameMode::Tick(float _DeltaTime)
 		UEngineAPICore::GetCore()->OpenLevel("Editor");
 	}
 
+	//// ResetLevel
+	//if (UEngineInput::GetInst().IsDown('R'))
+	//{
+	//	UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
+	//}
 
 
 }

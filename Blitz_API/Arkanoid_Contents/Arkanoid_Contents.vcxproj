@@ -163,6 +163,7 @@
     <ClInclude Include="Map_Bottom.h" />
     <ClInclude Include="Map_Die.h" />
     <ClInclude Include="Map_Play.h" />
+    <ClInclude Include="Map_Title.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PreCompiledFile.h" />
     <ClInclude Include="BrickEditor.h" />
@@ -171,6 +172,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="TitleGameMode.h" />
     <ClInclude Include="TmpGameMode.h" />
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +186,7 @@
     <ClCompile Include="Map_Bottom.cpp" />
     <ClCompile Include="Map_Die.cpp" />
     <ClCompile Include="Map_Play.cpp" />
+    <ClCompile Include="Map_Title.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PreCompiledFile.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -195,6 +198,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp" />
     <ClCompile Include="TmpGameMode.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

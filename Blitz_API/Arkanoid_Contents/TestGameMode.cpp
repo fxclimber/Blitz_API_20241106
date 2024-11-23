@@ -18,6 +18,8 @@
 #include "Score.h"
 #include "Fade.h"
 #include "Map_Bottom.h"
+#include "Map_Play.h"
+
 
 bool ATestGameMode::IsEnd = false;
 
@@ -116,6 +118,14 @@ void ATestGameMode::BeginPlay()
 void ATestGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
+
+	// ResetLevel
+	if (UEngineInput::GetInst().IsDown('R'))
+	{
+		//UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
+	}
+
+
 
 
 	// 엔터누르면 바닥 생기기

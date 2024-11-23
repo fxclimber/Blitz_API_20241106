@@ -1,6 +1,20 @@
 #include "PreCompiledFile.h"
 #include "Score.h"
 
+#include <EngineBase/EngineDirectory.h>
+#include <EngineCore/EngineAPICore.h>
+
+#include "Map_Play.h"
+#include "Map_Die.h"
+#include "TestGameMode.h"
+#include "DieGameMode.h"
+#include <EnginePlatform/EngineInput.h>
+
+
+
+
+
+
 int AScore::ScoreUI = 0; // 정적 변수 정의
 int AScore::FinalScoreUI = 0; // 정적 변수 정의 및 초기화
 

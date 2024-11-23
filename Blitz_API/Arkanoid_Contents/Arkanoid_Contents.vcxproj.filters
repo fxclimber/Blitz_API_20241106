@@ -49,6 +49,12 @@
     <ClInclude Include="TmpGameMode.h">
       <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
+    <ClInclude Include="TitleGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Title.h">
+      <Filter>ContentsObject\Map</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -98,6 +104,12 @@
     </ClCompile>
     <ClCompile Include="TmpGameMode.cpp">
       <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleGameMode.cpp">
+      <Filter>ContentsObject\GameMode</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Title.cpp">
+      <Filter>ContentsObject\Map</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

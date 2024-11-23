@@ -64,7 +64,6 @@ void ULevel::BeginPlayCheck()
 
 		Renderers;
 
-		// todtjdtl 
 		AActor::ComponentBeginPlay();
 
 		Renderers;

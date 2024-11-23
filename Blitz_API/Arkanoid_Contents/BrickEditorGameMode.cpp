@@ -7,6 +7,8 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 #include "ContentsEnum.h"
+
+
 // 타일찍고 저장할 수 있는 레벨
 void BrickEditorGameMode::BeginPlay()
 {

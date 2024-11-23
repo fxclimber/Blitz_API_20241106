@@ -1,11 +1,13 @@
 #pragma once
 #include <EngineCore/Actor.h>
 
-class Map_Play : public AActor
+
+class Map_Title : public AActor
 {
 public:
-	Map_Play();
-	~Map_Play(){}
+	Map_Title();
+	~Map_Title(){}
+
 	USpriteRenderer* GetRender()
 	{
 		return SpriteRender;
@@ -17,6 +19,7 @@ protected:
 	virtual void Tick(float _DeltaTime)override;
 
 private:
-	USpriteRenderer* SpriteRender;
+	class USpriteRenderer* SpriteRender;
+
 };
 

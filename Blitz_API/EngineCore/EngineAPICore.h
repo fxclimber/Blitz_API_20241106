@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <EnginePlatform/EngineWindow.h>
 #include <EngineBase/EngineTimer.h>
+#include <EngineBase/EngineString.h>
 
 #pragma comment (lib, "EngineBase.lib")
 #pragma comment (lib, "EnginePlatform.lib")
@@ -61,6 +62,52 @@ public:
 		return NewLevel;
 	}
 
+
+
+	template<typename GameModeType, typename MainPawnType>
+	void ResetLevel(std::string_view _LevelName)
+	{
+		// DestroyLevelName = _LevelName;
+		std::string UpperName = UEngineString::ToUpper(_LevelName);
+
+		// 지금 당장 이녀석을 지우면 안된다.
+		if (CurLevel->GetName() != UpperName)
+		{
+			DestroyLevel(_LevelName);
+			CreateLevel<GameModeType, MainPawnType>(UpperName);
+			return;
+		}
+
+		// CurLevel은 삭제되어야 한다.
+		// 나의 포인터는 살아있다. CurLevel
+		std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
+		Levels.erase(FindIter);
+		NextLevel = CreateLevel<GameModeType, MainPawnType>(UpperName);
+		IsCurLevelReset = true;
+	}
+
+	void DestroyLevel(std::string_view _LevelName)
+	{
+		std::string UpperName = UEngineString::ToUpper(_LevelName);
+
+		if (false == Levels.contains(UpperName))
+		{
+			// MSGASSERT("존재하지 않는 레벨을 리셋할수 없습니다." + UpperName);
+			return;
+		}
+
+		std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
+
+		if (nullptr != FindIter->second)
+		{
+			delete FindIter->second;
+			FindIter->second = nullptr;
+		}
+
+		Levels.erase(FindIter);
+	}
+
+
 	void OpenLevel(std::string_view _LevelName);
 
 
@@ -82,6 +129,9 @@ private:
 	// 포인터 체인지 방식
 	class ULevel* CurLevel = nullptr;
 	class ULevel* NextLevel = nullptr;
+	bool IsCurLevelReset = false;
+
+	float GlobalTimeScale = 1.0f;
 
 	void Tick();
 
