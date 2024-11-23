@@ -29,6 +29,8 @@ void Map_Title::BeginPlay()
 {
 	Super::BeginPlay();
 	GetWorld()->SetCameraToMainPawn(false);
+	BGM = UEngineSound::Play("jingle-bells.wav");
+
 }
 
 void Map_Title::Tick(float _DeltaTime)

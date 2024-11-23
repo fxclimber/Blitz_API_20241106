@@ -1,6 +1,10 @@
 #pragma once
 #include <EngineCore/Actor.h>
+#include <EnginePlatform/EngineSound.h>
 
+
+class USpriteRenderer;
+class USoundPlayer;
 
 class Map_Title : public AActor
 {
@@ -20,6 +24,7 @@ protected:
 
 private:
 	class USpriteRenderer* SpriteRender;
+	USoundPlayer BGM;
 
 };
 
