@@ -38,9 +38,9 @@ void DieGameMode::BeginPlay()
 
 void DieGameMode::Tick(float _DeltaTime)
 {
-	if (UEngineInput::GetInst().IsDown('C'))
+	if (UEngineInput::GetInst().IsDown('P'))
 	{
-		UEngineAPICore::GetCore()->OpenLevel("Test");
+		UEngineAPICore::GetCore()->OpenLevel("Editor");
 	}
 
 
