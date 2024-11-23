@@ -14,7 +14,7 @@ public:
 	void SpawnBall();
 	std::vector<class ABall*> Balls;
 	void CheckScore();
-	int AllBricksNonBreakable();
+	bool AllBricksNonBreakable();
 	bool GetGameClear()const
 	{
 		return GameClear;
@@ -45,10 +45,10 @@ private:
 
 	bool bIsBonusActive = false;
 	class Brick* BonusA;
+
 	bool GameClear = false;
-	int TotalCount = 100;
-	int BreakCountTotal = 1000;
-	int DeathCount = 650;
+	int BreakCountTotal = 11;
+	int DeathCount = 2;
 
 };
 

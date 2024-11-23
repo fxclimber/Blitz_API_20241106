@@ -88,7 +88,6 @@ void ATestGameMode::BeginPlay()
 
 
 	BreakCountTotal = CountBreakableBricks();
-	UEngineDebug::CoreOutPutString("GameMode-Number of Bricks : " + std::to_string(BreakCountTotal));
 
 
 
@@ -111,13 +110,23 @@ void ATestGameMode::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
 
-	if (false == Bottom-> GetRender()->IsActive())
+
+	// 엔터누르면 바닥 생기기
 	{
-		if (UEngineInput::GetInst().IsDown(VK_RETURN))
-		{
-			Bottom->GetRender()->SetActive(true);
+		static bool wasReturnDown = false; // 이전 프레임 엔터상태
+		bool isReturnDown = UEngineInput::GetInst().IsDown(VK_RETURN); // 현재 키 상태
+
+		// 키상태,처음만 실행
+		if (!wasReturnDown && isReturnDown) {
+			bool isActive = Bottom->GetRender()->IsActive();
+			Bottom->GetRender()->SetActive(!isActive); // 상태 반전
 		}
+		// 지금상태를 다음프레임의 이전 상태로 저장
+		wasReturnDown = isReturnDown;
 	}
+
+
+
 
 
 	if (UEngineInput::GetInst().IsDown('P'))
@@ -163,16 +172,15 @@ void ATestGameMode::Tick(float _DeltaTime)
 	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
 
 	DeathCount = Editor->GetDeathCount();
-
-	int BrokenCount = AllBricksNonBreakable();
+	bool BrokenCount = AllBricksNonBreakable();
 
 	if (nullptr != Editor)
 	{
 			// 클리어처리
-			if (1 == BrokenCount)
+			if (true == BrokenCount)
 			{
 				score->SetFinalValue(AScore::ScoreUI);
-				//UEngineAPICore::GetCore()->OpenLevel("Die");
+				UEngineAPICore::GetCore()->OpenLevel("Die");
 			}
 	}
 
@@ -186,8 +194,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		int TotalScore = Editor->GetScore();
 		UEngineDebug::CoreOutPutString("TotalScore : " + std::to_string(TotalScore * 32));
-
-
 	}
 
 }
@@ -209,7 +215,6 @@ void ATestGameMode::SpawnBall()
 		Ball0->ballType = BallType::Bonus;
 		Balls.push_back(Ball0);
 	}
-
 }
 
 void ATestGameMode::CheckScore()
@@ -227,83 +232,43 @@ void ATestGameMode::CheckScore()
 
 int ATestGameMode::CountBreakableBricks()
 {
-	int NotBreakcount = 0;
-	int SpriteCount = 0;
-	std::vector<std::vector<ABrick>>& Test = Editor->GetAllBricks();
+	int DefaultCount = 0;
+	int HPBrickCount = 0;
 
-	if (nullptr != Editor)
-	{
-		if (0 != Editor->GetAllBricks().size())
-		{
-			for (int y = 0; y < Test.size(); y++)
-			{
-				for (int x = 0; x < Test[y].size(); x++)
-				{
-					if (Test[y][x].BrickType == BrickType::NotBreak)
-					{
-						NotBreakcount++;
-						BreakCountTotal = 0;
-					}
+	std::vector<std::vector<ABrick>>& GetAllBricks = Editor->GetAllBricks();
+
+	if (!Editor->GetAllBricks().empty()) {
+		for (int y = 0; y < GetAllBricks.size(); y++) {
+			for (int x = 0; x < GetAllBricks[y].size(); x++) {
+				const auto& brick = GetAllBricks[y][x];
+				switch (brick.BrickType) {
+				case BrickType::Default:
+					DefaultCount++;
+					break;
+				case BrickType::HPBrick:
+					HPBrickCount++;
+					break;
+				default:
+					break; 
 				}
 			}
-
-
-			for (int y = 0; y < Test.size(); y++)
-			{
-				for (int x = 0; x < Test[y].size(); x++)
-				{
-					if (nullptr != Test[y][x].SpriteRenderer)
-					{
-						SpriteCount++;
-					}
-					else
-					{
-						SpriteCount = 10;
-					}
-				}
-			}
-			//BreakCountTotal = 0;
-			BreakCountTotal = SpriteCount - NotBreakcount;
-			return BreakCountTotal;
 		}
-		else
-		{
-			return 5;
-		}
-
+		BreakCountTotal = DefaultCount + HPBrickCount;
+		return BreakCountTotal;
 	}
 }
 
-int ATestGameMode::test()
-{
-	return 10;
-}
 
 
-int ATestGameMode::AllBricksNonBreakable()
+bool ATestGameMode::AllBricksNonBreakable()
 {
 	DeathCount = Editor->GetDeathCount();
-	//DeathCount = test();
-	//DeathCount = 11;
-	BreakCountTotal = 1;
-
-
-	const int CurrentDeathCount = DeathCount;
-	const int CurrentBreakCountTotal = BreakCountTotal;
-
-	if (Editor == nullptr || Editor->GetAllBricks().empty())
+	if (DeathCount == BreakCountTotal)
 	{
-		return 0;
+		return true;
 	}
-	else if (CurrentDeathCount-1 == CurrentBreakCountTotal)
-	{
-		return 1;
-	}
-
-
-
 
 	UEngineDebug::CoreOutPutString("GameMode-Number of Bricks : " + std::to_string(BreakCountTotal));
-	UEngineDebug::CoreOutPutString("GameMode-Number of DeathCount : " + std::to_string(Editor->GetDeathCount()));	
+	UEngineDebug::CoreOutPutString("GameMode-Number of DeathCount : " + std::to_string(DeathCount));
 }
 

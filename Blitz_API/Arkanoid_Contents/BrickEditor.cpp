@@ -16,7 +16,6 @@ BrickEditor* BrickEditor::Create(std::string_view _Sprite, FIntPoint _Count, FVe
 	SpriteName = _Sprite;
 	BrickSize = _BrickSize;
 	BrickCount = _Count;
-	//Score = _Score;
 	AllBricks.resize(_Count.Y);
 
 	for (size_t y = 0; y < AllBricks.size(); y++)
@@ -372,8 +371,8 @@ BrickEditor::BrickEditor()
 	BonusA = nullptr;
 	std::srand(static_cast<unsigned int>(std::time(nullptr)));
 	stageStartTime = std::chrono::steady_clock::now();
-
 }
+
 void BrickEditor::Tick(float _DeltaTime)
 {
 	Super::Tick(_DeltaTime);
