@@ -12,7 +12,7 @@ Map_Title::Map_Title()
 	{
 		SpriteRender = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRender->SetOrder(ERenderOrder::BACKGROUND);
-		SpriteRender->SetSprite("Map_Title_resize_1000.png");
+		SpriteRender->SetSprite("Map_Title_Blitz.png");
 
 		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
 		SpriteRender->SetComponentScale(WinSize);
