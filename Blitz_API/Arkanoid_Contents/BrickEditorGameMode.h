@@ -12,4 +12,9 @@ protected:
 private:
 	BrickEditor* Editor = nullptr;
 	std::string LoadFileName;
+
+
+	class UI_Editor* UI_EditorLetters =nullptr;
+
+
 };

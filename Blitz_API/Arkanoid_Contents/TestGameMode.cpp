@@ -20,11 +20,13 @@
 #include "Map_Bottom.h"
 #include "Map_Play.h"
 #include "UI.h"
+#include "UI_P.h"
 
 bool ATestGameMode::IsEnd = false;
 
 ATestGameMode::ATestGameMode()
 {
+
 }
 
 void ATestGameMode::BeginPlay()
@@ -44,7 +46,9 @@ void ATestGameMode::BeginPlay()
 	//UILetters->SetText("press");
 	//UILetters->SetText("L");
 	UILetters = GetWorld()->SpawnActor<UI>();
+	UILettersP = GetWorld()->SpawnActor<UI_P>();
 	IsUIMove = false;
+	IsEditMode = false;
 
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
@@ -165,6 +169,8 @@ void ATestGameMode::Tick(float _DeltaTime)
 	if (UEngineInput::GetInst().IsDown('P'))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Editor");
+		IsEditMode = true;
+		IsEditMode = true;
 	}
 
 	float paddleVel = Paddle->GetVel().X;
@@ -250,6 +256,34 @@ void ATestGameMode::Tick(float _DeltaTime)
 		NewFile.Read(Ser);
 		Editor->DeSerialize(Ser);
 
+		{
+			float center = 100.f;
+			float height = 840.f;
+			float smallFontsize = 20;
+			float bigFontSize = 35;
+
+			ALetter* letter3 = GetWorld()->SpawnActor<ALetter>();
+			letter3->SetActorLocation({ center,height });
+			letter3->SetTextSpriteName("Text_Letters.png");
+			letter3->SetOrder(ERenderOrder::UI);
+			letter3->SetTextScale({ bigFontSize, bigFontSize });
+			letter3->SetText("enter");
+
+			ALetter* letter2 = GetWorld()->SpawnActor<ALetter>();
+			letter2->SetActorLocation({ center,height + 40.f });
+			letter2->SetTextSpriteName("Text_Letters.png");
+			letter2->SetOrder(ERenderOrder::UI);
+			letter2->SetTextScale({ smallFontsize, smallFontsize });
+			letter2->SetText("can");
+
+			ALetter* letter1 = GetWorld()->SpawnActor<ALetter>();
+			letter1->SetActorLocation({ center,height + 80.f });
+			letter1->SetTextSpriteName("Text_Letters.png");
+			letter1->SetOrder(ERenderOrder::UI);
+			letter1->SetTextScale({ smallFontsize, smallFontsize });
+			letter1->SetText("helpyou");
+		}
+
 		BreakCountTotal = CountBreakableBricks();
 		//if (nullptr != UILetters)
 		{
@@ -265,7 +299,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 		}
 	}
 
-	if (true==IsUIMove)
+	if (true==IsUIMove)// ¿Ö ¾ÈµÇ!!!!
 	{
 		FVector2D dir = { 200.f,300.f };
 		UILetters->AddActorLocation(dir * 500.f * _DeltaTime);

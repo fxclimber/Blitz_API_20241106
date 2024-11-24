@@ -61,6 +61,12 @@
     <ClInclude Include="UI.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
+    <ClInclude Include="UI_P.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="UI_Editor.h">
+      <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PreCompiledFile.cpp">
@@ -121,6 +127,12 @@
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
     <ClCompile Include="UI.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_P.cpp">
+      <Filter>ContentsObject\Global</Filter>
+    </ClCompile>
+    <ClCompile Include="UI_Editor.cpp">
       <Filter>ContentsObject\Global</Filter>
     </ClCompile>
   </ItemGroup>

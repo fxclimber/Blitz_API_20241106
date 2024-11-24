@@ -176,6 +176,8 @@
     <ClInclude Include="TitleGameMode.h" />
     <ClInclude Include="TmpGameMode.h" />
     <ClInclude Include="UI.h" />
+    <ClInclude Include="UI_Editor.h" />
+    <ClInclude Include="UI_P.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ArkanoidContentsCore.cpp" />
@@ -204,6 +206,8 @@
     <ClCompile Include="TitleGameMode.cpp" />
     <ClCompile Include="TmpGameMode.cpp" />
     <ClCompile Include="UI.cpp" />
+    <ClCompile Include="UI_Editor.cpp" />
+    <ClCompile Include="UI_P.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

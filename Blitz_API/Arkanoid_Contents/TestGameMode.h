@@ -28,6 +28,7 @@ public:
 		else{return nullptr;}
 	}
 	bool IsUIMove=false;
+	bool IsEditMode=false;
 
 protected:
 	void BeginPlay() override;
@@ -41,7 +42,6 @@ private:
 	class APaddle* Paddle = nullptr;
 	class AScore* score = nullptr;
 	class Map_Bottom* Bottom = nullptr;
-	class UI* UILetters = nullptr;
 	FVector2D UIPos = {0,0};
 
 	bool bIsBonusActive = false;
@@ -52,5 +52,7 @@ private:
 	int DeathCount = 2;
 	std::string LoadFileName;
 
+	class UI* UILetters = nullptr;
+	class UI_P* UILettersP = nullptr;
 };
 

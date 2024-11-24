@@ -7,7 +7,8 @@
 #include <EngineBase/EngineDirectory.h>
 #include <EngineBase/EngineRandom.h>
 #include "ContentsEnum.h"
-
+#include "TestGameMode.h"
+#include "UI_Editor.h"
 
 // 타일찍고 저장할 수 있는 레벨
 void BrickEditorGameMode::BeginPlay()
@@ -34,6 +35,22 @@ void BrickEditorGameMode::BeginPlay()
 		Editor->SetActorLocation({80.f,300.f});
 	}
 
+	{
+		UI_EditorLetters = GetWorld()->SpawnActor<UI_Editor>();
+		UI_EditorLetters->SetActive(false);
+
+		USpriteRenderer* SpriteRender = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRender->SetOrder(ERenderOrder::SURF);
+		SpriteRender->SetSprite("Text_Spacebar.png");
+
+		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+		SpriteRender->SetComponentScale(WinSize);
+
+		FVector2D MapScale = SpriteRender->SetSpriteScale(0.55f);
+		//SpriteRender->SetComponentLocation(MapScale.Half());
+		SpriteRender->SetComponentLocation({250.f,900.f});
+	}
+
 
 }
 
@@ -42,6 +59,16 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 {
 
 	Super::Tick(_DeltaTime);
+
+	ATestGameMode* playgamemode = GetWorld()->GetGameMode<ATestGameMode>();
+	if (nullptr != playgamemode)
+	{
+		if (true == playgamemode->IsEditMode)
+		{
+			UI_EditorLetters->SetActive(true);
+		}
+	}
+
 
 	if (UEngineInput::GetInst().IsDown('P'))
 	{
@@ -148,4 +175,6 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 			UEngineDebug::OutPutString(std::to_string(Value));
 		}
 	}
+
+
 }

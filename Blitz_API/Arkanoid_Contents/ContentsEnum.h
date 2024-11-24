@@ -14,6 +14,7 @@ enum class ERenderOrder
 	UI = 2000,
 	FX = 2001,
 	FADE = 20000,
+	SURF = 40000,
 };
 enum class WhereIsBall
 {
