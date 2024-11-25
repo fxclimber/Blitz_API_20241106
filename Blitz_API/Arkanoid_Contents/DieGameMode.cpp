@@ -15,6 +15,7 @@
 #include "ContentsEnum.h"
 #include "Map_Play.h"
 #include "TestGameMode.h"
+#include "Map_Die.h"
 
 DieGameMode::DieGameMode()
 {
@@ -45,11 +46,12 @@ void DieGameMode::Tick(float _DeltaTime)
 		UEngineAPICore::GetCore()->OpenLevel("Editor");
 	}
 
-	//// ResetLevel
-	//if (UEngineInput::GetInst().IsDown('R'))
-	//{
-	//	UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
-	//}
+	if (UEngineInput::GetInst().IsDown('R'))
+	{
+		//UEngineAPICore::GetCore()->ResetLevel<DieGameMode, Map_Die>("Die");
+		UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
+
+	}
 
 
 }

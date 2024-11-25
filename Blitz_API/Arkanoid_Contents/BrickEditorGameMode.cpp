@@ -9,6 +9,7 @@
 #include "ContentsEnum.h"
 #include "TestGameMode.h"
 #include "UI_Editor.h"
+#include "Map_Die.h"
 
 // 타일찍고 저장할 수 있는 레벨
 void BrickEditorGameMode::BeginPlay()
@@ -59,6 +60,14 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 {
 
 	Super::Tick(_DeltaTime);
+
+	if (UEngineInput::GetInst().IsDown('R'))
+	{
+		UEngineAPICore::GetCore()->ResetLevel<BrickEditorGameMode, Map_Die>("Editor");
+	}
+
+
+
 
 	ATestGameMode* playgamemode = GetWorld()->GetGameMode<ATestGameMode>();
 	if (nullptr != playgamemode)

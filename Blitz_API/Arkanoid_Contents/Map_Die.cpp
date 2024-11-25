@@ -23,5 +23,4 @@ Map_Die::Map_Die()
 
 void Map_Die::Tick(float _DeltaTime)
 {
-
 }
