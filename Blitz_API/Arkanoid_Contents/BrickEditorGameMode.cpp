@@ -181,7 +181,7 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 		for (size_t i = 0; i < 10; i++)
 		{
 			int Value = Random.RandomInt(0, 100);
-			UEngineDebug::OutPutString(std::to_string(Value));
+			//UEngineDebug::OutPutString(std::to_string(Value));
 		}
 	}
 

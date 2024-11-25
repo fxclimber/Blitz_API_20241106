@@ -45,13 +45,13 @@ void APaddle::Tick(float _DeltaTime)
 	{
 		AddActorLocation(FVector2D::RIGHT * _DeltaTime * Speed);
 		Vel = (FVector2D::RIGHT * _DeltaTime * Speed);
-		UEngineDebug::CoreOutPutString("Vel : " + std::to_string(Vel.X));
+		//UEngineDebug::CoreOutPutString("Vel : " + std::to_string(Vel.X));
 	}
 	if (true == UEngineInput::GetInst().IsPress('A'))
 	{
 		AddActorLocation(FVector2D::LEFT * _DeltaTime * Speed);
 		Vel = (FVector2D::LEFT * _DeltaTime * Speed);
-		UEngineDebug::CoreOutPutString("Vel : " + std::to_string(Vel.X));
+		//UEngineDebug::CoreOutPutString("Vel : " + std::to_string(Vel.X));
 
 	}
 

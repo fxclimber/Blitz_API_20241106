@@ -59,7 +59,7 @@ BonusType Brick::GetRandomBonusType()
 {
     UEngineRandom Random;
     int Value = Random.RandomInt(0, 6);
-    UEngineDebug::CoreOutPutString("Value : " + Value , {200,300});
+    //UEngineDebug::CoreOutPutString("Value : " + Value , {200,300});
     //return static_cast<BonusType>(Value);
     return static_cast<BonusType>(1);
 

@@ -391,8 +391,8 @@ bool ATestGameMode::AllBricksNonBreakable()
 		return true;
 	}
 
-	UEngineDebug::CoreOutPutString("GameMode-Number of Bricks : " + std::to_string(BreakCountTotal));
-	UEngineDebug::CoreOutPutString("GameMode-Number of DeathCount : " + std::to_string(DeathCount));
+	//UEngineDebug::CoreOutPutString("GameMode-Number of Bricks : " + std::to_string(BreakCountTotal));
+	//UEngineDebug::CoreOutPutString("GameMode-Number of DeathCount : " + std::to_string(DeathCount));
 	return false;
 }
 
