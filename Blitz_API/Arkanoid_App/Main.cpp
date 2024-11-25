@@ -5,6 +5,7 @@
 #include <windows.h>
 #include <iostream>
 
+
 #pragma comment (lib, "EngineCore.lib")
 #pragma comment(lib,"Arkanoid_Contents.lib")
 
@@ -23,6 +24,5 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 	// 엔진 시작 클래스 Core, hInstance와 컨텐츠객체 포인터를 인자로.
 	return UEngineAPICore::EngineStart(hInstance, &User);
 
-	
 }
 

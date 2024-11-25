@@ -173,8 +173,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 	}
 
 
-
-
 	// 엔터누르면 바닥 생기기
 	{
 		static bool wasReturnDown = false; // 이전 프레임 엔터상태
@@ -277,19 +275,66 @@ void ATestGameMode::Tick(float _DeltaTime)
 	// 벽돌로드 
 	if (true == UEngineInput::GetInst().IsPress('L'))
 	{
-		UEngineDirectory Dir;
-		if (false == Dir.MoveParentToDirectory("Resources"))
 		{
-			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-			return;
+			//UEngineDirectory Dir;
+			//if (false == Dir.MoveParentToDirectory("Resources"))
+			//{
+			//	MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			//	return;
+			//}
+			//Dir.Append("Data");
+			//std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+			//UEngineFile NewFile = SaveFilePath;
+			//NewFile.FileOpen("rb");
+			//UEngineSerializer Ser;
+			//NewFile.Read(Ser);
+			//Editor->DeSerialize(Ser);
 		}
-		Dir.Append("Data");
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("rb");
-		UEngineSerializer Ser;
-		NewFile.Read(Ser);
-		Editor->DeSerialize(Ser);
+		// 여러파일 직렬화 로드 테스트
+		if (true == UEngineInput::GetInst().IsPress('L'))
+		{
+			UEngineDirectory Dir;
+			if (false == Dir.MoveParentToDirectory("Resources"))
+			{
+				MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+				return;
+			}
+
+			Dir.Append("Data");
+
+			// 가장 최신 파일을 찾는 로직 추가
+			int FileIndex = 0;
+			std::string SaveFilePath;
+
+			// 가장 높은 인덱스의 파일을 찾기
+			do {
+				SaveFilePath = Dir.GetPathToString() + "\\MapData" + std::to_string(FileIndex) + ".Data";
+				FileIndex++;
+			} while (std::filesystem::exists(SaveFilePath));
+
+			// 마지막 파일 인덱스 조정 (존재하지 않는 파일에서 하나 전 파일로)
+			if (FileIndex > 1) {
+				SaveFilePath = Dir.GetPathToString() + "\\MapData" + std::to_string(FileIndex - 2) + ".Data";
+			}
+			else {
+				MSGASSERT("로드할 파일이 없습니다.");
+				return;
+			}
+
+			// 파일 읽기
+			UEngineFile NewFile = SaveFilePath;
+			NewFile.FileOpen("rb");
+			UEngineSerializer Ser;
+			NewFile.Read(Ser);
+			Editor->DeSerialize(Ser);
+		}
+
+
+
+
+
+
+
 
 		{
 			float center = 100.f;
@@ -320,25 +365,10 @@ void ATestGameMode::Tick(float _DeltaTime)
 		}
 
 		BreakCountTotal = CountBreakableBricks();
-		//if (nullptr != UILetters)
-		{
 			IsUIMove = true;
-			//UILetters->Destroy();
-			//UILetters->SetActive(false);
-
-			//UILetters->GetLetter()[0]->GetRenders()[0]->SetAlphafloat(0.f);
-			//UILetters->GetLetter()[0]->GetRenders()[0]->SetActive(false);
-			//UILetters->GetLetter()[1]->GetRenders()[0]->SetActive(false);
-			//UILetters->GetLetter()[2]->GetRenders()[0]->SetActive(false);
 			return;
-		}
 	}
 
-	if (true==IsUIMove)// 왜 안되!!!!
-	{
-		FVector2D dir = { 200.f,300.f };
-		UILetters->AddActorLocation(dir * 500.f * _DeltaTime);
-	}
 }
 
 

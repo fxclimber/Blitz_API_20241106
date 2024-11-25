@@ -169,41 +169,155 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 
 
 	// 직렬화 저장
-	if (true == UEngineInput::GetInst().IsPress('M'))
+	//if (true == UEngineInput::GetInst().IsPress('M'))
+	//{
+	//	UEngineSerializer _Ser;
+	//	Editor->Serialize(_Ser);
+	//	// 순수한 바이트 덩어리 그냥 저장하면 끝난다.
+	//	UEngineDirectory Dir;
+	//	if (false == Dir.MoveParentToDirectory("Resources"))
+	//	{
+	//		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+	//		return;
+	//	}
+	//	Dir.Append("Data");
+	//	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+	//	UEngineFile NewFile = SaveFilePath;
+	//	NewFile.FileOpen("wb");
+	//	NewFile.Write(_Ser);
+	//}
+
+	// 여러파일 직렬화 저장 테스트
 	{
-		UEngineSerializer _Ser;
-		Editor->Serialize(_Ser);
-		// 순수한 바이트 덩어리 그냥 저장하면 끝난다.
-		UEngineDirectory Dir;
-		if (false == Dir.MoveParentToDirectory("Resources"))
+		if (true == UEngineInput::GetInst().IsDown('M'))
 		{
-			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-			return;
+			UEngineSerializer _Ser;
+			Editor->Serialize(_Ser);
+
+			//// 리소스 폴더 설정
+			//UEngineDirectory Dir;
+			//if (false == Dir.MoveParentToDirectory("Resources"))
+			//{
+			//	MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+			//	return;
+			//}
+
+			//Dir.Append("Data");
+
+			//// 파일 이름 자동 생성 로직 추가
+			//int FileIndex = 0;
+			//std::string SaveFilePath;
+
+			//do {
+			//	SaveFilePath = Dir.GetPathToString() + "\\MapData" + std::to_string(FileIndex) + ".Data";
+			//	FileIndex++;
+			//} while (std::filesystem::exists(SaveFilePath)); // 파일 존재 여부 확인
+
+			//// 파일 열기 및 쓰기
+			//UEngineFile NewFile = SaveFilePath;
+			//NewFile.FileOpen("wb");
+			//NewFile.Write(_Ser);
+
+			UEngineDirectory Dir;
+			if (false == Dir.MoveParentToDirectory("Resources"))
+			{
+				MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+				return;
+			}
+
+			Dir.Append("Data");
+
+			// 새로운 파일 경로 생성
+			int FileIndex = 0;
+			std::string SaveFilePath;
+
+			// 존재하지 않는 파일 경로 찾기
+			do {
+				SaveFilePath = Dir.GetPathToString() + "\\MapData" + std::to_string(FileIndex) + ".Data";
+				FileIndex++;
+			} while (std::filesystem::exists(SaveFilePath));
+
+			// 파일 생성
+			UEngineFile NewFile = SaveFilePath;
+			NewFile.FileOpen("wb");
+			NewFile.Write(_Ser); // 직렬화된 데이터를 저장
+
 		}
-		Dir.Append("Data");
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("wb");
-		NewFile.Write(_Ser);
+
+
+
 	}
 
+
+
+
+
 	// 직렬화 로드
-	if (true == UEngineInput::GetInst().IsPress('L'))
+	//if (true == UEngineInput::GetInst().IsPress('L'))
+	//{
+	//	UEngineDirectory Dir;
+	//	if (false == Dir.MoveParentToDirectory("Resources"))
+	//	{
+	//		MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+	//		return;
+	//	}
+	//	Dir.Append("Data");
+	//	std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
+	//	UEngineFile NewFile = SaveFilePath;
+	//	NewFile.FileOpen("rb");
+	//	UEngineSerializer Ser;
+	//	NewFile.Read(Ser);
+	//	Editor->DeSerialize(Ser);
+	//}
+
+	// 여러파일 직렬화 로드 테스트
 	{
-		UEngineDirectory Dir;
-		if (false == Dir.MoveParentToDirectory("Resources"))
+		if (true == UEngineInput::GetInst().IsPress('L'))
 		{
-			MSGASSERT("리소스 폴더를 찾지 못했습니다.");
-			return;
+			UEngineDirectory Dir;
+			if (false == Dir.MoveParentToDirectory("Resources"))
+			{
+				MSGASSERT("리소스 폴더를 찾지 못했습니다.");
+				return;
+			}
+
+			Dir.Append("Data");
+
+			// 가장 최신 파일을 찾는 로직 추가
+			int FileIndex = 0;
+			std::string SaveFilePath;
+
+			// 가장 높은 인덱스의 파일을 찾기
+			do {
+				SaveFilePath = Dir.GetPathToString() + "\\MapData" + std::to_string(FileIndex) + ".Data";
+				FileIndex++;
+			} while (std::filesystem::exists(SaveFilePath));
+
+			// 마지막 파일 인덱스 조정 (존재하지 않는 파일에서 하나 전 파일로)
+			if (FileIndex > 1) {
+				SaveFilePath = Dir.GetPathToString() + "\\MapData" + std::to_string(FileIndex - 2) + ".Data";
+			}
+			else {
+				MSGASSERT("로드할 파일이 없습니다.");
+				return;
+			}
+
+			// 파일 읽기
+			UEngineFile NewFile = SaveFilePath;
+			NewFile.FileOpen("rb");
+			UEngineSerializer Ser;
+			NewFile.Read(Ser);
+			Editor->DeSerialize(Ser);
 		}
-		Dir.Append("Data");
-		std::string SaveFilePath = Dir.GetPathToString() + "\\MapData.Data";
-		UEngineFile NewFile = SaveFilePath;
-		NewFile.FileOpen("rb");
-		UEngineSerializer Ser;
-		NewFile.Read(Ser);
-		Editor->DeSerialize(Ser);
+
 	}
+
+
+
+
+
+
+
 
 	// 랜덤 사용 샘플
 	if (true == UEngineInput::GetInst().IsPress('P'))
