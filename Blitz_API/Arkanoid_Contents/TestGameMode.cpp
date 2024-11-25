@@ -58,7 +58,7 @@ void ATestGameMode::BeginPlay()
 	score->SetTextScale({ 32, 32 });
 
 	playTime = GetWorld()->SpawnActor<AScore>();
-	playTime->SetActorLocation({ 200,50 });
+	playTime->SetActorLocation({ 290,50 });
 	playTime->SetTextSpriteName("Text_Num.png");
 	playTime->SetOrder(ERenderOrder::UI);
 	playTime->SetTextScale({ 32, 32 });
@@ -221,7 +221,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 	score->SetValue(AScore::ScoreUI , 8);//여기에 점수넣기
 
 	AScore::ElapsedTime = static_cast<int>(Editor->GetElapsedTime());
-	playTime->SetValue(AScore::ElapsedTime , 4);
+	playTime->SetValue(AScore::ElapsedTime ,5);
 
 
 	DeathCount = Editor->GetDeathCount();

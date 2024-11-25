@@ -18,5 +18,7 @@ protected:
 
 private:
 	USpriteRenderer* SpriteRender;
+	USpriteRenderer* SpriteRenderScore;
+	USpriteRenderer* SpriteRenderTime;
 };
 

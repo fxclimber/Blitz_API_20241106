@@ -21,6 +21,34 @@ Map_Play::Map_Play()
 		FVector2D MapScale = SpriteRender->SetSpriteScale(1.0f);
 		SpriteRender->SetComponentLocation(MapScale.Half());
 	}
+	{
+		SpriteRenderScore = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRenderScore->SetOrder(ERenderOrder::Bricks);
+		SpriteRenderScore->SetSprite("Text_Time.png"); 
+
+		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+		SpriteRenderScore->SetComponentScale(WinSize);
+
+		FVector2D MapScale = SpriteRenderScore->SetSpriteScale(0.8f);
+		//SpriteRenderScore->SetComponentLocation(MapScale.Half());
+		SpriteRenderScore->SetComponentLocation({ 70.f,50.f });
+
+	}
+	{
+		SpriteRenderTime = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRenderTime->SetOrder(ERenderOrder::Bricks);
+		SpriteRenderTime->SetSprite("Text_Score.png");
+
+		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+		SpriteRenderTime->SetComponentScale(WinSize);
+
+		FVector2D MapScale = SpriteRenderTime->SetSpriteScale(0.8f);
+		//SpriteRenderTime->SetComponentLocation(MapScale.Half());
+		SpriteRenderTime->SetComponentLocation({ 420.f,50.f });
+
+	}
+
+
 }
 
 void Map_Play::BeginPlay()

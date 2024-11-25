@@ -74,8 +74,20 @@ void UEngineAPICore::EngineTick()
 
 void UEngineAPICore::Tick()
 {
+	if (true == IsCurLevelReset)
+	{
+		delete CurLevel;
+		CurLevel = nullptr;
+		IsCurLevelReset = false;
+	}
+
+
+
 	if (nullptr != NextLevel)
 	{
+		// 레벨들을 왔다갔다 할때가 있기 때문에.
+		// 그 순간마다 여러분들이 뭔가를 해주고 싶을수가 있다.
+
 		if (nullptr != CurLevel)
 		{
 			CurLevel->LevelChangeEnd();
@@ -89,7 +101,6 @@ void UEngineAPICore::Tick()
 		// 델타타임이 지연될수 있으므로 델타타임을 초기화시켜주는것이 좋다.
 		DeltaTimer.TimeStart();
 	}
-
 	// 시간을 잴겁니다. 현재시간 
 	DeltaTimer.TimeCheck();
 	float DeltaTime = DeltaTimer.GetDeltaTime();
@@ -115,16 +126,18 @@ void UEngineAPICore::Tick()
 
 void UEngineAPICore::OpenLevel(std::string_view _LevelName)
 {
-	std::string ChangeName = _LevelName.data();
+	std::string UpperName = UEngineString::ToUpper(_LevelName);
 
-	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(ChangeName);
+
+	std::map<std::string, class ULevel*>::iterator FindIter = Levels.find(UpperName);
 	std::map<std::string, class ULevel*>::iterator EndIter = Levels.end();
 
 	if (EndIter == FindIter)
 	{
-		MSGASSERT(ChangeName + "라는 이름의 레벨은 존재하지 않습니다.");
+		MSGASSERT(UpperName + " 라는 이름의 레벨은 존재하지 않습니다.");
 		return;
 	}
 
 	NextLevel = FindIter->second;
+
 }

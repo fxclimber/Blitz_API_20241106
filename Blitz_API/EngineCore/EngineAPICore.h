@@ -48,16 +48,24 @@ public:
 	template<typename GameModeType, typename MainPawnType>
 	ULevel* CreateLevel(std::string_view _LevelName)
 	{
+		std::string UpperName = UEngineString::ToUpper(_LevelName);
+
+		if (false != Levels.contains(UpperName))
+		{
+			MSGASSERT("존재하는 이름의 레벨을 또 만들수 없습니다" + UpperName);
+			return nullptr;
+		}
+
+
 		ULevel* NewLevel = new ULevel();
 
-		// 게임모드가 Level의 특성을 설정하는 중요객체
+		// 게임 모드가 레벨의 특성을 설정하는 중요한 객체
 		NewLevel->CreateGameMode<GameModeType, MainPawnType>();
+		NewLevel->SetName(UpperName);
 
-		// 관리
-		// 삭제되는 객체를 만들고.
-		// 그 객체안에 자료구조 넣은다음
-		// 그 자료구조안에 새롭게 만들어지는 객체들을 보관하는것.
-		Levels.insert({ _LevelName.data() , NewLevel });
+
+		// 레벨을 string으로 저장하고 string으로 호출한다.
+		Levels.insert({ UpperName, NewLevel });
 
 		return NewLevel;
 	}
