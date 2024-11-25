@@ -16,13 +16,45 @@
 #include "Map_Play.h"
 #include "TestGameMode.h"
 #include "Map_Die.h"
+#include "Letter.h"
 
 DieGameMode::DieGameMode()
 {
+	score = nullptr;
 }
 
 void DieGameMode::BeginPlay()
 {
+	// ------------상단 리셋 메세지
+
+	float center = 40.f;
+	float height = 20.f;
+	float smallFontsize = 20;
+	float bigFontSize = 35;
+
+	ALetter* letterReset = GetWorld()->SpawnActor<ALetter>();
+	letterReset->SetActorLocation({ center,height });
+	letterReset->SetTextSpriteName("Text_Letters1.png");
+	letterReset->SetOrder(ERenderOrder::UI);
+	letterReset->SetTextScale({ smallFontsize, smallFontsize });
+	letterReset->SetText("reset");
+
+	ALetter* letterResetAll = GetWorld()->SpawnActor<ALetter>();
+	letterResetAll->SetActorLocation({ center + 120.f,height });
+	letterResetAll->SetTextSpriteName("Text_Letters1.png");
+	letterResetAll->SetOrder(ERenderOrder::UI);
+	letterResetAll->SetTextScale({ smallFontsize, smallFontsize });
+	letterResetAll->SetText("all");
+
+	ALetter* letterResetR = GetWorld()->SpawnActor<ALetter>();
+	letterResetR->SetActorLocation({ center + 212.f,height });
+	letterResetR->SetTextSpriteName("Text_Letters1.png");
+	letterResetR->SetOrder(ERenderOrder::UI);
+	letterResetR->SetTextScale({ bigFontSize, bigFontSize });
+	letterResetR->SetText("r");
+
+	//----------------------------------------------------------------
+
 	//UI
 	score = GetWorld()->SpawnActor<AScore>();
 	score->SetActorLocation({ 385,500 });

@@ -11,6 +11,7 @@
 
 UI_Editor::UI_Editor()
 {
+	gamemode = nullptr;
 }
 
 void UI_Editor::BeginPlay()

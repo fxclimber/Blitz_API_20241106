@@ -16,10 +16,14 @@
 #include "TmpGameMode.h"
 #include "TitleGameMode.h"
 #include "Map_Title.h"
+#include "Letter.h"
 
 
 void ArkanoidContentsCore::BeginPlay()
 {
+
+	
+
 	//------- image load -------------------------------------------------
 	UEngineDirectory Dir;
 

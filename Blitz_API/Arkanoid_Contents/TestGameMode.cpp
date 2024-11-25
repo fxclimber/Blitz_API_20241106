@@ -26,7 +26,7 @@ bool ATestGameMode::IsEnd = false;
 
 ATestGameMode::ATestGameMode()
 {
-
+	BonusA = nullptr;
 }
 
 void ATestGameMode::BeginPlay()
@@ -36,15 +36,36 @@ void ATestGameMode::BeginPlay()
 	Bottom = GetWorld()->SpawnActor<Map_Bottom>();
 	Bottom->GetRender()->SetActive(false);
 
-	// UI text
-	//UILetters = GetWorld()->SpawnActor<ALetter>();
-	//UILetters->SetActorLocation({ 100,600 });
-	//UILetters->SetTextSpriteName("Text_Letters.png");
-	//UILetters->SetOrder(ERenderOrder::UI);
-	//UILetters->SetTextScale({ 40, 40 });
-	//UILetters->SetText("please");
-	//UILetters->SetText("press");
-	//UILetters->SetText("L");
+	// ------------상단 리셋 메세지
+
+	float center = 40.f;
+	float height = 20.f;
+	float smallFontsize = 20;
+	float bigFontSize = 35;
+
+	ALetter* letterReset = GetWorld()->SpawnActor<ALetter>();
+	letterReset->SetActorLocation({ center,height });
+	letterReset->SetTextSpriteName("Text_Letters1.png");
+	letterReset->SetOrder(ERenderOrder::UI);
+	letterReset->SetTextScale({ smallFontsize, smallFontsize });
+	letterReset->SetText("reset");
+
+	ALetter* letterResetAll = GetWorld()->SpawnActor<ALetter>();
+	letterResetAll->SetActorLocation({ center +120.f,height });
+	letterResetAll->SetTextSpriteName("Text_Letters1.png");
+	letterResetAll->SetOrder(ERenderOrder::UI);
+	letterResetAll->SetTextScale({ smallFontsize, smallFontsize });
+	letterResetAll->SetText("all");
+
+	ALetter* letterResetR = GetWorld()->SpawnActor<ALetter>();
+	letterResetR->SetActorLocation({ center+212.f,height });
+	letterResetR->SetTextSpriteName("Text_Letters1.png");
+	letterResetR->SetOrder(ERenderOrder::UI);
+	letterResetR->SetTextScale({ bigFontSize, bigFontSize });
+	letterResetR->SetText("r");
+
+	//----------------------------------------------------------------
+
 	UILetters = GetWorld()->SpawnActor<UI>();
 	UILettersP = GetWorld()->SpawnActor<UI_P>();
 	IsUIMove = false;
@@ -379,6 +400,8 @@ int ATestGameMode::CountBreakableBricks()
 		BreakCountTotal = DefaultCount + HPBrickCount;
 		return BreakCountTotal;
 	}
+
+	return 0;
 }
 
 

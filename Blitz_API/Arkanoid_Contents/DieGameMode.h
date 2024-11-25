@@ -23,7 +23,7 @@ protected:
 
 
 private:
-	class AScore* score;
+	class AScore* score=nullptr;
 	FVector2D UIPos = { 0,0 };
 
 };
