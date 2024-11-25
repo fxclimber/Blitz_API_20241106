@@ -57,6 +57,16 @@ void ATestGameMode::BeginPlay()
 	score->SetOrder(ERenderOrder::UI);
 	score->SetTextScale({ 32, 32 });
 
+	playTime = GetWorld()->SpawnActor<AScore>();
+	playTime->SetActorLocation({ 200,50 });
+	playTime->SetTextSpriteName("Text_Num.png");
+	playTime->SetOrder(ERenderOrder::UI);
+	playTime->SetTextScale({ 32, 32 });
+
+
+
+
+
 	GetWorld()->SetCameraToMainPawn(false);
 
 	// BrickEditor
@@ -208,7 +218,11 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 	// score
 	AScore::ScoreUI = Editor->GetScore() * 32;
-	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
+	score->SetValue(AScore::ScoreUI , 8);//여기에 점수넣기
+
+	AScore::ElapsedTime = static_cast<int>(Editor->GetElapsedTime());
+	playTime->SetValue(AScore::ElapsedTime , 4);
+
 
 	DeathCount = Editor->GetDeathCount();
 	bool BrokenCount = AllBricksNonBreakable();
@@ -330,7 +344,7 @@ void ATestGameMode::CheckScore()
 	{
 		// 점수 합산
 		int finalScore = Editor->GetScore() * 32;
-		score->SetValue(finalScore); // 점수 업데이트
+		score->SetValue(finalScore,4); // 점수 업데이트
 
 		// 최종 점수 저장
 		score->SetFinalValue(finalScore);

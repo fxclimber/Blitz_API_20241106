@@ -41,6 +41,7 @@ private:
 	//class BrickEditor* EditorLoad = nullptr;
 	class APaddle* Paddle = nullptr;
 	class AScore* score = nullptr;
+	class AScore* playTime = nullptr;
 	class Map_Bottom* Bottom = nullptr;
 	FVector2D UIPos = {0,0};
 

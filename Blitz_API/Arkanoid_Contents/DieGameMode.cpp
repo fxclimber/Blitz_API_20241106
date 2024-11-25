@@ -32,7 +32,7 @@ void DieGameMode::BeginPlay()
 	GetWorld()->SetCameraToMainPawn(false);
 
 	// score
-	score->SetValue(AScore::ScoreUI);//여기에 점수넣기
+	score->SetValue(AScore::ScoreUI,8);//여기에 점수넣기
 	score->SetFinalValue(AScore::FinalScoreUI);
 	//UEngineAPICore::GetCore()->OpenLevel("Die");
 

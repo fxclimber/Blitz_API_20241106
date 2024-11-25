@@ -27,10 +27,14 @@ public:
 
 	void SetOrder(int _Order);
 
-	void SetValue(int _Score);
+	void SetValue(int _Score , int _Padding);
 	void SetFinalValue(int _FinalScore)
 	{
 		FinalScoreUI = _FinalScore;
+	}
+	void SetFinalTime(int _FinalElapsedTime)
+	{
+		FinalElapsedTime = _FinalElapsedTime;
 	}
 
 
@@ -41,6 +45,8 @@ public:
 
 	static int ScoreUI;
 	static int FinalScoreUI;
+	static int ElapsedTime;
+	static int FinalElapsedTime;
 
 protected:
 	void BeginPlay() override{}
