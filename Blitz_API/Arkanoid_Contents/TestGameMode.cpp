@@ -39,7 +39,7 @@ ATestGameMode::ATestGameMode()
 		FVector2D MapScale = SpriteRenderTuto->SetSpriteScale(1.0f);
 		SpriteRenderTuto->SetComponentLocation(MapScale.Half());
 
-		SpriteRenderTuto->SetAlphafloat(0.65f);
+		SpriteRenderTuto->SetAlphafloat(0.75f);
 		SpriteRenderTuto->SetActive(true);
 	}
 
@@ -82,8 +82,35 @@ void ATestGameMode::BeginPlay()
 
 	//----------------------------------------------------------------
 
-	UILetters = GetWorld()->SpawnActor<UI>();
-	UILettersP = GetWorld()->SpawnActor<UI_P>();
+	//UILetters = GetWorld()->SpawnActor<UI>();
+	//UILettersP = GetWorld()->SpawnActor<UI_P>();
+
+	// load stage sprite	 
+if (nullptr == SpriteLoad)
+{
+	SpriteLoad = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteLoad->SetOrder(ERenderOrder::Bricks);
+	SpriteLoad->SetSprite("Text_edit_load.png");
+	SpriteLoad->SetComponentLocation({ 400.f,770.f });
+	SpriteLoad->SetPivot({ 0,0 });
+	SpriteLoad->SetComponentScale({ 296,38 });
+	SpriteLoad->SetAlphafloat(0.75f);
+	SpriteLoad->SetActive(true);
+}
+	// load move sprite	 
+if (nullptr == SpriteMove)
+{
+	SpriteMove = CreateDefaultSubObject<USpriteRenderer>();
+	SpriteMove->SetOrder(ERenderOrder::Bricks);
+	SpriteMove->SetSprite("Text_edit_P.png");
+	SpriteMove->SetComponentLocation({ 160.f,120.f });
+	SpriteMove->SetPivot({ 0,0 });
+	SpriteMove->SetComponentScale({ 230,38 });
+	SpriteMove->SetAlphafloat(0.75f);
+}
+
+
+
 	IsUIMove = false;
 	IsEditMode = false;
 
@@ -115,8 +142,6 @@ void ATestGameMode::BeginPlay()
 	int score = 0;
 	Editor->Create("Brick", Num, Size);
 
-
-
 	UEngineDirectory Dir;
 	if (false == Dir.MoveParentToDirectory("Resources"))
 	{
@@ -141,20 +166,20 @@ void ATestGameMode::BeginPlay()
 	// 그 경로의 파일 존재하지 않는다면 디폴트 방식으로 생성
 	else 
 	{
-		//FVector2D Size = { 57,26 };
-		//FIntPoint Num = { 5,4 };
-		//int score = 0;
-		//Editor->Create("Brick", Num, Size);
+		FVector2D Size = { 57,26 };
+		FIntPoint Num = { 5,4 };
+		int score = 0;
+		Editor->Create("Brick", Num, Size);
 
-		//for (int y = 0; y < Num.Y; y++)
-		//{
-		//	for (int x = 0; x < Num.X; x++)
-		//	{
-		//		int randomIndex = std::rand() % 5;//일반벽돌색 5개
-		//		Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
-		//		Editor->setBrickType({ x,y }, BrickType::Default);
-		//	}
-		//}
+		for (int y = 0; y < Num.Y; y++)
+		{
+			for (int x = 0; x < Num.X; x++)
+			{
+				int randomIndex = std::rand() % 5;//일반벽돌색 5개
+				Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
+				Editor->setBrickType({ x,y }, BrickType::Default);
+			}
+		}
 		//BreakCountTotal = CountBreakableBricks();
 		//IsUIMove = true;
 		//return;
@@ -214,14 +239,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 			}
 			SpriteRenderTuto->SetActive(true);
 		}
-		//if(UEngineInput::GetInst().IsDown(VK_ESCAPE))
-		//{
-		//	SpriteRenderTuto->SetActive(false);
-		//}
-		//if (UEngineInput::GetInst().IsDown(VK_F1))
-		//{
-		//	SpriteRenderTuto->SetActive(true);
-		//}
 
 	}
 
@@ -232,8 +249,13 @@ void ATestGameMode::Tick(float _DeltaTime)
 
 		// 키상태,처음만 실행
 		if (!wasReturnDown && isReturnDown) {
-			bool isActive = Bottom->GetRender()->IsActive();
-			Bottom->GetRender()->SetActive(!isActive); // 상태 반전
+			// Bottom 상태 반전
+			bool isBottomActive = Bottom->GetRender()->IsActive();
+			Bottom->GetRender()->SetActive(!isBottomActive);
+
+			// SpriteEnter 상태 반전
+			bool isSpriteActive = SpriteEnter->IsActive();
+			SpriteEnter->SetActive(!isSpriteActive);
 		}
 		// 지금상태를 다음프레임의 이전 상태로 저장
 		wasReturnDown = isReturnDown;
@@ -322,6 +344,11 @@ void ATestGameMode::Tick(float _DeltaTime)
 	// 벽돌로드 
 	if (true == UEngineInput::GetInst().IsPress('L'))
 	{
+		if (true== SpriteLoad->IsActive())
+		{
+			SpriteLoad->SetActive(false);
+		}
+
 		{
 			//UEngineDirectory Dir;
 			//if (false == Dir.MoveParentToDirectory("Resources"))
@@ -338,9 +365,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 			//Editor->DeSerialize(Ser);
 		}
 		// 여러파일 직렬화 로드 테스트
-		if (true == UEngineInput::GetInst().IsPress('L'))
-		{
-			//UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
 
 			UEngineDirectory Dir;
 			if (false == Dir.MoveParentToDirectory("Resources"))
@@ -376,41 +400,46 @@ void ATestGameMode::Tick(float _DeltaTime)
 			UEngineSerializer Ser;
 			NewFile.Read(Ser);
 			Editor->DeSerialize(Ser);
-		}
-
-
-
-
-
-
 
 
 		{
-			float center = 100.f;
-			float height = 840.f;
-			float smallFontsize = 20;
-			float bigFontSize = 35;
+			if (nullptr == SpriteEnter)
+			{
+				SpriteEnter = CreateDefaultSubObject<USpriteRenderer>();
+				SpriteEnter->SetOrder(ERenderOrder::Bricks);
+				SpriteEnter->SetSprite("Text_edit_enter.png");
+				SpriteEnter->SetComponentLocation({200.f,970.f});
+				SpriteEnter->SetPivot({0,0});
+				SpriteEnter->SetComponentScale({296,38});
+				SpriteEnter->SetAlphafloat(0.7f);
+			}
 
-			ALetter* letter3 = GetWorld()->SpawnActor<ALetter>();
-			letter3->SetActorLocation({ center,height });
-			letter3->SetTextSpriteName("Text_Letters.png");
-			letter3->SetOrder(ERenderOrder::UI);
-			letter3->SetTextScale({ bigFontSize, bigFontSize });
-			letter3->SetText("enter");
 
-			ALetter* letter2 = GetWorld()->SpawnActor<ALetter>();
-			letter2->SetActorLocation({ center,height + 40.f });
-			letter2->SetTextSpriteName("Text_Letters.png");
-			letter2->SetOrder(ERenderOrder::UI);
-			letter2->SetTextScale({ smallFontsize, smallFontsize });
-			letter2->SetText("can");
+			//float center = 100.f;
+			//float height = 840.f;
+			//float smallFontsize = 20;
+			//float bigFontSize = 35;
 
-			ALetter* letter1 = GetWorld()->SpawnActor<ALetter>();
-			letter1->SetActorLocation({ center,height + 80.f });
-			letter1->SetTextSpriteName("Text_Letters.png");
-			letter1->SetOrder(ERenderOrder::UI);
-			letter1->SetTextScale({ smallFontsize, smallFontsize });
-			letter1->SetText("helpyou");
+			//ALetter* letter3 = GetWorld()->SpawnActor<ALetter>();
+			//letter3->SetActorLocation({ center,height });
+			//letter3->SetTextSpriteName("Text_Letters.png");
+			//letter3->SetOrder(ERenderOrder::UI);
+			//letter3->SetTextScale({ bigFontSize, bigFontSize });
+			//letter3->SetText("enter");
+
+			//ALetter* letter2 = GetWorld()->SpawnActor<ALetter>();
+			//letter2->SetActorLocation({ center,height + 40.f });
+			//letter2->SetTextSpriteName("Text_Letters.png");
+			//letter2->SetOrder(ERenderOrder::UI);
+			//letter2->SetTextScale({ smallFontsize, smallFontsize });
+			//letter2->SetText("can");
+
+			//ALetter* letter1 = GetWorld()->SpawnActor<ALetter>();
+			//letter1->SetActorLocation({ center,height + 80.f });
+			//letter1->SetTextSpriteName("Text_Letters.png");
+			//letter1->SetOrder(ERenderOrder::UI);
+			//letter1->SetTextScale({ smallFontsize, smallFontsize });
+			//letter1->SetText("helpyou");
 		}
 
 		BreakCountTotal = CountBreakableBricks();

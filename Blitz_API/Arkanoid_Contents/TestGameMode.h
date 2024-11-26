@@ -38,7 +38,6 @@ protected:
 
 private:
 	class BrickEditor* Editor=nullptr;
-	//class BrickEditor* EditorLoad = nullptr;
 	class APaddle* Paddle = nullptr;
 	class AScore* score = nullptr;
 	class AScore* playTime = nullptr;
@@ -56,6 +55,9 @@ private:
 	class UI* UILetters = nullptr;
 	class UI_P* UILettersP = nullptr;
 	class USpriteRenderer* SpriteRenderTuto = nullptr;
+	class USpriteRenderer* SpriteEnter = nullptr;
+	class USpriteRenderer* SpriteLoad = nullptr;
+	class USpriteRenderer* SpriteMove = nullptr;
 
 };
 

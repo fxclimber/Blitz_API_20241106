@@ -69,17 +69,17 @@ void BrickEditorGameMode::BeginPlay()
 
 	{
 		UI_EditorLetters = GetWorld()->SpawnActor<UI_Editor>();
-		UI_EditorLetters->SetActive(false);
+		//UI_EditorLetters->SetActive(false);
 
 		USpriteRenderer* SpriteRender = CreateDefaultSubObject<USpriteRenderer>();
 		SpriteRender->SetOrder(ERenderOrder::SURF);
 		SpriteRender->SetSprite("Text_Spacebar.png");
+		SpriteRender->SetAlphafloat(0.6f);
 
 		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
-		SpriteRender->SetComponentScale(WinSize);
+		SpriteRender->SetComponentScale({557.f,172.f});
 
 		FVector2D MapScale = SpriteRender->SetSpriteScale(0.55f);
-		//SpriteRender->SetComponentLocation(MapScale.Half());
 		SpriteRender->SetComponentLocation({250.f,900.f});
 	}
 
@@ -88,7 +88,7 @@ void BrickEditorGameMode::BeginPlay()
 
 
 void BrickEditorGameMode::Tick(float _DeltaTime)
-{
+{ 
 
 	Super::Tick(_DeltaTime);
 
@@ -113,11 +113,6 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 	if (UEngineInput::GetInst().IsDown('P'))
 	{
 		UEngineAPICore::GetCore()->OpenLevel("Play");
-	}
-
-	if (UEngineInput::GetInst().IsDown('Q'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("Tmp");
 	}
 
 	static bool IsSpaceBarPressed = false;
@@ -148,7 +143,6 @@ void BrickEditorGameMode::Tick(float _DeltaTime)
 	if (true == UEngineInput::GetInst().IsPress(VK_LBUTTON))
 	{
 		FVector2D MousePos = UEngineAPICore::GetCore()->GetMainWindow().GetMousePos();
-		//ABrick* brick = GetWorld()->SpawnActor<ABrick>();		
 		Editor->SetBrickLocation(MousePos, BrickType);
 	}
 

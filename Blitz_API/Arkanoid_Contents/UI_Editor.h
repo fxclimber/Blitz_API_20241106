@@ -30,6 +30,6 @@ private:
 	ALetter* letter2 = nullptr;
 	ALetter* letter3 = nullptr;
 
-	class USpriteRenderer* SpriteRender=nullptr;
+	class USpriteRenderer* SpriteEdit =nullptr;
 
 };
