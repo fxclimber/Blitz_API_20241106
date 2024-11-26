@@ -38,6 +38,8 @@ ATestGameMode::ATestGameMode()
 
 		FVector2D MapScale = SpriteRenderTuto->SetSpriteScale(1.0f);
 		SpriteRenderTuto->SetComponentLocation(MapScale.Half());
+
+		SpriteRenderTuto->SetAlphafloat(0.65f);
 		SpriteRenderTuto->SetActive(true);
 	}
 
@@ -140,19 +142,23 @@ void ATestGameMode::BeginPlay()
 	else 
 	{
 		//FVector2D Size = { 57,26 };
-		//FIntPoint Num = { 11,2 };
+		//FIntPoint Num = { 5,4 };
 		//int score = 0;
 		//Editor->Create("Brick", Num, Size);
 
-		for (int y = 0; y < Num.Y; y++)
-		{
-			for (int x = 0; x < Num.X; x++)
-			{
-				int randomIndex = std::rand() % 5;//일반벽돌색 5개
-				//Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
-				//Editor->setBrickType({ x,y }, BrickType::Default);
-			}
-		}
+		//for (int y = 0; y < Num.Y; y++)
+		//{
+		//	for (int x = 0; x < Num.X; x++)
+		//	{
+		//		int randomIndex = std::rand() % 5;//일반벽돌색 5개
+		//		Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
+		//		Editor->setBrickType({ x,y }, BrickType::Default);
+		//	}
+		//}
+		//BreakCountTotal = CountBreakableBricks();
+		//IsUIMove = true;
+		//return;
+
 	}
 
 
@@ -233,11 +239,6 @@ void ATestGameMode::Tick(float _DeltaTime)
 		wasReturnDown = isReturnDown;
 	}
 
-
-	if (UEngineInput::GetInst().IsDown('Q'))
-	{
-		UEngineAPICore::GetCore()->OpenLevel("Tmp");
-	}
 
 
 
@@ -339,6 +340,8 @@ void ATestGameMode::Tick(float _DeltaTime)
 		// 여러파일 직렬화 로드 테스트
 		if (true == UEngineInput::GetInst().IsPress('L'))
 		{
+			//UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
+
 			UEngineDirectory Dir;
 			if (false == Dir.MoveParentToDirectory("Resources"))
 			{
