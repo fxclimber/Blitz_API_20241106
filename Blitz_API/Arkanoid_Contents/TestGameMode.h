@@ -55,5 +55,7 @@ private:
 
 	class UI* UILetters = nullptr;
 	class UI_P* UILettersP = nullptr;
+	class USpriteRenderer* SpriteRenderTuto = nullptr;
+
 };
 

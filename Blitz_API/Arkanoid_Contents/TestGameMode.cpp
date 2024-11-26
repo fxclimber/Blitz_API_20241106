@@ -27,6 +27,20 @@ bool ATestGameMode::IsEnd = false;
 ATestGameMode::ATestGameMode()
 {
 	BonusA = nullptr;
+	// tuto 
+	{
+		SpriteRenderTuto = CreateDefaultSubObject<USpriteRenderer>();
+		SpriteRenderTuto->SetOrder(ERenderOrder::SURF);
+		SpriteRenderTuto->SetSprite("tuto.png");
+
+		FVector2D WinSize = UEngineAPICore::GetCore()->GetMainWindow().GetWindowSize();
+		SpriteRenderTuto->SetComponentScale(WinSize);
+
+		FVector2D MapScale = SpriteRenderTuto->SetSpriteScale(1.0f);
+		SpriteRenderTuto->SetComponentLocation(MapScale.Half());
+		SpriteRenderTuto->SetActive(true);
+	}
+
 }
 
 void ATestGameMode::BeginPlay()
@@ -171,7 +185,39 @@ void ATestGameMode::Tick(float _DeltaTime)
 	{
 		//UEngineAPICore::GetCore()->ResetLevel<ATestGameMode, Map_Play>("Play");
 	}
+	// tuto 제거
+	{
+		float EleapsedTime = Editor->GetElapsedTime();
 
+		if (UEngineInput::GetInst().IsDown(VK_ESCAPE))
+		{
+			if (!SpriteRenderTuto)
+			{
+				MSGASSERT("SpriteRenderTuto 객체를 찾지 못했습니다.");
+				return;
+			}
+			SpriteRenderTuto->SetActive(false);
+		}
+
+		if (UEngineInput::GetInst().IsDown(VK_F1))
+		{
+			if (!SpriteRenderTuto)
+			{
+				MSGASSERT("SpriteRenderTuto 객체를 찾지 못했습니다.");
+				return;
+			}
+			SpriteRenderTuto->SetActive(true);
+		}
+		//if(UEngineInput::GetInst().IsDown(VK_ESCAPE))
+		//{
+		//	SpriteRenderTuto->SetActive(false);
+		//}
+		//if (UEngineInput::GetInst().IsDown(VK_F1))
+		//{
+		//	SpriteRenderTuto->SetActive(true);
+		//}
+
+	}
 
 	// 엔터누르면 바닥 생기기
 	{

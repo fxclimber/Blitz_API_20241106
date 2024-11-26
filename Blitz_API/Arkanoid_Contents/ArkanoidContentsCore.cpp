@@ -18,7 +18,6 @@
 #include "Map_Title.h"
 #include "Letter.h"
 
-
 void ArkanoidContentsCore::BeginPlay()
 {
 

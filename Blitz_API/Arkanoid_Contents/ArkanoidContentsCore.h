@@ -15,6 +15,5 @@ protected:
 
 private:
 	ULevel* TitleLevel=nullptr;
-
 };
 

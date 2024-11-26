@@ -20,5 +20,7 @@ private:
 	USpriteRenderer* SpriteRender;
 	USpriteRenderer* SpriteRenderScore;
 	USpriteRenderer* SpriteRenderTime;
+	USpriteRenderer* SpriteRenderTuto;
+
 };
 

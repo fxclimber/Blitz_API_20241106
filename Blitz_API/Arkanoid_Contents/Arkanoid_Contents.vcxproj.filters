@@ -25,9 +25,6 @@
     <ClInclude Include="ContentsEnum.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
-    <ClInclude Include="TestGameMode.h">
-      <Filter>ContentsObject\GameMode</Filter>
-    </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>ContentsObject\Global</Filter>
     </ClInclude>
@@ -66,6 +63,9 @@
     </ClInclude>
     <ClInclude Include="UI_Editor.h">
       <Filter>ContentsObject\Global</Filter>
+    </ClInclude>
+    <ClInclude Include="TestGameMode.h">
+      <Filter>ContentsObject\GameMode</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

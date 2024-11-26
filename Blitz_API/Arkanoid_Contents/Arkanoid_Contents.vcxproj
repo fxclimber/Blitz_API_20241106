@@ -169,10 +169,7 @@
     <ClInclude Include="PreCompiledFile.h" />
     <ClInclude Include="BrickEditor.h" />
     <ClInclude Include="Score.h" />
-    <ClInclude Include="TestGameMode.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
+    <ClInclude Include="TestGameMode.h" />
     <ClInclude Include="TitleGameMode.h" />
     <ClInclude Include="TmpGameMode.h" />
     <ClInclude Include="UI.h" />
