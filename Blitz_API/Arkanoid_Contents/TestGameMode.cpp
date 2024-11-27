@@ -166,20 +166,20 @@ if (nullptr == SpriteMove)
 	// 그 경로의 파일 존재하지 않는다면 디폴트 방식으로 생성
 	else 
 	{
-		FVector2D Size = { 57,26 };
-		FIntPoint Num = { 5,4 };
-		int score = 0;
-		Editor->Create("Brick", Num, Size);
+		//FVector2D Size = { 57,26 };
+		//FIntPoint Num = { 5,4 };
+		//int score = 0;
+		//Editor->Create("Brick", Num, Size);
 
-		for (int y = 0; y < Num.Y; y++)
-		{
-			for (int x = 0; x < Num.X; x++)
-			{
-				int randomIndex = std::rand() % 5;//일반벽돌색 5개
-				Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
-				Editor->setBrickType({ x,y }, BrickType::Default);
-			}
-		}
+		//for (int y = 0; y < Num.Y; y++)
+		//{
+		//	for (int x = 0; x < Num.X; x++)
+		//	{
+		//		int randomIndex = std::rand() % 5;//일반벽돌색 5개
+		//		Editor->SetBrickIndex({ x,y }, { 0, 0 }, Size, 1, 1);
+		//		Editor->setBrickType({ x,y }, BrickType::Default);
+		//	}
+		//}
 		//BreakCountTotal = CountBreakableBricks();
 		//IsUIMove = true;
 		//return;
