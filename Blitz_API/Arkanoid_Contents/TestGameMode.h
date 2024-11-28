@@ -29,6 +29,8 @@ public:
 	}
 	bool IsUIMove=false;
 	bool IsEditMode=false;
+	static bool GameClear;
+
 
 protected:
 	void BeginPlay() override;
@@ -47,7 +49,6 @@ private:
 	bool bIsBonusActive = false;
 	class Brick* BonusA;
 
-	bool GameClear = false;
 	int BreakCountTotal = 11;
 	int DeathCount = 2;
 	std::string LoadFileName;

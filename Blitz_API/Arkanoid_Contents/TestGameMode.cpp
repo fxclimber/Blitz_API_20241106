@@ -23,6 +23,7 @@
 #include "UI_P.h"
 
 bool ATestGameMode::IsEnd = false;
+bool ATestGameMode::GameClear = false;
 
 ATestGameMode::ATestGameMode()
 {
@@ -204,7 +205,7 @@ if (nullptr == SpriteMove)
 		Ball->SetSpeed(700.f);
 		Ball->SetActorLocation({ Paddle->GetActorLocation().X, Paddle->GetActorLocation().Y - Paddle->PaddleScale.Y });
 	}
-	GameClear = false;
+	//GameClear = false;
 }
 
 void ATestGameMode::Tick(float _DeltaTime)
@@ -323,6 +324,7 @@ void ATestGameMode::Tick(float _DeltaTime)
 				if (true == BrokenCount)
 				{
 					score->SetFinalValue(AScore::ScoreUI);
+					playTime->SetFinalTime(AScore::ElapsedTime);
 					UEngineAPICore::GetCore()->OpenLevel("Die");
 				}
 		}

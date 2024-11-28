@@ -17,13 +17,13 @@
 
 ALetter::ALetter()
 {
-    for (size_t i = 0; i < 10; i++)
-    {
-        // 카메라가 움직여도 이녀석은 움직이지 않는다.
-        USpriteRenderer* Sprite = CreateDefaultSubObject<USpriteRenderer>();
-        Sprite->SetCameraEffect(false);
-        Renders.push_back(Sprite);
-    }
+    //for (size_t i = 0; i < 10; i++)
+    //{
+    //    // 카메라가 움직여도 이녀석은 움직이지 않는다.
+    //    USpriteRenderer* Sprite = CreateDefaultSubObject<USpriteRenderer>();
+    //    Sprite->SetCameraEffect(false);
+    //    Renders.push_back(Sprite);
+    //}
 }
 
 
@@ -91,46 +91,47 @@ void ALetter::SetText(const std::string& _Text)
 
     float spacing = 1.f;
     FVector2D Pos = FVector2D::ZERO;
-    // 문자갯수
+
     size_t TextLength = _Text.size();
 
-    if (TextLength > Renders.size())
-    {
-            MSGASSERT("스프라이트 렌더링 개수가 부족합니다.");
-            return;
-    }
-    // 문자갯수만큼만 순회한다
-    for (size_t i = 0; i < TextLength; i++)
-    {
-        //알파벳은 ASCII 값기준으로 인덱스 생성
-        char Character = _Text[i];
-        // 소문자 ->대문자
-        if (Character >= 'a' && Character <= 'z')
+    // Renders 크기 확인 및 조정
+    if (TextLength > Renders.size()) {
+        int PrevSize = Renders.size(); // 크기 부족 시 확장
+        Renders.resize(TextLength);
+
+        for (size_t i = PrevSize; i < Renders.size() - PrevSize; i++)
         {
-            Character -= ('a' - 'A'); 
+            USpriteRenderer* Sprite = CreateDefaultSubObject<USpriteRenderer>();
+            Sprite->SetCameraEffect(false);
+            Renders[i] = Sprite;
         }
-        // 예외
-        if (Character < 'A' || Character > 'Z')
-        {
-            MSGASSERT("알파벳 외 문자는 처리할 수 없습니다.");
+    }
+
+    // 문자 갯수만큼만 순회
+    for (size_t i = 0; i < TextLength; i++) {
+        char Character = _Text[i];
+        // 소문자 -> 대문자
+        if (Character >= 'a' && Character <= 'z') {
+            Character -= ('a' - 'A');
+        }
+        // 알파벳 외 문자 처리
+        if (Character < 'A' || Character > 'Z') {
+            std::cerr << "Error: Unsupported character in text!" << std::endl;
             continue;
         }
-        // 인덱싱
         int Index = Character - 'A';
 
         Renders[i]->SetSprite(TextSpriteName, Index);
         Renders[i]->SetComponentScale(TextScale);
         Renders[i]->SetComponentLocation(Pos);
         Renders[i]->SetActive(true);
-        // 위치는 크기+자간
-        Pos.X += spacing+ TextScale.X;
 
+        Pos.X += spacing + TextScale.X; // 위치 업데이트
     }
-    // 안쓰는 스프라이트 비활성 
-    for (size_t i = 26; i < Renders.size(); i++)
-    {
+
+    // 사용되지 않는 렌더 비활성화
+    for (size_t i = TextLength; i < Renders.size(); i++) {
         Renders[i]->SetActive(false);
     }
-
 }
 

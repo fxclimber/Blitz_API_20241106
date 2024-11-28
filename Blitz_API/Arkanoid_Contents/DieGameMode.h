@@ -24,7 +24,8 @@ protected:
 
 private:
 	class AScore* score=nullptr;
+	class AScore* time=nullptr;
 	FVector2D UIPos = { 0,0 };
-
+	class USpriteRenderer* SpriteMove = nullptr;
 };
 
